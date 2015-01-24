@@ -1,0 +1,1783 @@
+%\listfiles
+%
+% --- Document class -----
+%
+\documentclass[%               %% Opzioni della classe scrreprt
+twoside,%oneside,              %% fronte-retro
+openright,%openany,            %% apertura capitolo a fronte
+titlepage,%                    %% frontespizio
+%draft,%                       %% modalita' draft copy
+numbers=noenddot,%             %% no punto dopo il num delle sezioni
+headinclude,footinclude=true,% %% testatine a
+cleardoublepage=empty,%        %% pagine vuote senza testina e pie pagina
+fleqn,%                        %% equazioni allineate a sinistra
+BCOR=5mm,%                     %% margine interno per la rilegatura di 5mm
+paper=a4,%                     %% carta formato A4
+fontsize=11pt,                 %% Corpo del font principale
+%tablecaptionabove,%           %% old didascalie in cima alle tabelle
+captions=tableheading,%        %% didascalie in cima alle tabelle
+ version=first,italian]{scrreprt}
+
+%
+% --- 1. Main packages -----
+%               
+
+%\usepackage[T1]{fontenc}           %% Imposta la codifica di input.
+%\usepackage[latin1]{inputenc}      %% Imposta la codifica dei font.
+\usepackage[italian]{babel}         %% Attiva supporto per la lingua.
+\usepackage[babel]{csquotes}        %% Consigliato se si usa biblatex.
+
+%\usepackage{indentfirst}           %% Rientra il primo paragrafo.
+
+\usepackage[final]{microtype}       %% Microgiustificazione e finezze.
+\usepackage{amsthm}                 %% Per i teoremi.
+\usepackage[italian]{varioref}      %% Riferimenti completi alla pagina.
+\usepackage[tight,italian]{minitoc} %% Mini-indici a inizio capitolo.
+\usepackage{wrapfig}                %% Figures which text can flow around.
+\usepackage{chngpage,calc}          %% Per impostare i margini del frontespizio.
+\usepackage{mflogo}                 %% LaTeX support for Metafont logo fonts.
+\usepackage{listings}               %% Ambienti per listati di codice.
+\usepackage[pdftex]{graphicx}       %% Attiva supporto per la grafica.
+\usepackage{multicol}               %% Supporto per piu' colonne
+\usepackage{makeidx}                %% Attiva supporto per l'indice analitico.
+\usepackage{xspace}                 %% To get the space after the macros right.
+\usepackage{mparhack}               %% Get marginpar right.
+\usepackage{fixltx2e}               %% Fixes some LaTeX stuff.
+\usepackage{relsize}                %% Set font size relative to current one.
+
+\usepackage{tabularx}               %% Better tabular environment.
+\usepackage{booktabs}               %% Great tables.
+\usepackage{subfig}                 %% Multifigures.
+\usepackage{caption}                %% Fancy captions and more.
+\usepackage{asymptote}                %% Fancy captions and more.
+
+%
+% --- 2. Bibliography using BiBLaTeX ----
+%
+\usepackage[%
+style=philosophy-modern,%
+%style=philosophy-classic,%
+%style=philosophy-verbose,%
+scauthorsbib,%
+hyperref,backref,%
+backend=biber,% or bibtex8
+square,%
+natbib,ibidtracker=false]{biblatex}
+
+%\setlength{\bibhang}{2.\parindent}
+
+
+
+%
+% --- 7. ClassicThesis ------
+%
+\PassOptionsToPackage{small}{eulervm}%
+\PassOptionsToPackage{euler-hat-accent}{eulervm}%
+\usepackage[%
+eulerchapternumbers,%
+listings,%
+%drafting,%
+%pdfspacing,%
+floatperchapter,%
+%linedheaders,%
+subfig,%
+beramono,%
+eulermath,%
+%parts,
+minionpro
+%minionprospacing
+]{classicthesis}
+
+\usepackage[eqno,toc,enum,bib]{tabfigures} 
+
+\usepackage{arsclassica}
+
+
+
+% ********************************************************************
+% classicthesis-preamble
+% ********************************************************************
+
+\newcommand{\myName}{Alessandro Candolini\xspace}
+\newcommand{\myTitle}{Una prima introduzione alla nozione di limite\xspace}
+\newcommand{\mySubTitle}{Versione Preliminare. Materiale da rivedere\xspace}
+\newcommand{\myLocation}{Trieste\xspace}
+%\newcommand{\myGroup}{Italian \TeX{} and \LaTeX{} User Group\xspace}
+%\newcommand{\myUrl}{\url{http://www.guit.sssup.it/}\xspace}
+\newcommand{\myTime}{Gennaio, 2012\xspace}
+
+
+\newlength{\abcd} % for ab..z string length calculation
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.} 
+
+% ********************************************************************
+% hyperref
+% ******************************************************************** 
+\hypersetup{%
+    colorlinks=true, linktocpage=true, pdfstartpage=1, pdfstartview=FitV,%
+    breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+    plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+    hypertexnames=true, pdfhighlight=/O,%
+    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=RoyalBlue, pagecolor=RoyalBlue,%
+% uncomment the following line if you want to have black links (e.g., for printing)
+% urlcolor=Black, linkcolor=Black, citecolor=Black, pagecolor=Black,%
+    pdftitle={\myTitle},%
+    pdfauthor={\textcopyright\ \myName},%
+    pdfsubject={},%
+    pdfkeywords={},%
+    pdfcreator={pdfLaTeX},%
+    pdfproducer={LaTeX con hyperref e ClassicThesis}%
+}
+
+\hypersetup{citecolor=webgreen}
+\hypersetup{hyperfootnotes=false,pdfpagelabels}
+
+
+\newcommand{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+
+% ********************************************************************
+% caption
+% ********************************************************************
+\captionsetup{format=hang,font=small}
+\captionsetup[table]{skip=\medskipamount} 
+
+
+% ********************************************************************
+% makeidx, multicol
+% ********************************************************************
+\let\orgtheindex\theindex
+\let\orgendtheindex\endtheindex
+\def\theindex{%
+	\def\twocolumn{\begin{multicols}{2}}%
+	\def\onecolumn{}%
+	\clearpage
+	\orgtheindex
+}
+\def\endtheindex{%
+	\end{multicols}%
+	\orgendtheindex
+}
+
+\makeindex
+
+
+% ********************************************************************
+% babel
+% ********************************************************************
+
+
+% ********************************************************************
+% listings
+% ********************************************************************
+
+\definecolor{lightergray}{gray}{0.99}
+
+\lstset{language=[LaTeX]Tex,
+    keywordstyle=\color{RoyalBlue},
+    basicstyle=\normalfont\ttfamily,
+    commentstyle=\color{Emerald}\ttfamily,
+    stringstyle=\rmfamily,
+    numbers=none,
+    numberstyle=\scriptsize,
+    stepnumber=5,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frameround=ftff,
+    frame=lines,
+    backgroundcolor=\color{lightergray}
+} 
+
+\lstset{	morekeywords=%
+        {RequirePackage,newboolean,DeclareOption,setboolean,%
+        ProcessOptions,PackageError,ifthenelse,boolean,%
+        chapterNumber,sodef,textls,allcapsspacing,%
+        MakeTextLowercase,orgtheindex,endtheindex,%
+        @ifpackageloaded,undefined,sfdefault,%
+        DeclareRobustCommand,spacedallcaps,%
+        microtypesetup,MakeTextUppercase,lowsmallcapsspacing,%
+        lowsmallcapsspacing,spacedlowsmallcaps,
+        spacedlowsmallcaps,lehead,headmark,color,%
+        headfont,partname,thepart,titleformat,part,
+        titlerule,chapter,thechapter,thesection,%
+        subsection,thesubsection,thesubsubsection,%
+        paragraph,theparagraph,descriptionlabel,titlespacing,%
+        graffito,lineskiplimit,finalhyphendemerits,%
+        colorbox,captionsetup,labelitemi,%
+        myincludegraphics,hypersetup,setlength,%
+        definecolor,lsstyle,textssc,subsubsection,%
+        graffito@setup,includegraphics,ifdefined,%
+        myTitle,textcopyright,myName,lstset,lstnewenvironment,%
+        setkeys,lst@BeginAlsoWriteFile,contentsname,%
+        toc@heading,@ppljLaTeX,z@,check@mathfonts,%
+        sf@size,ptctitle,mtctitle,stctitle,lst@intname,%
+        @empty,math@fontsfalse,@ppljscTeX,@iwonaTeX,%
+        @iwonascLaTeX,@ctTeX,tw@,ct@sc,@ctTeX,f@family,%
+        f@shape,ct@sc,ctLaTeX,ctLaTeXe,@twoe,@sctwoe,%
+        texorpdfstring,m@th,ctTeX,@mkboth,ProvidesPackage,%
+        theindex,PackageInfo,PackageWarningNoLine,%
+        mtifont,mtcindent,@iwonaLaTeX,@ppljTeX,@iwonascTeX,%
+        rohead,orgendtheindex,@ppljscLaTeX,%
+        @ifclassloaded,toc@headingbkORrp,backreftwosep,%
+        backrefalt,backreflastsep,areaset,pnumfont,%
+        arsincludegraphics,ExecuteOptions,PackageWarning,%
+        MessageBreak,ars@@includegraphics,ifcld@backref,rofoot,formatchapter},
+        commentstyle=\color{Emerald}\ttfamily,%
+        frame=lines}
+
+\lstset{basicstyle=\normalfont\ttfamily}
+\lstset{flexiblecolumns=true}
+\lstset{moredelim={[is][\normalfont\itshape]{/*}{*/}}}
+
+\DeclareRobustCommand*{\pacchetto}[1]{{\normalfont\ttfamily#1}%
+\index{Pacchetto!#1@\texttt{#1}}%
+\index{#1@\texttt{#1}}}
+
+
+\lstset{basicstyle=\normalfont\ttfamily}
+\lstset{flexiblecolumns=false}
+\lstset{moredelim={[is][\ttfamily]{!?}{?!}}} 
+\lstset{escapeinside={£*}{*£}}
+\lstset{firstnumber=last}
+
+\lstnewenvironment{code}% 
+{\setkeys{lst}{columns=fullflexible,keepspaces=true}%
+\lstset{basicstyle=\small\ttfamily}%
+}{}
+
+\lstset{extendedchars} 
+\lstnewenvironment{sidebyside}{% 
+    \global\let\lst@intname\@empty 
+    \setbox\z@=\hbox\bgroup 
+    \setkeys{lst}{columns=fullflexible,% 
+    linewidth=0.45\linewidth,keepspaces=true,%
+    breaklines=true,% 
+    breakindent=0pt,%
+    boxpos=t,%
+    basicstyle=\small\ttfamily
+}% 
+    \lst@BeginAlsoWriteFile{\jobname.tmp}% 
+}{% 
+    \lst@EndWriteFile\egroup 
+        \begin{center}% 
+            \begin{minipage}{0.45\linewidth}% 
+                \hbox to\linewidth{\box\z@\hss} 
+            \end{minipage}% 
+            \qquad 
+            \begin{minipage}{0.45\linewidth}%
+            \setkeys{lst}{frame=none}% 
+                \leavevmode \catcode`\^^M=5\relax 
+                \small\input{\jobname.tmp}% 
+            \end{minipage}% 
+        \end{center}% 
+} 
+
+
+\newcommand{\omissis}{[\dots\negthinspace]}
+
+\graphicspath{{Graphics/}}
+
+%\hyphenation{ƒcole \'Ecole Na-tio-nale Su-pŽ-rieure
+%Tech-niques Avan-cŽes Robert Bring-hurst DejaVu
+%Bera Mono Vera Classic-Thesis suite Knuth Zapf}
+
+
+%\newcommand{\meta}[1]{$\langle${\normalfont\itshape#1}$\rangle$}
+%\lstset{escapeinside={£*}{*£}}
+
+\lstset{moredelim={[is][\ttfamily]{!?}{?!}}}
+
+%\DeclareRobustCommand*{\miktex}{MiK\TeX%
+%\index{miktex@MiK\protect\TeX}%
+%}
+
+%\DeclareRobustCommand*{\metafont}{\MF%
+%\index{METAFONT@\protect\MF}%
+%}
+
+%\DeclareRobustCommand*{\metapost}{\MP%
+%\index{METAPOST@\protect\MP}%
+%}
+
+%\DeclareRobustCommand*{\texlive}{\TeX{}~Live%
+%\index{texlive@\protect\TeX{}~Live}%
+%}
+
+
+%%%%%%%%%%%%
+% biblatex %
+%%%%%%%%%%%%
+
+\bibliography{myBibliography2}
+
+\renewcommand{\nameyeardelim}{, }
+
+\defbibheading{bibliography}{%
+\cleardoublepage
+\manualmark
+\phantomsection
+\addcontentsline{toc}{chapter}{\numberline{}\tocEntry{\bibname}}
+\chapter*{\bibname\markboth{\spacedlowsmallcaps{\bibname}}
+{\spacedlowsmallcaps{\bibname}}}}     
+
+  \DeclareCiteCommand{\citeyearpar}[\mkbibparens] 
+  {\boolfalse{citetracker}% 
+   \boolfalse{pagetracker}% 
+   \usebibmacro{prenote}} 
+  {\printtext[bibhyperref]{\printfield{year}}} 
+  {\multicitedelim} 
+  {\usebibmacro{postnote}} 
+
+\makeatletter 
+  \DeclareCiteCommand{\citetalias} 
+  {\usebibmacro{prenote}} 
+  {\usebibmacro{citeindex}% 
+   \bibhyperref{\@citealias{\thefield{entrykey}}}} 
+  {\multicitedelim} 
+  {\usebibmacro{postnote}} 
+\makeatother 
+
+
+%%%%%%%%%%%%%%%%%%
+% other commands %
+%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ita}[1]{% 
+  \begin{otherlanguage*}{italian}#1\end{otherlanguage*}}
+  
+\DeclareRobustCommand*{\pkgname}[1]{{\normalfont\sffamily#1}%
+\index{Package!#1@\textsf{#1}}%
+\index{#1@\textsf{#1}}}
+
+\DeclareRobustCommand*{\envname}[1]{{\normalfont\ttfamily#1}%
+\index{Environment!#1@\texttt{#1}}%
+\index{#1@\texttt{#1}}}
+
+\DeclareRobustCommand*{\optname}[1]{{\normalfont\ttfamily#1}%
+\index{Option!#1@\texttt{#1}}%
+\index{#1@\texttt{#1}}}
+
+\DeclareRobustCommand*{\clsname}[1]{{\normalfont\sffamily#1}%
+\index{Class!#1@\textsf{#1}}%
+\index{#1@\textsf{#1}}}
+
+\DeclareRobustCommand*{\cmdname}[1]{\mbox{\lstinline!\\#1!}%
+\index{#1@\texttt{\hspace*{-1.2ex}\textbackslash#1}}}
+
+\DeclareRobustCommand*{\classicthesis}{Classic\-Thesis}
+
+\DeclareRobustCommand*{\arsclassica}{{\normalfont\sffamily ArsClassica}}
+
+\DeclareRobustCommand*{\miktex}{MiK\TeX%
+\index{miktex@MiK\protect\TeX}}
+
+\DeclareRobustCommand*{\texlive}{\TeX{}~Live%
+\index{texlive@\protect\TeX{}~Live}}
+
+%
+% --- 8. Problem and Solution environments -----
+% 
+\usepackage{xcolor}
+%\colorlet{botcolor}{blue!50}
+\providecommand{\solutionname}{Soluzione}
+\makeatletter
+\newcommand{\TeXline}[0]{\hbox to\hsize}
+\newcommand{\StarLine}[0]{%
+\TeXline{\hfil\hbox to 1in {\leaders\hbox{$\  \star \ $ }\hfil}\hfil}}
+\newenvironment{Solution}{%
+\begingroup%\smallskip%\addvspace{10\p@}%\small\normalfont
+\trivlist\item[\hskip\labelsep{\scshape \solutionname.}]}%
+{\endtrivlist\nopagebreak\StarLine\endgroup\par\medskip}
+\makeatother
+
+\usepackage[style=1]{mdframed}
+\providecommand{\problemname}{Problema}
+\newcounter{problem}[chapter]
+\setcounter{problem}{0}
+\makeatletter
+ \renewcommand{\theproblem}{%
+\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@problem
+}
+
+\def\Exercise{%
+  \addtocounter{problem}{1}
+  \begin{mdframed}[backgroundcolor=lightgray!50, roundcorner=5pt, 
+skipabove=12pt,skipbelow=12pt
+]
+  \@ifnextchar [%
+      {\@myprobt}%
+      {\@myprob}%
+}
+
+\def\@myprobt[#1]{%
+%\trivlist\item[\hskip\labelsep{\bfseries\problemname~\theproblem~(#1).}]}
+\textcolor{orange}{\textsc\problemname~\theproblem (#1).}
+}
+
+\def\@myprob{%
+%\trivlist\item[\hskip\labelsep{\bfseries\problemname\ \theproblem.}]
+\textcolor{orange}{\textsc\problemname~\theproblem.}
+}
+
+\def\endExercise{\end{mdframed}}
+
+\makeatother
+%
+% --- 9. Remark -----
+% 
+\newcommand{\remarkname}{Nota}
+\def\remark{\trivlist
+   \item[\hskip \labelsep{\emph{%
+\remarkname}.}]%\virage
+%\graffito{\dbend}
+}
+\def\endremark{\endtrivlist\smallskip}
+\newenvironment{approfondimento}%
+{
+\begin{quotation}\begin{small}}%
+{\end{small}\end{quotation}
+}%
+
+%
+% --- 10. Theorem style and environments (amsthm required) ------
+%
+\makeatletter
+\newtheoremstyle{classicdef}% Nome 
+%{12pt}%      % Spazio che precede l'enunciato
+%{12pt}%      % Spazio che segue l'enunciato
+{11pt}%      % Spazio che precede l'enunciato
+{11pt}%      % Spazio che segue l'enunciato
+{}%          % Stile del font dell'enunciato
+{}%          % Rientro (se vuoto, non c'\`e rientro;
+%            % \parindent = rientro dei capoversi)
+{\scshape}%  % Stile del font dell'intestazione
+{:}%         %Punteggiatura che segue l'intestazione
+{.5em}%      % Spazio che segue l'intestazione:
+%            % " " = normale spazio inter-parola;
+%            % \newline = a capo
+{}%         % Specifica l'intestazione dell'enunciato
+\makeatother
+%\theoremstyle{definition}
+\theoremstyle{classicdef}
+\newtheorem*{theorem}{Teorema}
+\newtheorem*{definition}{Definizione}
+\newtheorem*{homework}{Homework}
+\renewcommand{\qedsymbol}{\rule{.5em}{.5em}}
+
+\usepackage{calligra}
+\usepackage{braket} %% Per la funzione set..
+\usepackage{mathtools}
+\usepackage{cool}
+\usepackage[veceuler]{utvec}
+\usepackage{nicefrac}
+\makeatletter
+\Style{%
+ArcTrig=arc,
+IntegrateDifferentialDSymb={{\operator@font d}},
+DSymb={{\operator@font d}},
+DDisplayFunc=inset,DShorten=true}
+\makeatother
+\providecommand{\N}[0]{\mathbb{N}}
+\providecommand{\Z}[0]{\mathbb{Z}}
+\providecommand{\R}[0]{\mathbb{R}}
+\providecommand{\C}[0]{\mathbb{C}}
+\newcommand{\Q}[0]{\mathbb{Q}}
+
+\newcommand{\cinterval}[2]{[#1,#2]}
+\newcommand{\ointerval}[2]{]#1,#2[}
+
+% simboli
+\newcommand{\ec}[0]{E_{c}}
+\newcommand{\ug}[0]{U_{g}}
+\newcommand{\etot}[0]{E}
+
+\usepackage{siunitx}
+\usepackage[euler]{flexisym}
+\usepackage{breqn}
+\makeatletter
+\def\eqnumsize{\normalfont \Tf@font}% Add support to Minion Pro
+\makeatother
+\setkeys{breqn}{labelprefix={eq:}}
+%
+% --- 16. Migliorare il kerning dell'apostrofo coi font MinionPro -----
+%
+\makeatletter 
+\catcode`\'=12 
+\def\qu@te{'} 
+\catcode`'=\active 
+\begingroup 
+\obeylines\obeyspaces% 
+\gdef\@resetactivechars{% 
+\def^^M{\@activechar@info{EOL}\space}% 
+\def {\@activechar@info{space}\space}% 
+}% 
+\endgroup 
+\providecommand{\texorpdfstring}{\@firstoftwo} 
+\protected\def'{\texorpdfstring{\active@quote}{\qu@te}} 
+\def\active@quote{\relax 
+  \ifmmode 
+    \expandafter^\expandafter\bgroup\expandafter\prim@s 
+  \else 
+    \expandafter\futurelet\expandafter\@let@token\expandafter\qu@t@ 
+  \fi} 
+\def\qu@t@{% 
+  \ifx'\@let@token 
+    \qu@te\qu@te\expandafter\@gobble 
+  \else 
+    {}\qu@te{}\penalty\@M\hskip\expandafter\z@skip 
+  \fi} 
+\scantokens\expandafter{% 
+  \expandafter\def\expandafter\pr@m@s\expandafter{\pr@m@s}} 
+\makeatother
+
+\graphicspath{{./},{./Asymptote/}}
+%
+
+
+\begin{document}
+\pagenumbering{roman}
+\pagestyle{plain}
+%******************************************************************
+% Frontmatter
+%******************************************************************
+%\input{FrontBackMatter/Titlepage}
+%\input{FrontBackMatter/Titleback}
+\begin{titlepage}
+\pdfbookmark{Titlepage}{Titlepage}
+\changetext{}{}{}{((\paperwidth  - \textwidth) / 2) - \oddsidemargin - \hoffset - 1in}{}
+\null\vfill
+\begin{center}
+\large
+\sffamily
+
+\bigskip
+
+{\Large\spacedlowsmallcaps{\myName}} \\
+
+\bigskip
+
+{\huge\spacedlowsmallcaps{\myTitle} \\
+}
+
+\bigskip
+{\large\spacedlowsmallcaps{\mySubTitle}} \\
+
+    
+\vfill
+\vfill
+\vfill
+					{\normalsize
+					
+        \myTime}
+\end{center}
+\end{titlepage}
+
+
+
+\clearpage
+
+%*******************************************************
+% Titleback
+%*******************************************************
+\thispagestyle{empty}
+
+\hfill
+
+\vfill
+
+\noindent\myName:
+\textit{\myTitle} 
+\textcopyright\ \myTime.
+
+\medskip
+\medskip
+\noindent{\spacedlowsmallcaps{E-mail}}: \\
+\mail{alessandro.candolini@gmail.com}
+
+\vspace{1cm}
+%\hrule
+\bigskip
+
+%\noindent The titlepage reproduces an engraving of Maurits Cornelis Escher, titled \emph{Plane Filling with Birds} (the picture is obtained from \url{http://www.mcescher.com/}).
+
+
+
+
+\cleardoublepage
+
+%\input{FrontBackMatter/Abstract+Sommario}
+%\input{FrontBackMatter/Acknowledgements}
+\pagestyle{scrheadings} 
+\cleardoublepage
+%\input{FrontBackMatter/Contents}
+%*******************************************************
+% Contents
+%*******************************************************
+\phantomsection
+\pdfbookmark{\contentsname}{tableofcontents}
+\setcounter{tocdepth}{2}
+\begingroup 
+    \let\clearpage\relax
+    \let\cleardoublepage\relax
+    \let\cleardoublepage\relax
+
+\dominitoc
+\tableofcontents
+\endgroup
+\markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}} 
+
+\cleardoublepage
+
+%*******************************************************
+% Prefazione 
+%*******************************************************
+\chapter*{Prefazione}
+\markboth{\spacedlowsmallcaps{Prefazione}}{\spacedlowsmallcaps{Prefazione}} 
+\mtcaddchapter[\numberline{}\tocEntry{Prefazione}]
+%\addtocontents{toc}{\protect\vspace{\beforebibskip}} % to have the bib a bit from the rest in the toc
+%\addcontentsline{toc}{chapter}{\numberline{}\tocEntry{Prefazione}}
+
+
+
+L'obiettivo di queste note \`e offrire una sintesi di alcuni tra i principali aspetti legati allo studio dei modelli di evoluzione stellare.
+\par
+Il testo \`e stato inizialmente pensato come materiale integrativo e di approfondimento rispetto ai programmi scolastici tradizionalmente svolti nelle classi quinte di un Liceo Scientifico.
+Questa \`e anche la ragione per cui si \`e scelto di mantenere l'esposizione a un livello piuttosto elementare, omettendo in larga misura i dettagli tecnici e il formalismo matematico richiesti, invece, in trattazioni di livello pi\`u avanzato.
+\par
+Per quanto riguarda il modo con cui i diversi argomenti vengono affrontati, \`e  forse opportuno menzionare che si \`e fatto ricorso, piuttosto  frequentemente nell'esposizione, a nozioni di fisica elementare.
+In un'epoca in cui l'interdisciplinariet\`a viene elevata a uno dei motivi centrali delle attuali metodologie didattiche, non pare soddisfacente avviare una presentazione dell'evoluzione stellare senza neppure fare menzione dei meccanismi fisici che ne sono alla base.
+\par
+Vi \`e almeno una seconda ragione per prediligere un simile approccio espositivo.
+In questo modo, infatti, il testo non viene ridotto a essere una presentazione informativa e perlopi\`u nozionistica, ma lascia intravvedere, seppure solamente a grande linee, il ragionamento che  ``sta dietro'' allo studio dell'evoluzione stellare.
+Si potrebbe essere portati a ritenere che buona parte delle conoscenze oggi acquisite in merito all'evoluzione stellare siano il frutto di osservazioni dirette.
+Non \`e cos\`{\i}{}. L'intera vita di una stella si svolge su scale di tempo dell'ordine di parecchi milioni di anni. Evidentemente, simili durate di tempo sono troppo lunghe per permettere di monitorare, in modo continuativo, l'evolversi di una stessa stella in tutte le sue fasi di sviluppo.
+Invece, quanto possiamo affermare di sapere oggi  sull'evoluzione stellare discende in larga misura dall'elaborazione di modelli teorici.
+Certamente questi modelli devono poi risultare compatibili con i dati oggi in possesso sugli oggetti stellari conosciuti.
+\par
+I risultati di fisica a cui si fa riferimento nel testo dovrebbero essere padroneggiati con sicurezza da uno studente del quinto anno di Liceo Scientifico, con l'eccezione, forse, del teorema del viriale.
+Per ogni evenienza, alcune note di supporto sono comunque raccolte in appendice.
+\par
+L'approccio adottato \`e strettamente teorico.
+Questo significa che i riferimenti a oggetti astronomici osservati sono perlopi\`u assenti e, laddove presenti, rimangono comunque  piuttosto marginali. Si rimanda il Lettore che volesse approfondire questi aspetti ai pi\`u appropriati testi del settore. Riferimenti completi ad alcuni di questi testi si possono reperire in Bibliografia.
+In particolare, si segnala l'ottimo volume di Robert Burnham~\citep{burnham}.
+\par
+Per quanto riguarda l'organizzazione del materiale, il testo si articola in cinque capitoli e quattro appendici.
+\par
+Il \chaptername~\ref{nascita} presenta una panoramica sui processi di formazione stellare. Il teorema del viriale per nubi autogravitanti \`e introdotto, senza dimostrazione (\seename~\appendixname~\ref{app:viriale}), sin dall'inizio. Buona parte dei risultati che saranno ottenuti nel seguito fanno riferimento a questo teorema.
+Buona parte della trattazione sin qui svolta si ispira all'eccellente esposizione di \citet[pp. 23-43]{kittel}.
+Il materiale proposto contiene alcune lacune.
+Una delle omissioni maggiori riguarda il ruolo svolto dalla turbolenza e dai campi magnetici nel collasso gravitazionale. 
+Si \`e preferito non sviluppare per esteso questa parte, dati gli obiettivi modesti che questa presentazione si propone.
+Il lettore pu\`o integrare le informazioni al riguardo consultando, ad esempio, un testo di livello intermedio come~\citet{origin}.
+\par
+Il \chaptername~\ref{stabilita} si rivolge alle stella in sequenza principale.
+Non vengono introdotte le equazioni differenziali di struttura stellare. Piuttosto, si \`e preferito dare risalto alla nozione di equilibrio, distinguendo tra equilibrio idrostatico ed equilibrio termico \citep{hack}.
+\`E opportuno prestare attenzione a questi termini: rispetto al significato specifico che assumono in altri contesti (in termodinamica, ad esempio), vengono adoperati qui con un'accezione piuttosto particolare.
+Nella stessa accezione saranno impiegati anche nei capitoli successivi.
+Per il processo di fusione dei nuclei di idrogeno, non si entra nei dettagli della catena protone--protone e del ciclo di Bethe. La distinzione tra i caratteri che esibiscono le stelle in cui \`e attivo prevalentemente l'uno o l'altro processo \`e presentata piuttosto estesamente, seppure a un livello qualitativo.
+Conclude il capitolo una digressione sul caso, in parte ancora misterioso, di $\eta$ Carinae.
+\par
+Il \chaptername~\ref{esodo} tratta l'esodo dalla sequenza principale.
+Si \`e preferito postporre la discussione sulla pressione di degenerazione degli elettroni fino alla \sectionname~\ref{degenere}.
+La formula per il calcolo della pressione, derivabile nell'ambito della statistica quantistica di Fermi--Dirac, non viene dimostrata. Piuttosto, buona parte della trattazione \`e spesa per mettere in evidenza le peculiari propriet\`a della pressione di degenerazione. \`E importante che queste propriet\`a vengano assimilate a fondo dal Lettore: la pressione di degenerazione gioca infatti un ruolo centrale in tutta la dinamica successiva dell'oggetto stellare.
+\par
+Per quanto riguarda il fenomeno supernova, la dinamica dell'evento non viene sviluppata nel dettaglio. \`E parso importante focalizzate l'attenzione sulle differenze tra eventi di tipo Ia e di tipo Ib, questo soprattutto visto l'impiego degli eventi Ia come candele standard per la misura delle distanze extragalattiche.
+L'esposizione \`e arricchita da alcuni eventi storici di supernovae galattiche, e viene discusso l'evento 1989A.
+\par
+\`E parso utile predisporre un quadro di riepilogo delle propriet\`a caratteristiche delle nane bianche (\sectionname~\ref{nane bianche}). La trattazione, ispirata ancora una volta all'eccellente volume di Robert Burnham~\Cite{burnham}, offre al Lettore una buona occasione per abbandonare il terreno della speculazione teorica e confrontarsi per un attimo con quanto realmente ci \`e dato conoscere dall'osservazione del cielo. Il Lettore potr\`a cos\`{\i} familiarizzare con gli ordini di grandezza in gioco.
+\par
+Apre il \chaptername~\ref{chandra} una modesta introduzione dedicata alla figura di Subramohion Chandrasekhar. Le vicende che hanno accompagnato la scoperta da parte di Chandrasekhar della massa limite che oggi porta il suo nome meritano di essere almeno menzionate.
+La prima parte del capitolo \`e riservata agli aspetti teorici del limite di Chandrasekhar. Pur non entrando nei dettagli tecnici dell'argomento, si \`e cercato di enfatizzare il carattere intrinsecamente relativistico del limite di Chandrasekhar: un gas degenere relativistico, a differenza di un gas degenere non relativistico,  non \`e in grado di fornire ''abbastanza`` pressione per garantire l'insorgere di una condizione di stabilit\`a (idrostatica) nell'edificio stellare.
+Per l'eccellente qualit\`a della narrazione, la vicenda della scoperta sperimentale della prima pulsar e le vicende che ne seguirono sono riportate, quasi parola per parola, da~\Cite{encicl}.
+La studio delle  propriet\`a della materia neutronica nelle condizioni in cui viene a trovarsi nell'interno di una stella di neutroni non sono neppure accennate. L'Autore non esita a dichiarare la sua completa ignoranza al riguardo nel momento della stesura!
+Il modello Pacini--Glod e tratteggiato nei suoi aspetti fondamentali. Un'esposizione pi\`u dettagliata pu\`o trovarsi, ad esempio, in un testo classico di radioastronomia amatoriale come~\Cite{krauss}.
+\par
+Le appendici si configurano come note integrative o di supporto ai contenuti principali discussi nel testo.
+L'\appendixname~\ref{app:cnero} tratta della fisica del corpo nero. L'argomento si trova sviluppato in qusi ogni buon testo di elettromagnetismo e fisica quantistica. Ci limiteremo qui a riportare alcuni dei risultati pi\`u importanti a cui si \`e fatto riferimento nel testo, ommettendo in molti casi le relative dimostrazioni.
+L'\appendixname~\ref{app:neutrini} \`e una sommaria presentazione circa alcuni recenti risultai usll'osservazione dei neutrini solari.
+L'\appendixname~\ref{app:viriale} contiene una dimostrazione del teorema del viriale, basata sull'uso delle leggi di Newton.
+Infine, l'\appendixname~\ref{app:buchi neri} tratta della fisica quantistica dei buchi neri.
+\par
+Sar\`o grato a chiunque voglia segnalarmi omissioni e/o errori sicuramente presenti nel testo.
+Qualunque consiglio o suggerimento sar\`a sempre pi\`u che gradito.
+
+\bigskip
+ 
+\noindent\textsw{\myLocation, \myTime}
+
+
+    %\begin{tabular}{c}
+
+{\raggedright
+\Large{\calligra\myName}  }
+
+
+    %\end{tabular}
+
+
+%****************************************************************** Mainmatter
+%******************************************************************
+\cleardoublepage \pagenumbering{arabic}
+%************************************************ \chapter{Alcune propriet\`a
+%metriche del continuo reale} \minitoc\mtcskip
+%************************************************
+
+%************************************************
+\chapter{La nascita delle stelle}\label{nascita}
+\minitoc\mtcskip
+%************************************************
+
+\noindent Viene enunciato il teorema del viriale per nubi autogravitanti.  Il
+teorema \`e utilizzato per predire, sotto opportune ipotesi semplificatrici,
+l'evoluzione nel tempo di una nube autogravitante soggetta a perdita di energia
+per irraggiamento. In particolare, si vedr\`a che nelle ipotesi di cui sopra,
+ogni nube autogravitante a seguito della perdita di energia radiante, si contrae
+aumentando la propria temperatura, e \emph{pu\`o} diventare una stella.  Alcuni
+limiti al modello presentato vengono discussi in \sectionname~\ref{consideraz}.
+
+
+%This chapter introduces the (truly simple) basic notions of \arsclassica{} and
+%presents its fundamental ideas and peculiarities.
+
+\section{Nubi autogravitanti. Teorema del viriale}\label{sec:viriale}
+Consideriamo un insieme di $N$ particelle.
+\`E consuetudine riferirsi a questo insieme come a una ``nube'' di $N$ particelle.
+Faremo due ipotesi su queste particelle.
+Innanzitutto,  supporremo che ciascuna di queste particelle sia puntiforme.
+(Con ``particella puntiforme'' intendiamo che le sue dimensioni siano del tutto trascurabili rispetto all'estensione dell'intera nube e che si possa ignorare l'eventualit\`a che la particella possieda una qualche struttura interna.)
+In secondo luogo, richiederemo che le particelle della nube non interagiscano affatto tra loro mediante forze di natura elettrica.
+\par
+In  Lettore che abbia un minimo di familiarit\`a con i concetti della termodinamica \`e presumibile che non abbia tardato a scorgere qualche stretta analogia con la caratterizzazione microscopica del cosiddetto ``gas ideale'' (o ``gas perfetto'').
+Volendo, si pu\`o in effetti  guardare alla nube sopra introdotta come a una nube di gas ideale;
+in una descrizione su scala microscopica del gas ideale infatti, questo pu\`o essere pensato come costituito da particelle puntiformi non interagenti elettricamente.
+Si tenga presente questo fatto quando, in alcuni punti nelle prossime sezioni, aplicheremo senza troppi problemi l'equazione di stato del gas ideale alla nosra nube.
+\par
+\`E  opportuno fare una precisazione sul significato dell'espressione ``particelle non nteragenti con forze di natura elettrica''.
+Le particelle a cui vogliamo fare riferimento quando parliamo di un gas sono atomi o molecole.
+Amche se si tratta di strutture aventi in genere carica elettrica complessiva nulla, queste entit\`a sono sempre soggette a interazioni elettriche.
+Nella nostra analisi sull'evoluzione stellare, dovremmo includere alla lista delle particelle anche atomi ionizzati ed elettroni liberi, che sono entit\`a dotate di carica elettrica (complessiva nel caso degli ioni) non nulla.
+\`E chiaro che per ciascuna di queste particelle le interazioni elettriche sono presenti eccome! Tanto pi\`u quando ci si trova a parlare di ioni.
+Quello che intendiamo dire con ``forze di natura elettrica trascurabili'' \`e che mediamente possiamo trascurare l'interazione a distanza che ogni particella della nube subisce ad opera di tutte le altre particelle della nube.
+Non si possono trascurare invece le interazioni elettriche negli urti tra queste particelle. 
+D'altro canto nel nostro modello a particelle puntiformi, l'energia \`e conservata (e anche nei casi reali, l'ipotesi che gli urti siano elastici \`e soddisfatta con buina approssimazione) per cui l'unico effetto degli urti \`e quello di deviare le particelle coinvolte dalla loro iniziale traiettoria.
+\par
+Ci si potrebbe aspettare che una nube quale quella ora descritta, se lasciata libera di espandersi nello spazio vuoto, si espanda indefinitamente.
+Perch\'e?
+Supponiamo che tra le particelle sia distribuito un certo quantitativo di energia cinetica.
+(Come vedremo in \sectionname~\ref{aumentot}, questo \`e sicuramente vero a patto che la nube, come peraltro \`e realistico attendersi, si trovi a una temperatura assoluta superiore allo zero kelvin.) 
+Dal momento che nessuna interazione di natura elettrica \`e presente tra le particelle, queste non si influenzeranno a vicenda.
+Non essendo trattenute nel loro moto, al trascorrere del tempo si distribuiranno su regioni di spazio via via di ampiezza maggiore.
+%\footnote{\`E questo, in ultima analisi, lo stesso tipo di  ragionamento alla base della tradizionale considerazione secondo cui un gas (ideale) non ha n\`e forma n\`e volume propri.}
+\par
+In  realt\`a pu\`o succedere che la nube rimanga comunque contenuta indefinitamente entro un volume finito per effetto della mutua attrazione gravitazionale tra le particelle che la compongono.
+Per quanto esotico possa apparire questo fenomeno, si ritiene oggi che nelle stelle avvenga proprio questo. Una stella \`e una struttura mantenuta assieme dalla forza di gravit\`a tra le sue parti.
+Una nube che rimanga confinata indefinitamente entro una regione finita di spazio per mezzo della sola attrazione gravitazionale che si esercita tra le particelle che la compongono la chiameremo ``nube autogravitante''.
+\par
+Introduciamo, in modo per certi versi informale,  due grandezze fisiche che possono essere utile a specificare le propriet\`a di una nube (non neccessariamente autogravitante). 
+Il Lettore interessato potr\`a comunque reperire le definizioni formali in \appendixname~\ref{app:viriale}.
+\par
+La  prima grandezza \`e l'energia cinetica totale della nube.
+Si tratta della somma algebrica dell'energia cinetica di ciascuna particella della nube.
+Siccome le particelle della nube sono per ipotesi puntiformi, non hanno quindi estensione n\'e struttura interna, non possono ruotare attorno a qualche loro asse, e peranto l'energia cinetica di ogni singola particella puntiforme della nube coincide con l'energia cinetica associata al solo moto di traslazione di tale particella. 
+Nel seguito, indicheremo l'energia cinetica totale con $\ec$.
+Sar\`a utile ricordare che, essendo per definizione l'energia cinetica di ogni particella una quantit\`a positiva, anche l'energia cinetica totale della nube sar\`a positiva.
+\par
+La seconda quantit\`a di cui avremmo bisogno nel  seguito \`e la cosiddetta ``energia potenziale gravitazionale propria'' della nube. (Talvolta l'aggettivo ``propria'' viene tralasciato, e anche noi spesso ci adegueremo  per brevit\`a a questa usanza.)
+Nel seguito, indicheremo l'energia potenziale gravitazionale propria con $\ug$. 
+Sar\`a utile ricordare che, essendo la forza di attrazione gravitazionale sempre attrattiva, l'energia potenziale gravitazionale di una nube ha sempre valore numerico negativo.
+\par
+Siamo pronti per enunciare il seguente importantissimo risultato, valido per nubi autogravitanti in quasi equilibrio.
+\begin{teo}[del viriale]
+Per una nube autogravitante sussiste la relazione
+\begin{equation} \label{viriale}
+\media{\ec} = - \frac{1}{2} \media{\ug} \eqspace ,
+\end{equation}
+dove le parentesi ad angolo $\media{\cdot}$ indicano che le quantit\`a che vi figurano vanno mediate su periodi di tempo ``ragionevolmente'' lunghi.
+\end{teo}
+\par
+Il Lettore pu\`o trovare una dimostrazione di questo teorema basata su semplici considerazioni di meccanica newtoniana in ~\appendixname~\ref{app:viriale}. 
+Nella stessa appendice, si pu\`o reperire anche maggiori dettagli su come debba intendersi l'espressione ``tempi ragionevolmente lunghi''.
+\par
+Conviene introdurre un'ulteriore grandezza che possiamo associare alla nostra nube, l'energia totale $\etot$, definita come la somma dell'energia cinetica $\ec$ e dell'energia potenziale gravitazionale propria  $\ug$:
+\begin{equation}\label{Ene}
+E=\ec + \ug \eqspace .
+\end{equation}
+Siccome le uniche forze agenti sulle particelle della nube sono le forze gravitazionali di mutua interazione, che sono forze conservative, l'energia totale cos\`{\i} definita si conserva.
+\par
+Vedremo  adesso che il teorema del viriale pu\`o essere utilizzato come strumento per caratterizzare una nube autogravitante uan volta che sia noto il valore dell'energia totale $\etot$ a un qualche istante di tempo. (Siccome l'energia totale si conserva nel nostro caso, non \`e particolarmente rilevante a che istante si riferisca il valore $\etot$.)
+Si hanno due casi:
+\begin{enumerate}
+\item~\label{e>0}%
+se $\etot>0$, la nube (o almeno parte di essa) si espande indefinitamente;
+\item~\label{e<0}%
+se $\etot<0$, la nube \emph{non} può espandersi indefinitamente, \ie, \`e autogravitante.
+\end{enumerate}
+Cerchiamo di spiegarne la ragione.
+Cominciamo dal caso~\ref{e>0}.
+Supponiamo per assurdo che, per $\etot>0$, la nuvola \emph{non} si espanda indefinitamente, ma rimanga confinata in un volume finito.
+Allora sarebbe possibile applicare il teorema del viriale.
+Possiamo riscrivere la \eqname~\eqref{viriale} nella forma $\media{\ug} = -2 \media{\ec}$, da cui
+\begin{equation}\label{Eec}
+\media{\etot} = \media{\ec+\ug} = \media{\ec}+\media{\ug} = \media{\ec}-2\media{\ec}  = - \media{\ec} \eqspace .
+\end{equation}
+Si \`e gi\`a osservato  che, per come definita, l'energia cinetica \`e una grandezza sempre positiva; dalla \eqname~\eqref{Eec} si conclude allora che $\media{\etot}<0$. Ma per la conservazione dell'energia, l'energia totale \`e costante, \ie, $\media{\etot}=\etot$, da cui si conclude che  $\etot <0$ contro l'ipotesi iniziale che $\etot>0$.
+\par
+Veniamo adesso al caso~\ref{e<0}.
+Procediamo per assurdo come nel caso precedente e supponiamo che, per $\etot<0$, la nuvola invece si espanda indefinitamente.
+Ciascuna particella finir\`{a} cio\`e per trovarsi a distanza infinita dalle altre.
+Quando ci\`o avviene, l'energia potenziale gravitazionale propria finale $\ug$ \`e nulla per definizione, tutta l'energia \`e cinetica (quindi positiva) e l'energia totale del sistema \`e dunque positiva contro l'ipotesi iniziale che $\etot<0$.
+\section{Effetti della perdita di energia}\label{perdita}
+Si dimostrer\`{a} di seguito che ogni nube per cui $E<0$ non solo, come gi\`{a} mostrato alla sezione precedente, rimane contenuta entro un volume finito, ma tende a contrarsi su s\`e stessa aumentando la propria temperatura.
+Come approfondiremo meglio nella prossima sezione, questi risultati suggeriscono automaticamente  un meccanismo plausibile per spiegare come si formino le stelle. 
+\subsection{Aumento della temperatura}\label{aumentot}
+Nella nostra indagine supporremo di poter ritenere valido il teorema di equipartizione dell'energia,
+da cui si ricava che la temperatura assoluta $T$ di un sistema di $N$ particelle \emph{puntiformi} in equilibrio termico è legata al valore dell'energia cinetica media $\langle E_{c} \rangle$ totale delle $N$ particelle dalla relazione
+\begin{equation}\label{equip}
+\langle E_{c} \rangle = \frac{3}{2} NkT
+\end{equation}
+dove $k$ è la costante di Boltzmann pari a $\SI{1.38E-23}{J/K}$~\citep{caforio}.
+\par
+Si è gi\`{a} visto che $E=\langle E \rangle = \langle E_{c} \rangle + \langle U_{g} \rangle = - \langle E_{c} \rangle$ come conseguenza del teorema del viriale ai numeri (\ref{Eec}) e (\ref{Ee}). Tenendo conto della relazione (\ref{equip}) si ha quindi:
+\begin{equation}\label{Eequip}
+E = \langle E \rangle = - \langle E_{c} \rangle  = - \frac{3}{2}  NkT
+\end{equation}
+da cui infine ricavando la temperatura assoluta $T$ si ha:
+\begin{equation}\label{Temp}
+T = \frac{2}{3} \cdot \frac{\langle E_{c} \rangle }{Nk} = -\frac{2}{3} \cdot \frac{ \langle E \rangle }{Nk} = -\frac{2}{3} \cdot \frac{E}{Nk}
+\end{equation}
+La nube assume facilmente temperature superiori, in qualche misura, alla temperatura dello spazio esterno, che, all'epoca attuale, è pari a circa 2.7 kelvin (radiazione del fondo cosmico). Per il principio zero della termodinamica, la nube tender\`{a} a irradiare energia nello spazio, in forma di onde elettromagnetiche, al fine di ricercare una condizione di equilibrio termico con lo spazio esterno.
+Indichiamo con $\Delta E$ la quantit\`{a} di energia irradiata dalla nube nello spazio circostante. $\Delta E$ rappresenta cioè la frazione di energia tatale che la nube \emph{perde} nel tentativo di stabilire una relazione di equilibrio termico con l'ambiente esterno più freddo. La variazione $\Delta T$ di temperatura corrispondente alla perdita di energia $\Delta E$  è pari, secondo la relazione (\ref{Temp}), a:
+\begin{equation}\label{DeltaT}
+\Delta T = -\frac{2}{3} \cdot \frac{\Delta E}{Nk}
+\end{equation}
+Ripercorriamo brevemente a parole quanto si è fatto in questi ultimi passaggi: abbiamo semplicemente ripreso le equazioni (\ref{Eec}) e (\ref{Ee}) del capitolo precedente, le abbiamo modificate introducendo l'espressione del principio di equipartizione e tutto ciò al fine di giungere ad una relazione, la numero (\ref{DeltaT}) appunto, che leghi la variazione di energia $\Delta E$ alla variazione di temperatura $\Delta T$. \par
+Questa equazione ci serve per dire che in generale il segno di $\Delta E$ sar\`{a} opposto al segno di $\Delta T$ (nella relazione (\ref{DeltaT}) compare infatti un segno meno per cui, qualora uno dei due termini della relazione sia negativo, l'altro dovr\`{a} necessariamente essere positivo e viceversa.)
+\par
+Pertanto, se $\Delta E$ è negativo (la nube \emph{perde} energia sotto forma di radiazione elettromagnetica) allora $\Delta T$ è positiva.
+Questo significa che, \emph{via via che la nuvola di gas irraggia energia, la sua temperatura deve aumentare.}
+\par
+L'effetto può apparire sconcertante, ma come si è visto è una conseguenza deducibile, neanche troppo difficilmente, dal teorema del viriale: più la nube emette energia più la sua temperatura aumenta, la stella continua ad irraggiare energia e intanto aumenta la propria temperatura e cos\`{\i}{} via.
+La stella perde energia e di conseguenza si scalda. \`E questo il significato profondo della relazione (\ref{DeltaT}).
+Il fatto che la nube si riscaldi è la prima conseguenza della perdita, da parte della nube stessa, di energia radiante.
+\subsection{Contrazione della nube}\label{contrazione}
+Si vuole ora esaminare un secondo effetto della perdita di energia radiante; si vedr\`{a} che, man mano che la nube rilascia energia nello spazio in forma di onde elettromagnetiche, oltre a scaldarsi subisce pure un effetto di \emph{contrazione}.
+\par
+Anche questa seconda conseguenza \`e deducibile da alcune considerazioni quantitative sul teorema del viriale. Vediamo di capire come.
+Per il teorema del viriale, se l'energia cinetica $E_{c}$ \emph{aumenta} è necessario che l'energia potenziale $U_{g}$ \emph{diminuisca}.
+Nell'espressione matematica del teorema del viriale compare infatti un segno meno; qualora il valore, mediato su un lungo periodo di tempo, di una delle due grandezze \emph{aumenti}, il valore dell'altra grandezza dovr\`{a} \emph{diminuire} affinché la relazione (\ref{viriale}) continui a mantenersi valida. Un aumento di energia cinetica implica dunque una diminuzione dell'energia potenziale.
+\par
+Se la nube irradia energia, abbiamo visto sopra (sezione \ref{aumentot})che aumenta la temperatura. Se aumenta la temperatura, aumenta l'energia cinetica media (basti ricordare il solito teorema di equipartizione). Ma maggiore energia cinetica significa, come abbiamo visto ora, minore energia potenziale.
+\setlength{\unitlength}{1mm}
+\begin{figure}[tbp]
+\begin{center}
+\begin{picture}(100,60)
+\put(30,50){\framebox(40,08)[cc]{Irraggiamento $\Delta E <0$}}
+\put(50,50){\vector(0,-1){7}}
+\put(35,35){\framebox(30,08)[cc]{$\Delta T >0$}}
+\put(50,35){\vector(0,-1){7}}
+\put(35,20){\framebox(30,08)[cc]{$\Delta \langle E_{c} \rangle  >0$}}
+\put(50,20){\vector(0,-1){7}}
+\put(35,05){\framebox(30,08)[cc]{$\Delta \langle U_{g} \rangle <0$}}
+\end{picture}
+\end{center}
+\caption{Schema}
+\end{figure}
+%\begin{center}
+%IRRAGGIAMENTO $\Rightarrow$ AUMENTO $T$ $\Rightarrow$ AUMENTO $\langle E_{c} \rangle$ $\Rightarrow$ DIMINUZIONE $\langle  U_{g} \rangle$
+%\par
+%\end{center}
+L'energia potenziale gravitazionale propria$U_{g}$ di un sistema è, per definizione, correlata alla massa ed alla geometria del sistema stesso. 
+Un'espressione matematica per $U_{g}$ nel caso di una sfera omogenea di massa $m$ e raggio $r$ è \citep{kittel}:
+\begin{equation}\label{epropriag}
+U_{g} = - \frac{3}{5} \cdot \frac{GM^{2}}{r}
+\end{equation}
+dove $G$ è la costante di gravitazione universale.
+\par
+Il fattore numerico $3/5$ è riferito al caso particolare di una sfera uniforme \citep{kittel}. Quello che qui ci interessa è la dipendenza di $U_{g}$ dall'inverso del raggio.
+\par
+Se $U_{g}$ deve diminuire come si è detto, è necessario che $r$ (che nell'espressione sopra compare al denominatore) diminuisca.
+In altri termini, mano a mano che la nube irradia energia, la nuvola diventa sempre più \emph{calda} e si \emph{contrae}. 
+Questa è una conseguenza del teorema del viriale.
+Il processo di contrazione della nube non è innescato da alcun meccanismo esterno alla nube stessa.
+\emph{Qualunque} insieme di particelle, per cui inizialmente $E<0$, evolver\`{a} autonomamente in maniera tale da ridurre le proprie dimensioni spaziali e da aumentare la propria temperatura interna; l'evoluzione è perfettamente descrivibile e prevedibile (come si è voluto mostrare) mediante l'impiego del teorema del viriale (e, volendo essere rigorosi, nell'ipotesi di applicabilit\`{a} del teorema di equipartizione dell'energia).
+Qualsiasi fattore estraneo alla nube stessa risulta superfluo per rendere ragione del processo di contrazione.
+Le leggi della fisica prevedono che \emph{qualsiasi} nube di gas per cui $E<0$ subisca contrazione gravitazionale e aumenti nel contempo la propria temperatura.
+\par
+Se il meccanismo di contrazione può essere interamente spiegato alla luce del teorema del viriale, ancora ignote rimangono invece le cause \emph{all'origine della formazione} dei globuli di Bok.
+Il perch\'{e} si formino, all'interno delle nebulose, marcate disomogeneit\`{a} nella distribuzione dei gas e delle polveri rimane ancora oggi oggetto di discussione.
+Secondo una delle ipotesi oggi maggiormente accreditate la condensazione dei materiali della nebulosa e la formazione di strutture globulari sarebbe da imputarsi all'effetto di compressione operato da onde d'urto sprigionate nell'esplosione di vicine supernovae.
+\par
+Quello che preme ancora una volta sottolineare, contro taluni errori in merito alla questione alle volte riportati in una manualistica anche di un certo livello,  è che l'effetto di compressione prodotto dall'esplosione delle supernovae \emph{non} concorre in alcun modo, o comunque con rilevanza scarsamente significativa, a indurre la contrazione dei globuli di Bok, il cui comportamento è \emph{interamente} regolato dal teorema del viriale, ma semmai costituisce uno dei principali fattori coinvolti nella formazione di disomogeneit\`{a} in seno alla nebulosa, quali appunto gli stessi globuli di Bok devono essere considerati.
+\subsection{Incremento della velocit\`{a} angolare di rotazione}\label{rotazione}
+A titolo di pura curiosit\`{a} ricordiamo a questo punto come, durante la fase di contrazione, la nube inizi a manifestare un sensibile moto di rotazione. Ciò è conseguenza del principio di conservazione del momento della quantit\`{a} di moto (o momento angolare).
+Malgrado infatti la velocit\`{a} iniziale di rotazione della nube sia il più delle volte talmente piccola da non essere operativamente misurabile, la contrazione determina un aumento della velocit\`{a} angolare (non diversamente da quanto avviene con una ballerina che avvicina le proprie braccia.)
+\subsection{Sintesi dei principali effetti connessi alla perdita di energia radiante}\label{effetti perdita energia}
+In sintesi la perdita di energia sotto forma di radiazione elettromagnetica determina:
+\begin{itemize}
+\item
+aumento della temperatura interna della nube;
+\item
+contrazione della nube;
+\item
+aumento della velocit\`{a} angolare della nube.
+\end{itemize}
+%\newpage
+\section{Alcune considerazioni sul modello di formazione stellare}\label{consideraz}
+Si è presentato un modello teorico semplificato che fornisca una qualche spiegazione dei meccanismi di formazione stellare. Prima di procedere oltre, appare lecito interrogarsi sull'attendibilit\`{a} di siffatto modello e sulle prove sperimentali che esso eventualmente vanta a conforto. L'elaborazione di ogni modello fisico richiede inoltre che vengano discusse le idealizzazioni e le approssimazioni che esso inevitabilmente contiene.
+Anche tenendo conto del fatto che il modello precedentemente descritto non vuole essere che una grossolana semplificazione della decisamente  più rigorosa e dettagliata modellistica esistente al riguardo, non si può prescindere dal fornire alcuni estremi di riferimento che permettano al lettore di formarsi un'idea, per quanto generale, della validit\`{a} dei modelli di formazione stellare.
+\par
+
+\smallskip
+
+Fin qui si è esposto un modello teorico soddisfacente secondo cui \emph{ogni} nube di gas autogravitante tale per cui $E<0$ (\sectionname~\ref{sec:viriale}) e sufficientemente massiccia\footnote{Come si vedr\`{a} più dettagliatamente alla\ref{Jeans}, si possono verificare delle situazioni in cui la massa in gioco è inferiore al valore critico di circa $0.07$ masse solari. Al di sotto di questo valore critico si ha l'arresto del collasso gravitazionale (causa l'insorgere di fenomeni quantistici) prima che la temperatura interna della nube raggiunga i valori di innesco delle reazioni nucleari.}, andr\`{a} incontro a collasso gravitazionale, a seguito del quale dar\`{a} poi origine ad una stella. Si è anche detto, nel paragrafo introduttivo alla sezione \ref{nascita}, che possibili candidati al ruolo di nubi dalle quali si origineranno, per successiva contrazione, le stelle, sono i \emph{globuli di Bok}\footnote{Più precisamente si parla di \emph{globuli di Bok maggiori}. Esiste un secondo gruppo di oggetti, appartenenti alla medesima classe dei globuli di Bok, ma di dimensioni estremamente più contenute. Sulla relazione che esista tra i due gruppi non si sa molto, ma secondo talune teorie recenti pare che le differenze non si limitino all'estensione spaziale \Cite{dick}.}
+%
+%
+%		***	trovare l'anno di Dickman	***
+%
+%
+\par
+\emph{Quali prove si hanno che i globuli di Bok siano veramente i primi embrioni di futuri corpi stellari?}
+\par
+Per rispondere, nel seguito si far\`{a} riferimento prevalentemente a \Cite{dick}.%
+\par
+
+\smallskip
+
+Conferme osservazionali dirette che provino in maniera inequivocabile che questi globuli evolvano a formare delle stelle ad oggi non ve ne sono.
+Nessuno ha mai visto nascere una stella.
+Ciò accade perch\'{e} il processo di formazione stellare richiede scale di tempo troppo grandi perch\'{e} possa venire direttamente osservato.
+Un tale problema non sussiste esclusivamente per le fasi iniziali dell'evoluzione stellare, ma, come si è cercato di mettere in luce sin dall'introduzione, costituisce una questione ricorrente che ritroveremo per tutti gli stadi evolutivi successivi.
+\par
+Un argomento piuttosto valido a sostegno dell'ipotesi che le stelle si originino dentro globuli di Bok in contrazione potrebbe essere quello di trovare stelle di formazione recente all'interno di queste strutture nebulari. Un'indagine di questo tipo è stata condotta qualche tempo fa da W.E. Herbst e D.G Turner. Il risultato è stato che un globulo, noto come Lynds 810, contiene almeno una stella giovane, plausibilmente originatasi per contrazione del globulo stesso.
+\footnote{L'indagine è citata da \Cite{dick}. %
+L'autore si scusa, ma purtroppo non gli è stato possibile reperire il lavoro originale dei due ricercatori e neppure venire a conoscenza di sviluppi più recenti sulla questione.}
+\par
+
+\smallskip
+
+Il fatto stesso che i globuli di Bok stiano collassando è tutt'altro che scontato.
+Potrebbe darsi benissimo il caso che tutti questi globuli siano strutture gravitazionalmente stabili. Se cos\`{\i}{} fosse, ci troveremo di fronte a due alternative: o le nubi che collassano a formare le stelle sono altre, diverse dai globuli di Bok, oppure semplicemente il nostro modello è tutto da rifare e non è affatto vero che le stelle si originano come si è cercato di far intendere nelle pagine precedenti.
+\par
+Un modo per verificare che i globuli si stiano realmente contraendo potrebbe essere questo: dal nostro modello sappiamo (\ref{sec:viriale}) che l'unico requisito perch\'{e} si abbia la contrazione è che $E<0$, perch\'{e} per $E>0$ la nube semplicemente si disperde e il teorema del viriale non è più applicabile.
+Se disponessimo di un dispositivo capace di misurare direttamente il valore di $E$ per un dato globulo, allora basterebbe vedere se $E>0$ o se $E<0$ per poter affermare, in tutta sicurezza, che quel globulo sta collassando o meno. In realt\`{a} ciò non è proprio rigorosamente esatto perch\'{e} si sono supposti trascurabili certi fattori, come presenza di campi magnetici, di cui diremo qualche parolina in seguito. Per ora continuiamo a trascurare questi fattori.
+Allora, come si stava dicendo, se misuriamo che $E<0$ siamo assolutamente certi che il globulo si sta contraendo.
+\par
+Purtroppo le cose non sono cos\`{\i}{} semplici, perch\'{e} non disponiamo di uno strumento che ci permetta di misurare direttamente $E$. Occorre procedere per via \emph{indiretta}, partendo dalla misurazione diretta di altre grandezze per poi risalire al valore di $E$. Si tratta cioè, per il nostro globulo, di raccogliere un po' di dati sperimentali e poi da questi, con qualche conticino, ricavare quanto vale $E$.
+\par
+Di quali dati abbiamo bisogno per calcolare $E$?
+\par
+Sappiamo dalla (\ref{Ene}) che $E=\langle E_{c} \rangle+\langle U_{g} \rangle$. Però questo non ci aiuta per niente, non disponendo di alcun modo per misurare direttamente neanche $\langle E_{c} \rangle$ e $\langle U_{g} \rangle$.
+Ma noi sappiamo anche dell'altro: sappiamo ad esempio il principio di equipartizione dell'energia (\ref{equip}), e abbiamo anche un'espressione, la (\ref{epropriag}), per $U_{g}$ nel caso in cui il globulo sia una sfera.
+\par
+Per valutare $\langle E_{c} \rangle$ sar\`{a} sufficiente conoscere il numero di particelle $N$ che compongono il globulo e la sua temperatura interna assoluta $T$; per $\langle U_{g} \rangle$ ci servono la massa del globulo $M$ e il raggio $r$. Se si considera che, sapendo la composizione approssimativa del globulo (e questa si può sapere tramite indagine spettroscopica),$N$ può essere ricavato da $M$, i parametri di cui abbiamo bisogno sono, alla fine, la temperatura interna $T$, la massa $M$ ed il raggio $r$.
+\par
+Raggio e massa del globulo sono deducibili dall'analisi di lastre fotografiche, il primo da una misura delle dimensioni \emph{apparenti} delglobulo sulla lastra (nota la distanza del globulo dalla Terra), la seconda, in modo un po' più complicato, stimando l'effetto di assorbimento operato dalle polveri del globulo sulla luce delle stelle che vi passa attraverso \Cite{dick}. Tra i metodi più efficaci per determinare la temperatura interna si ricorda quello basato sull'osservazione della riga spettrale dell'ossido di carbonio alla lunghezza d'onda di 2.6mm \Cite{dick}.
+\par
+A questo punto, noti $T$, $r$ ed $M$, non resta che verificare che i loro valori forniscano la conferma della contrazione gravitazionale dei globuli di Bok.
+Nell'indagine condotta da Dickman su un campione di otto globuli, tutti questi otto globuli si sono rivelati, in base alla misura dei parametri $T$, $M$ ed $r$, in stato avanzato di collasso gravitazionale \Cite{dick}.
+\par
+
+\smallskip
+
+Nel modello di formazione stellare presentato, si è ignorata l'esistenza di almeno tre importanti fattori frenanti che possono opporsi alla contrazione gravitazionale \Cite{dick}:
+\begin{enumerate}
+\item
+\emph{forze centrifughe} dovute alla rotazione;
+\item
+\emph{campi magnetici}
+\item
+\emph{turbolenza fluidodinamica}
+\end{enumerate}
+La geometria sferica del globulo suggerisce che il primo di questi fattori, la presenza di forze centrifughe, sia trascurabile con buona approssimazione; in caso contrario, ci si aspetterebbe che l'entit\`{a} della forza centrifuga fosse tale da provocare un sensibile schiacciamento nella forma del globulo. Più difficile è valutare l'entit\`{a} dei restanti due fattori. Vi sono comunque buone ragioni per considerare trascurabili, almeno in prima approssimazione, anche questi fattori.
+Per una trattazione qualitativa più approfondita sull'argomento si rimanda all'articolo di Dickman \Cite{dick}.
+\section{Le protostelle}
+\`E noto come, all'aumentare della temperatura, l'intensit\`{a} massima di irraggiamento per un corpo si abbia a frequenze via via più elevate.
+In forma quantitativa, per un corpo nero\footnote{Qualunque sistema fisico avente \emph{potere assorbente} $A(\nu, T, \ldots)$ pari ad $1$, cioè in grado di assorbire \emph{tutta} la radiazione incidente.
+%Si definisce \emph{potere assorbente} di un    qualunque corpo, avente temperatura assoluta $T$, il  rapporto tra l'energia assorbita dal corpo stesso e l'energia incidente alla frequenza $\nu$. In genere $A(\nu, T, \ldots)$ è funzione \emph{anche} delle caratteristiche del corpo in esame, in particolare della sua superficie.(Peruzzi 2000)} 
+}
+questo fatto viene espresso mediante la legge dello spostamento di Wien. \footnote{
+Detta $\lambda_{max}$ la lunghezza d'onda alla quale si ha la massima intensit\`{a} di irraggiamento per un corpo nero alla temperatura assoluta $T$, la legge dello spostamento di Wien stabilisce che $\lambda_{max} \cdot T = b_{0}$,
+con $b_{0}$ costante pari a $b_{0}=\mathnormal{2.897 \times 10^{-3}} m \cdot K$ \Cite{caf}.}
+Il globulo di Bok, durante la fase di contrazione, aumentando la propria temperatura, comincer\`{a} ad emettere radiazione con un massimo di intensit\`{a} attorno a frequenze sempre maggiori, diventando infine osservabile nell'infrarosso e, in molti casi, nello spettro del visibile.
+Qualche decina di anni fa, esaminando con fotometri sensibili all'infrarosso la regione centrale della nebulosa di Orione, Becklin e Neugebauer, due astrofisici del Caltech, hanno identificato una intensa sorgente di radiazione infrarossa, da ritenersi una nube in contrazione gravitazionale.
+La scoperta si è poi ripetuta, nella medesima zona di cielo, grazie a Kleinmann e Low, che hanno identificato un oggetto, ancora meno compatto, anch'esso visibile nel lontano infrarosso.
+Da allora, il numero di simili oggetti, presumibilmente associati a stelle in via di formazione, è andato sempre aumentando; ad essi è stato dato il nome di \emph{protostelle}: pur brillando di luce propria, caratteristica questa delle stelle, non derivano la quantit\`{a} di energia che irradiano nello spazio da reazioni di fusione nucleare.
+\par
+La durata della fase di protostella dipende dalla massa dei materiali in condensazione: il corso evolutivo è tanto più rapido quanto maggiore è la massa in gioco.
+
+
+%************************************************
+\chapter{La sequenza principale \label{stabilita}}
+\minitoc\mtcskip
+%************************************************
+
+\noindent Il processo di contrazione gravitazionale si arresta quando la temperatura nelle regioni centrali della stella è tale da consentire il verificarsi di reazioni di fusione nucleare.
+La stella entra in sequenza principale e viene definita di \emph{et\`{a} zero}.
+\section{Equilibrio}\label{equilibrio}
+\subsection{Massa di Jeans. Nane brune}\label{Jeans}
+\`E bene precisare sin da subito come non tutte le protostelle in fase di contrazione raggiungano temperature tali da consentire l'innescarsi al loro interno delle reazioni termonucleari; si stima che per masse inferiori a $0,07 M_{\odot}$, con $M_{\odot}$ massa del Sole, la protostella non raggiunga mai lo stadio di stella di sequenza principale.\footnote{La massa critica che una protostella in fase di contrazione deve  possedere per diventare, dopo un opportuno periodo di tempo,  una stella di et\`{a} zero è detta \emph{massa di Jeans}. Il valore qui riferito, pari a $0.07$ masse solari, è riportato in \Cite{rosino}, p. $750$. Altre fonti forniscono per la massa di Jeans il valore di $0.08 M_{\odot}$ \citep{hack}.} In questo caso infatti il collasso gravitazionale verr\`{a} arrestato (prima che si assista all'innesco delle reazioni di fusione)  da effetti di natura quantistica sui quali si discorr\`{a} più approfonditamente in seguito in riferimento alle nane bianche.
+Per valori di massa $<0.07 M_{\odot}$ la protostella terminer\`{a} infine la propria vita nello stadio di nana bruna, irradiando lentamente energia nello spazio, raffreddandosi fino al sopraggiungere della morte termica.
+\par
+\`E interessante notare come anche un pianeta come Giove si possa far rientrare in quest'ultima categoria di oggetti stellari. Secondo una descrizione del pianeta gigante, risalente ancora agli anni tra il 1940 e il 1950 ma tutt'oggi rimasta largamente valida, la composizione dell'atmosfera gioviana si accorda perfettamente con una composizione simile a quella del Sole e di altre stelle. \footnote{Gli spettrometri infrarossi montati sulle sonde Voyager hanno permesso di stimare il rapporto fra abbondanza di elio ($He$) e idrogeno ($H_{2}$) pari a 0.11 $\pm$ 0.3, in ottimo accordo con il valore ottenuto per il Sole, che è pari a 0.12 \Cite{cav}. \`E doveroso segnalare che, in tempi più recenti, l'esplorazione  diretta dell'atmosfera gioviana ad opera di un modulo spaziale sganciato nel dicembre del 1995 dalla sonda Galileo ha messo in evidenza un sorprendentemente elevato contenuto di carbonio, azoto e ossigeno rispetto alla composizione dell'atmosfera del Sole. Pare plausibile, allo stadio attuale di riduzione dei dati, che impatti di comete e asteroidi col pianeta possano averne influenzato in maniera rilevante la composizione degli strati più esterni \Cite{conti}.}
+A quanto pare, all'epoca della sua formazione Giove non raggiunse una massa sufficiente affinché il collasso gravitazionale del corpo potesse proseguire fino all'avvio, nel suo interno, delle reazioni di fusione. 
+\subsection{Condizioni di equilibrio}\label{ce}
+Nel caso in cui la massa in gioco sia superiore alla massa critica di Jeans, la temperatura della protostella diventa infine cos\`{\i}{} elevata da consentire il verificarsi dei processi di fusione nucleare.
+Il questo caso la quantit\`{a} di energia persa per irraggiamento dalla stella viene compensata perfettamente da quella prodotta nel nocciolo centrale dalle reazioni nucleari. 
+La variazione di energia totale $\Delta E$ del sistema è perciò nulla:
+\begin{displaymath}
+\Delta E = 0
+\end{displaymath}
+Conseguenza di ciò si assiste all'arresto del collasso gravitazionale e la stella entra in una fase di stabilit\`{a}.
+Con stabilit\`{a} non si intende il raggiungimento di uno stato statico, ma piuttosto di una condizione \emph{stazionaria} di equilibrio dinamico in cui mediamente non avvengono cambiamenti significativi nelle caratteristiche e nella struttura complessiva della stella.
+La fase di stabilit\`{a} risulta caratterizzata da \citep{hack}:
+\begin{enumerate}
+\item
+\emph{Equilibrio termico}: tanta energia viene prodotta dalle reazioni di fusione nucleare tanta viene emessa dalla superficie. In altri termini l'energia prodotta dalle reazioni di fusione è sufficiente a mantenere costante la temperatura della stella.
+\item
+\emph{Equilibrio idrostatico}: in termini di forze, la forza di attrazione gravitazionale della stella su sé stessa è perfettamente controbilanciata dalla forza di pressione\footnote{Più propriamente ciò che bilancia la forza di gravit\`{a} è il \emph{gradiente} di pressione} che tende a far espandere la stella stessa.
+\par
+Si consideri a titolo di esempio un qualche elemento del corpo stellare avente massa $dm$ e volume infinitesimo $dV$. Le forze agenti su questo elemento sono, come schematicamente raffigurato in figura 1, la forza di attrazione gravitazionale $\vec{F_{G}}$ e la forza di pressione $\vec{F_{p}}$. Affinché vi sia equilibrio idrostatico la risultante delle forze agenti deve essere nulla, cioè $F_{G}=F_{p}$ indipendentemente da quale elemento di massa si scelga di considerare.
+\footnote{Per il lettore che lo desiderasse, si riporta, a puro titolo di curiosit\`{a}, l'equazione dell'equilibrio idrostatico ricavabile imponendo che la forza di attrazione gravitazionale $F_{G}$ agente su un elemento di massa $dm$ per comodit\`{a} scelto a forma di parallelepipedo, posto ad una distanza $r$ dal centro della stella e avente volume infinitesimo $dV=dr \cdot dS$, eguagli il gradiente di pressione:
+\begin{displaymath}\nonumber
+\frac{dP(r)}{dr}=-G \frac{M(r) \rho(r)}{r^{2}}
+\end{displaymath}
+dove $M(r)$ è la massa della stella contenuta entro il raggio $r$, $\rho(r)$ la densit\`{a} alla distanza $r$, $P(r)$ la pressione alla distanza $r$ e $G$ la costante di gravitazione universale.
+}
+\end{enumerate}
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics{equilibrio4}
+%\end{center}
+%\caption{Equilibrio idrostatico.}
+%\end{figure}
+La forza di pressione è data fondamentalmente dalla somma di due contributi, il primo dei quali dovuto alla pressione del plasma stellare: non diversamente da quanto avviene per un gas che esercita una pressione sulle pareti del recipiente che lo contiene, cos\`{\i}{} allo stesso modo anche il plasma stellare esercita una pressione in virtù del fatto che  le particelle che lo compongono hanno una certa energia cinetica.
+Una seconda sorgente di pressione è data dalla \emph{pressione di radiazione}.% che, prodotta nel nocciolo centrale della stella, cerca di raggiungere la superficie esterna. La pressione di radiazione sar\`{a} approfondita più dettagliatamente al numero \ref{prad}.
+\subsection{Pressione di radiazione}\label{prad}
+Nel seguito chiameremo $P$, per brevit\`{a}, la pressione esercitata dal plasma. Si indicher\`{a} invece con $P_{rad}$ la pressione di radiazione.
+\par
+Si può dimostrare che il rapporto $P_{rad}/P$ è all'incirca direttamente proporzionale al quadrato della massa $M$ della stella: \footnote{La relazione è deducibile nell'ipotesi che per il plasma stellare possa ritenersi valida l'equazione di stato del gas perfetto, cioè nell'ipotesi che il plasma si \emph{comporti} (ovviamente non che realmente sia!) come un gas ideale.}
+\begin{equation}\label{pressione_radiazione}
+\frac{P_{rad}}{P} \propto M^{2}
+\end{equation}
+Detto a parole, maggiore è la massa $M$ della stella, (e dunque maggiore è $M^{2}$) qualitativamente più grande sar\`{a} il rapporto tra pressione di radiazione e pressione del gas. Questo è, in breve, il significato della relazione (\ref{pressione_radiazione}): via che si considerano stelle di massa sempre maggiore, il rapporto tra pressione di radiazione e pressione del plasma tende ad aumentare in misura sempre più significativa.
+\par
+Si è voluto insistere su questo aspetto, riportando anche la relazione matematica (\ref{pressione_radiazione}), perch\'{e} esso ha una interessante conseguenza, e cioè che il contributo della pressione di radiazione alla pressione complessiva diventa particolarmente importante quando si ha a che fare con stelle massicce. 
+\par
+Il fatto che la pressione di radiazione possa diventare dominante in stelle molto massicce è alla base di alcuni accreditati modelli sul meccanismo di formazione dei \emph{venti stellari}: pare plausibile che, per effetto dell'intensa pressione di radiazione, stelle massicce subiscano l'espulsione nello spazio di ingenti quantit\`{a} di materiale stellare (alcune volte in maniera violenta, altre volte in modo lento e prolungato). L'emissione cessa una volta che la massa della stella si riduce ad un valore sufficientemente piccolo da rendere praticamente trascurabili, in base alla relazione (\ref{pressione_radiazione}), gli effetti della pressione di radiazione. \footnote{Il vento solare è invece di origine \emph{termica}: si sviluppa nella corona causa l'altissima temperatura che caratterizza questa regione del Sole. Come fatto notare ancora da E. N. Parker, l'elevata temperatura della corona (compresa tra uno e due milioni di Kelvin) fa  si che l'attrazione gravitazionale solare non sia sufficiente a mantenere confinato il gas coronale. Per una trattazione qualitativa più approfondita sui venti stellari si veda ad esempio \Cite{WE}.}
+\par
+La dipendenza lineare del rapporto $P_{rad}/P$ dal quadrato della massa della stella fissa anche la massa massima $M_{max}$ che una stella può avere, che risulta essere pari a:
+\begin{displaymath}
+M_{max}\sim 100 M_{\odot}
+\end{displaymath}
+\subsection{Comportamento ``autoregolante'' di una stella di sequenza principale}
+Vi è ancora un aspetto degno di nota sulle caratteristiche di una stella in fase di stabilit\`{a}.
+\par
+Durante la permanenza della stella in sequenza principale, la stella costituisce un sistema \emph{autoregolante}. Essa possiede un sistema termostatico che le consente di mantenersi nelle condizioni di equilibrio termico e idrostatico prima descritte: qualora casualmente il tasso di produzione di energia nel nucleo aumentasse, si avrebbe una espansione dei gas esterni, con conseguente raffreddamento e rallentamento dei processi di fusione. 
+Analogamente un decremento significativo nell'attivit\`{a} di nucleosintesi sarebbe accompagnato da una contrazione del corpo stellare sufficiente a garantire un aumento della temperatura nel nocciolo centrale e il ripristino delle condizioni di equilibrio.
+\section{Vita di una stella in sequenza principale}\label{sp}
+Le stelle di et\`{a} zero occupano una stretta banda del diagramma HR, nota con il nome di sequenza principale. La posizione precisa in cui la stella fa la sua comparsa in sequenza principale fu studiata dal giapponese Hayashi;
+egli calcolò come le coordinate di ingresso in sequenza principale siano strettamente dipendenti dal valore della massa della stella.
+\footnote{Forse non sorprender\`{a} il lettore sapere che il risultato fu ottenuto da Hayashi proprio facendo uso, sotto certe ipotesi, del teorema del viriale. Del resto questo teorema si presta ad essere applicato in astronomia ad una grandevariet\`{a} di contesti e situazioni differenti. Basti pensare che una delle prove a sostegno dell'ipotesi dell'esistenza nelle galassie della cosiddetta materia oscura proviene proprio dal risultare sperimentalmente non rispettato il teorema del viriale per alcuni di questi oggetti cosmici.
+\par
+Una discussione quantitativa del percorso evolutivo tracciato da Hayashi è reperibile in \Cite{collins}.  Il lavoro originale di Hayashi è reperibile in: C. Hayashi, \emph{Evolution of Protostars}, Ann. Rev. Astr. and Astrophys. 4, 1966, pp. 171-192.}
+\par
+Più in generale, \emph{l'intero tracciato evolutivo di una stella è strettamente connesso al valore della sua massa}.
+\par
+Prescindendo dai dettagli tecnici del lavoro di Hayashi, la figura 2 illustra schematicamente l'ingresso in sequenza principale di protostelle di massa diversa in un diagramma HR; le masse sono espresse come multipli della massa solare $M_{\odot}$ \Cite{collins}.
+%\begin{figure}\label{Hayashi}
+%\begin{center}
+%\includegraphics[width=15cm]{track1}
+%\end{center}
+%\caption{Diagramma HR per la transizione protostella--stella di sequenza principale secondo il modello Hayashi \Cite{collins}.}
+%\end{figure}
+Il tempo di permanenza di una protostella nella fase contrattiva è anch'esso un parametro che, come si potrebbe intuitivamente essere portati a pensare, è diverso a seconda dei valori di massa in gioco. In genere protostelle di massa maggiore evolvono più rapidamente verso lo stato di stelle di et\`{a} zero rispetto a protostelle di massa inferiore \Cite{rosino}.
+\subsection{Stelle giganti blu}\label{giganti blu}
+Le stelle molto massicce, situate nel diagramma HR nell'alto della sequenza principale, raggiungono nel nocciolo (\emph{core}) centrale temperature sufficientemente elevate\footnote{Maggiori di 15 milioni di kelvin secondo la stima riportata in: \Cite{rosino} p. 758} da consentire prevalentemente il ciclo\footnote{Si parla di ciclo perch\'{e} in esso il nucleo di carbonio funge da catalizzatore della nucleosintesi dell'elio, trasformandosi dapprima in un nucleo di azoto 14 per poi riconvertirsi in carbonio 12.} di Bethe ($CNO$); essendo la temperatura elevata, per la legge dello spostamento di Wien, appariranno di colore blu-azzurro, e per questa ragione vengono designate come \emph{giganti blu}\footnote{cfr. ad es.: M. Crippa, M. Fiorani, \emph{Geografia generale}, Arnoldo Mondadori Scuola, Milano 2002, p. 33}; nel diagramma HR occupano la porzione in alto a sinistra della sequenza principale.
+\par
+Per mantenere una temperatura interna ottimale al mantenimento di una condizione di equilibrio, le giganti blu consumano il combustibile nucleare del nocciolo più velocemente rispetto a stelle meno massicce e conseguentemente il loro tempo di permanenza in sequenza principale risulta estremamente ridotto, nelle scale di tempo di vita di una stella.
+\par
+Un ulteriore elemento di diversit\`{a} che distingue stelle massicce da stelle di massa inferiore riguarda le modalit\`{a} di propagazione del calore nel nocciolo interno.
+\footnote{La diffusione di energia all'interno di una stella avviene attraverso le usuali modalit\`{a} di trasmissione:
+\begin{enumerate}
+\item
+\emph{convezione}, cioè sviluppo di moti ascensionali di materiale caldo e discendenti di materiale freddo.
+\item
+\emph{irraggiamento}, cioè attraverso emissione e successivo riassorbimento di fotoni. Viene di norma riferito con l'espressione \emph{trasferimento radiativo}.
+\item
+\emph{conduzione} dovuta alla collisione tra particelle.
+\end{enumerate}
+In genere, se confrontata per efficacia con gli altri due meccanismi di diffusione, la conduzione può essere trascurata.}
+Nel caso, sin qui preso in esame, di stelle massicce, il trasporto di calore nel core avviene prevalentemente per convezione. Per contro, nelle zone esterne al core risulta più efficace il trasporto radiativo.
+Non si ha rimescolamento del materiale del core con quello degli strati esterni della stella.
+\subsection{Stelle nane rosse}\label{nane rosse}
+Si consideri ora il caso di stelle meno massicce, diciamo aventi massa indicativamente inferiore a due masse solari $M<2M_{\odot}$ \Cite{collins}; nel diagramma HR occupano la porzione più bassa della sequenza principale e per questo vengono alle volte riferite come stelle di bassa sequenza principale (vedi figura 2).
+%
+% Qui c'è scritto figura 2
+%
+La massa di queste stelle non è sufficiente a garantire il raggiungimento nel nocciolo centrale di temperature tali da consentire il funzionamento del ciclo $CNO$; il processo di fusione prevalente è allora la catena protone-protone (p--p).
+\par
+L'energia liberata dalla catena p--p è \emph{esattamente} la stessa che nel ciclo $CNO$ attivo in stelle più massicce.
+Ciò che cambia nei due casi è il modo in cui la velocit\`{a} con cui le reazioni avvengono dipende dalla temperatura.
+Nel caso della catena p--p, la velocit\`{a} della reazione cresce con la quarta potenza della temperatura assoluta (cioè con $T^{4}$) mentre per il ciclo $CNO$ la dipendenza dalla temperatura è assai più vincolante, essendo la velocit\`{a} della reazione proporzionale alla 20$^{a}$ potenza della temperatura assoluta (cioè a $T^{20}$ !) \Cite{rosino}.
+\par
+Questo fatto ha una importante conseguenza.
+\par
+In genere, sia che si considerino stelle massicce o stelle di bassa sequenza principale, la temperatura diminuisce abbastanza rapidamente via via che ci si sposta dal centro verso l'esterno della stella.
+La dipendenza della velocit\`{a} del ciclo $CNO$ da $T^{20}$ fa si che una relativamente piccola diminuzione della temperatura $T$ abbia come effetto una diminuzione alquanto cospicua dell'efficienza del ciclo $CNO$ allontanandosi dalle regioni centrali. Un esempio numerico potr\`{a} aiutare a chiarire meglio il concetto: 
+è dato il caso in cui il ciclo $CNO$ sia attivo in una stella la cui temperatura al centro è stimata essere pari a 20 milioni di Kelvin. Appena fuori dal centro la temperatura scende a 18 milioni di Kelvin.
+A questa temperatura l'efficienza del ciclo $CNO$ (che dipende da $T^{20}$) si riduce a 1/8 rispetto al centro e ad appena un centesimo qualora la temperatura diminuisca ulteriormente a 16 milioni di Kelvin.
+\footnote{l'esempio è tratto da: \Cite{rosino}, p. 763. Non dovrebbe essere particolarmente difficile ricavare i risultati presentati da Rosino: il rapporto tra l'efficienza ad una temperatura diciamo $T_{1}$ e l'efficienza ad una seconda temperatura diciamo $T_{2}$ è semplicemente $(T_{1} / T_{2})^{20}$.
+Nel caso della diminuzione tra 20 milioni di Kelvin e 18 milioni di Kelvin, il rapporto tra l'efficienza a 20 milioni e l'efficienza a 18 milioni è $\left( (20 \cdot 10^{6})/(18 \cdot 10^{6}) \right) ^{20}= (20/18)^{20} \sim 8.22$.}
+Nelle stelle massicce la sintesi di energia interessa pertanto solamente una alquanto contenuta regione del corpo stellare in prossimit\`{a} del suo centro.
+\par
+Non accade lo stesso laddove, per stelle di massa inferiore, predomina la catena p--p. La dipendenza della velocit\`{a} della reazione da $T^{4}$ fa si che i processi di sintesi e produzione di energia interessino una regione assai più estesa attorno al centro.
+\par
+
+\smallskip
+
+Le stelle di bassa sequenza principale, dato il valore relativamente basso della temperatura, appaiono di colore rosso e per questo sono dette alle volte \emph{nane rosse}.
+\par
+Il trasporto di calore nelle regioni centrali avviene prevalentemente per trasporto radiativo.
+Per queste stelle le condizioni per l'instaurarsi di regimi convettivi hanno modo di verificarsi a livello delle regioni più esterne. Per il Sole si stima che la transizione da regime prevalentemente radiativo a regime prevalentemente convettivo avvenga ad una distanza dal centro stimata pari a circa $0.75R_{\odot}$, dove $R_{\odot}$ è la misura del raggio solare \Cite{collins}.
+\par
+L'assenza pressoché completa nel core di moti di origine convettiva ha rilevanti implicazioni nell'evoluzione futura della stella; essa concorre a determinare un accumulo dell'elio $^{4}He$, prodotto dalla combustione dell'idrogeno, nelle regioni centrali.
+In questo stadio di evoluzione, l'elio non può venire a sua volta impiegato per ulteriori processi di nucleosintesi\footnote{Come si dir\`{a} anche nel seguito, le temperatura richieste affinché abbiano luogo reazioni di fusione dei nuclei di elio sono pari a circa 100 milioni di kelvin \Cite{kittel}.}. Reazioni che comportino ad esempio la sintesi di $_{5}Li$ a partire dall'elio 4 per successiva cattura di protoni non possono invece avere luogo perch\'{e} i nuclei aventi numero di massa eguale a 5 non sono stabili \Cite{rosino}, mentre le scorte di idrogeno disponibile per le reazioni di fusione diventano limitate in misura sempre maggiore.
+Il tasso di produzione di energia rimane stabile al valore ottimale perch\'{e} la stella permanga nella propria condizione di equilibrio solo a condizione che la temperatura nel nocciolo venga adeguatamente aumentata. L'aumento delle temperature al centro si traduce in un sensibile aumento della luminosit\`{a} della superficie emettente più esterna della stella. Si stima che il Sole abbia aumentato di circa il 40\% la sua luminosit\`{a} dall'epoca del suo ingresso in sequenza principale \Cite{collins}.
+\par
+Per stelle massicce le correnti convettive del core assicurano invece un sistema di smaltimento dell'elio sintetizzato e un continuo apporto di nuovo idrogeno indispensabile al mantenimento delle reazioni di fusione.
+In ciascun caso comunque non ha modo di verificarsi un qualche rimescolamento tra il materiale del core (che progressivamente va arricchendosi in contenuto di elio) e quello (ancora ricco di idrogeno) degli strati esterni.
+La continua diminuzione della quantit\`{a} di idrogeno effettivamente disponibile  nel core centrale condurr\`{a} infine alla situazione in cui le reazioni di fusione fin qui descritte, divenute altamente improbabili per l'assenza di ``combustibile'', risulteranno insufficienti a garantire l'apporto energetico indispensabile al mantenimento delle condizioni di equilibrio.
+Si va cos\`{\i}{} preparando la strada all'esodo della stella dalla sequenza principale.
+\par
+
+\smallskip
+
+In condizioni ordinarie, una stella permane nello stadio stabile di sequenza principale per una durata di tempo, indicabile con $\tau$ (notazione non standard), legata alla massa $M$ della stella da una relazione di proporzionalit\`{a}:
+\begin{equation}\label{timelife}
+\tau \propto \frac{1}{M^{3.5}}
+\end{equation}
+%
+%\begin{figure}[!h]\label{efficienza1}
+%\begin{center}
+%\includegraphics[width=15cm]{efficienza1}
+%\\
+%\emph{Figura 3.} Efficienza del ciclo $CNO$ e della catena p--p per diversi valori della temperatura del nocciolo centrale della stella.
+%\end{center}
+%\end{figure}
+%\newpage
+\subsection{Riepilogo delle informazioni in sintesi}
+Si riporta di seguito un riepilogo in sintesi dei principali elementi di diversit\`{a} che contraddistinguono stelle di bassa sequenza principale e stelle di alta sequenza principale. 
+%\begin{center}
+%\begin{tabular}{p{3mm} c p{3mm} c p{3mm}}
+%\multicolumn{5}{c}{Tabella 1} \\
+%\hline
+%& & & & \\
+%& \emph{Giganti blu} & & \emph{Nane rosse}  & \\[3.00mm]
+%& & & & \\
+%& T$_{\textrm{core}}$ $>$ 15 milioni di K && T$_{\textrm{core}}$ $>$ 10 milioni di K & \\
+%& ciclo $CNO$ $^{*}$         && catena p--p   &  \\
+%& colore blu-azzurro         && colore rosso    & \\
+%& stelle di alta sequenza principale && stelle di bassa sequenza principale &  \\
+%& core prevalentemente convettivo         && core prevalentemente radiativo    & \\
+%&&&& \\
+%& \multicolumn{3}{l} {$^{*}$ \footnotesize In misura minore si verifica anche la catena p--p} & \\[2.00mm]
+%\hline
+%\end{tabular}
+%\end{center}
+%In condizioni ordinarie, una stella permane nello stadio stabile di sequenza principale per una durata di tempo, indicabile con $\tau$ (notazione non standard), legata alla massa $M$ della stella da una relazione di proporzionalit\`{a}:
+%\begin{equation}\label{timelife}
+%\tau \propto \frac{1}{M^{3.5}}
+%\end{equation}
+\section{Determinare l'et\`{a} degli ammassi stellari dal loro diagramma HR}
+La relazione (\ref{timelife}) viene usata per determinare l'et\`{a} di un ammasso di stelle dalla conformazione della sequenza principale nel diagramma HR osservativo dell'ammasso stesso.
+In un ammasso stellare di formazione recente infatti le stelle più massicce (si da il caso che siano anche le più luminose) di classe spettrale $OB$, non possono gi\`{a} aver abbandonato la sequenza principale e pertanto saranno presenti nel diagramma HR relativo all'ammasso; al contrario per ammassi più vecchi (i cosiddetti ammassi globulari) è gi\`{a} trascorso un periodo di tempo sufficiente perch\'{e} queste stelle abbiano ormai lasciato la sequenza principale.
+Nel diagramma HR osservativo di un ammasso globulare in genere è quasi del tutto assente il ramo superiore della sequenza principale, difettando l'ammasso delle stelle di classe $OB$; il punto dal quale la sequenza principale è troncata viene detto \emph{main sequence turn-off}. Le poche stelle che compaiono in sequenza al di sopra del punto di turn-off vengono indicate come \emph{blue straggers}, e rappresentano una classe di stelle per le quali si è verificato un rimescolamento del materiale del core con quello, ricco di idrogeno, degli strati più esterni. Il diagramma HR per ammassi globulari presenta alcuni ulteriori elementi di diversit\`{a} che  andrebbero sottolineati; l'argomento, ovviamente molto più vasto, esula dagli obiettivi del presente documento, e pertanto non sar\`{a} ulteriormente discusso. Il lettore che lo desiderasse può consultare \Cite{rosino}.
+\section{Associazionismo T--Tauri. Lo strano caso di $\eta$ Carinae}
+Precisiamo che la fase di transizione tra protostella e stella non avviene certo in forma cos\`{\i}{} tranquilla come potrebbe sembrare.
+Molte giovani stelle, prima di raggiungere una configurazione di relativa stabilit\`{a}, attraversano un periodo di variabilit\`{a} in cui la loro luminosit\`{a} fluttua irregolarmente con ampiezza di alcune magnitudini. \`E questo il caso delle stelle cosiddette di associazione T (associazioni di stelle prevalentemente rosse che hanno il loro prototipo nella stella T Tauri) o di variabili come RW Aurigae.
+Non mancano casi di stelle in contrazione che hanno aumentato la loro luminosit\`{a} intrinseca di un fattore cento o anche mille, ritornando poi dopo mesi o anni al loro originario splendore. Ne sono tipici esempi V 1057 Cygni e FU Orionis; quest'ultima nel 1937 aumentò di 6 magnitudini in un periodo di 19 giorni \Cite{rosino}.
+\par
+Secondo taluni forse anche la famosa stella australe $\eta$ Carinae, troppo debole per essere catalogata come supernova e troppo luminosa per essere considerata una nova, potrebbe rientrare in questa classe di stelle variabili in via di formazione; stimata da Halley di quarta grandezza, $\eta$ Carinae raggiunse nell'aprile del 1843 una luminosit\`{a} visuale apparente di -0.8 magnitudini, diventando la stella più brillante del cielo dopo Sirio; in seguito si affievol\`{\i}{}, diventando invisibile a occhio nudo gi\`{a} nel 1868; agli inizi del 1900 la sua magnitudine visuale apparente fu stimata attorno all'ottava grandezza; nel 1941 aumentò nuovamente la propria luminosit\`{a} e nel 1953 fu stimata di 7$^{a}$ magnitudine \Cite{burn}.
+La curva di luminosit\`a \'e riportata in figure. 
+L'ipotesi che si tratti di una stella di formazione recente sembra confermata dal fatto che essa appartenga ad una nebulosa diffusa, la nebulosa NGC 3372, e costituisca una delle sorgenti infrarosse più intense tra quelle oggi conosciute. Risposte definitive in questo senso comunque non sono ad oggi ancora state formulate.
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=12cm, height=50mm]{carinae}
+%\end{center}
+%\caption{Curva di luce di $\eta$ Carinae \Cite{carinae}.}\label{carinAe}
+%\end{figure}
+%\newpage
+%************************************************
+\chapter{L'esodo dalla sequenza principale}\label{esodo}
+\minitoc\mtcskip
+%************************************************
+\section{Premesse}\label{Premesse}
+La fase di stabilit\`{a} descritta in sezione \ref{stabilita} viene definitivamente meno nel momento in cui il ``combustibile'' del nucleo comincia ad esaurirsi.
+Una volta che le scorte di idrogeno disponibile nel nocciolo si fanno via via sempre più scarse, le reazioni termonucleari procedono a ritmi decisamente insufficienti a garantire un tasso di produzione di energia costante e ottimale al mantenimento delle condizioni di equilibrio della stella.
+Come conseguenza di questo fatto, la stella va incontro a rilevanti modificazioni  nell'organizzazione della propria struttura; in genere si assiste ad un cospicuo ridimensionamento delle dimensioni del nucleo centrale della stella.
+Il nocciolo della stella attraversa una fase di contrazione a seguito della quale, per ragioni del tutto analoghe a quelle gi\`{a} discusse per il processo di formazione stellare (sezione \ref{contrazione}), aumenta la propria temperatura. 
+In accordo con questi cambiamenti strutturali, anche i parametri che caratterizzano una stella subiranno delle variazioni. Complessivamente, si designa questa fase di sviluppo della stella come \emph{esodo dalla sequenza principale} \Cite{rosino}.
+\par
+Ad ogni modo, il comportamento successivo della stella presenta, nello specifico, tratti diversificati a seconda che si prenda in esame stelle massicce o stelle meno massicce.
+Come gi\`{a} si è avuto modo di verificare durante la fase di stabilit\`{a}, la configurazione del tracciato evolutivo di una stella dipende fortemente dai valori di massa in gioco.
+Sar\`{a} conveniente esaminare separatamente tre distinti casi: stelle di massa complessiva pari a qualche decimo della massa solare (diciamo aventi massa inferiore a circa $0.5 M_{\odot}$); stelle di massa complessiva inferiore a $8 M_{\odot}$; stelle di massa complessiva maggiore di $8 M_{\odot}$.
+\section{Stelle di massa $M<0.5M_{\odot}$}
+Sia dato il caso di stelle aventi massa complessiva pari a qualche decimo della massa solare. Come parametro di riferimento, stabiliremo di considerare appartenenti a questa categoria tutte quelle stelle aventi indicativamente massa inferiore diciamo a $0.5 M_{\odot}$.
+\footnote{M. Crippa, M. Fiorani, \emph{Geografia Generale}, Arnoldo Mondadori Scuola, Milano 2002, p. 34}
+\par
+Si tratta di stelle di bassa sequenza principale, la cui fase di stabilit\`{a} ha i caratteri descritti in sezione \ref{nane rosse}. Cosa succede a queste stelle quando le riserve di idrogeno nel nocciolo cominciano ad esaurirsi? Si è gi\`{a} visto sopra (sezione \ref {Premesse}) che, come accade per \emph{tutte} le stelle in esodo dalla sequenza principale, indipendentemente da quale sia la loro massa, anche per queste stelle si assiste ad una contrazione del nocciolo centrale.
+Nel momento in cui la quantit\`{a} di energia $\Delta E$ persa dalla stella per irraggiamento non è più compensata dall'energia prodotta dalle reazioni nucleari nel nocciolo (e ciò in conseguenza della mancanza di sufficienti quantit\`{a} di idrogeno nel nocciolo stesso), le regioni centrali della stella vanno incontro a collasso gravitazionale. Il fenomeno avviene per ragioni del tutto analoghe a quelle descritte nel processo di formazione stellare (sezione \ref{contrazione}).
+\par
+La contrazione gravitazionale del nocciolo è accompagnata da un corrispondente aumento di temperatura, anche qui non diversamente da quanto avviene nel processo di formazione stellare (sezione \ref{aumentot})
+\par
+Da calcoli basati sulla teoria quantistica, si stima che temperature maggiori di 100 milioni di kelvin \Cite{kittel} siano tali da consentire il verificarsi di reazioni di fusione nucleare tra nuclei di elio $^{4}He$. \footnote{Si torner\`{a} su questo punto in sezione \ref{giganti rosse}, parlando delle giganti rosse}
+\par
+Si potrebbe allora pensare che il collasso gravitazionale del nocciolo, con corrispondente aumento della temperatura centrale, porti infine \emph{tutte} stelle ad innescare le reazioni di fusione dell'elio. In una teoria \emph{classica} dell'evoluzione stellare questo risultato sarebbe fondamentalmente corretto: prima o poi ogni stella in esodo dalla sequenza principale raggiungerebbe quel centinaio di milioni di kelvin indispensabili all'attivazione della fusione dell'elio, basterebbe solo aspettare che il nocciolo si contragga abbastanza.
+\par
+Questo fatto non è però vero! Sono proprio le stelle aventi massa $M < 0.5 M_{\odot}$ quelle per cui il nucleo non raggiunge \emph{mai} temperature sufficienti per innescare la fusione dell'elio.
+Stelle di massa $M < 0.5 M_{\odot}$ non raggiungono mai, nella fase di collasso del nocciolo, quei valori di temperatura al centro indispensabili affinché avvengano le reazioni di fusione dell'elio.
+Per queste stelle il collasso gravitazionale del nocciolo viene arrestato prima che la temperatura sia sufficientemente elevata. L'arresto è operato da forze di repulsione tra gli elettroni del plasma stellare. Queste forze sono di natura genuinamente \emph{quantistica}. Si parla di pressione degli elettroni degeneri (l'argomento sar\`{a} trattato in sezione \ref{degenere}). La forza di pressione dovuta agli elettroni degeneri è infine sufficiente a bilanciare la forza di attrazione gravitazionale che la stella esercita su sé stessa e ad impedire un'ulteriore contrazione del nocciolo centrale.
+Detto in altre parole ancora, a causa di effetti \emph{tipicamente quantistici}, il collasso del nocciolo di stelle di massa $M<0.5M_{\odot}$ si arresta prima che la temperatura al centro della stella abbia raggiunto quei 100 milioni di kelvin necessari all'innesco della fusione nell'elio.
+\par
+A questo punto la stella si stabilizza (non potendo il suo nocciolo collassare ulteriormente) in una condizione di equilibrio \emph{idrostatico}.
+Tuttavia, non disponendo di alcuna fonte di energia interna ad eccezione dell'energia termica, la stella, via via che irradia energia nello spazio, andr\`{a} raffreddandosi fino a diventare un piccolo oggetto spento.
+La stella viene classificata come \emph{nana bianca}.
+Cessata la contrazione, esaurita ogni riserva di combustibile nucleare, la nana bianca procede inesorabile nel suo cammino verso una sicura morte termica.
+\par
+Per la legge di Stefan--Boltzmann, la quantit\`{a} di energia $\Delta E$ persa per irraggiamento, nell'unit\`{a} di tempo, da un generico corpo è legata alla temperatura assoluta $T$ e alla superficie emettente $S$ del corpo stesso dalla relazione:
+\begin{equation}
+\Delta E = e \sigma S T^{4}
+\end{equation}
+dove $\sigma$ è la costante di Stefan pari a $\sigma=\mathnormal{5.68 \times 10^{-8}}$ W/(m$^{2}\cdot$ k$^{4}$) ed $e$ è il coefficiente di emissione (emettanza) compreso tra 0 e 1. Per un corpo nero $e=1$ \Cite{caf}.
+\par
+Essendo la superficie emettente della stella diventata, a seguito della fase di contrazione del nocciolo, estremamente piccola, la stella irradier\`{a} ben poca energia, e ne irradier\`{a} sempre di meno via via che la sua temperatura andr\`{a} diminuendo.
+Il processo di raffreddamento risulter\`{a} conseguentemente lunghissimo.
+Al suo termine, la stella cessa definitivamente ogni processo energetico per diventare un corpo freddo chiamato alle volte col nome di \emph{nana nera} \Cite{caf}.
+Una stima del tempo di raffreddamento di una nana bianca è fornita ad esempio in \Cite{rosino}.
+Dal momento che l'et\`{a} dell'universo, secondo le stime più attuali, è di circa 13 miliardi di anni, è presumibile che nessuna nana bianca abbia ancora raggiunto la morte termica.
+\section{La pressione dello stato degenere}\label{degenere}
+\subsection{Modello di calcolo della pressione degli elettroni degeneri}
+Viene presentato nel seguito un modello semplificato di calcolo per la pressione degli elettroni degeneri. Lo scopo è quello di fornire al lettore da un lato un'evidenza della natura genuinamente quantistica della pressione dello stato degenere, dall'altra un'utile strumento per comprendere meglio da quali fattori, e da quali no, dipenda questa pressione. Soprattutto quest'ultimo punto sar\`{a} di importanza decisiva nel seguito. Il lettore non abbia la pretesa che poche righe bastino ad esaurire compiutamente che cosa si intenda per \emph{modello} in fisica. Quello che qui preme sottolineare è che un modello muove da ipotesi di lavoro anche piuttosto restrittive: la validit\`{a} di queste e, più in generale, dell'intero modello, è garantita solamente dalla ``bont\`{a}'' (\Cite{caf}, p. D52) dei risultati.
+Premettiamo sin d'ora che la deduzione rigorosamente esatta del calcolo della pressione di degenerazione va fatta nell'ambito della distribuzione statistica di Fermi--Dirac.
+Il risultato esatto cui si perviene è il seguente: indicando con $P_{deg}$ la pressione degli elettroni degeneri, con $m_{e}$ la massa dell'elettrone, con $n_{e}$ il numero di elettroni su unit\`{a} di volume e con $h$ la costante di Planck, si ha:
+\begin{equation}\label{pesatta}
+P_{deg}=\frac{1}{5} \sqrt[3]{\left( \frac{3}{8\pi} \right) ^{2}} \ \cdot \ \frac{h^{2}n_{e}^{\frac{5}{3}}}{m_{e}}
+\end{equation}
+Il modello di calcolo che qui sar\`{a} presentato risulta in accordo, a meno di coefficienti numerici,  con questo risultato.
+\par
+
+\smallskip
+Si procede nella presentazione del modello.
+Il lettore non si faccia spaventare per nessuna ragione dalle formule che può aver intravvisto nel seguito. Moltiplicazioni, divisioni e una radice cubica: ecco tutte le nozioni matematiche richieste, nulla di più.
+Per una maggiore efficacia espositiva si proceder\`{a} scandendo ogni singolo passaggio del calcolo.
+\begin{enumerate}
+\item
+Primo passaggio. Risulta conveniente introdurre una nuova grandezza, la \emph{densit\`{a} volumetrica di elettroni} $n_{e}$ cos\`{\i}{} definita: si consideri un volumetto cubico di lato $l$ e volume $V=l^{3}$; esso contiene un certo numero $N_{e}$ di elettroni \emph{liberi}. Allora $n_{e}$ è semplicemente il numero di elettroni per unit\`{a} di volume, cioè:
+\begin{equation}\label{densita_elettroni}
+n_{e}=\frac{N_{e}}{l^{3}}
+\end{equation}
+Fin qua nulla di particolarmente impegnativo, si è solo voluto introdurre per comodit\`{a} una nuova grandezza che ci dice, dato un certo volume, quanti elettroni liberi si trovano dentro questo volume. \`E solo questione di comodit\`{a} in seguito, tutto qua, si poteva anche fare a meno di introdurre, risparmiando una fatica ora ma più avanti ci saremo trovati a dover lavorare con due lettere ($N_{e}$ e $l^{3}$) invece che solo con una ($n_{e}$)!
+\item
+Secondo passaggio (che nulla ha a che fare col primo): scriviamo la relazione di indeterminazione:
+\begin{equation}\label{Heisenberg}
+\Delta x \Delta p > \frac{\hbar}{2}
+\end{equation}
+dove $\Delta x$ è l'\emph{indeterminazione} sulla posizione, $\Delta p$ l'\emph{indeterminazione} sulla quantit\`{a} di moto $p$ e $\hbar=h/2\pi$. La (\ref{Heisenberg}) è solo una delle relazioni di indeterminazione, peraltro anche abbastanza nota, che si possono far discendere dal principio di indeterminazione di Heisenberg. 
+\par
+Si noti che la relazione (\ref{Heisenberg}) è tipicamente quantistica: in meccanica   classica non vi è alcuna limitazione, almeno in linea di principio, alla precisione di due misure simultanee di posizione e quantit\`{a} di moto. 
+\item
+Terzo passaggio. Ci chiediamo: ''noto $n_{e}$, per un singolo elettrone quanto spazio è disponibile? ''
+\par
+Per rispondere è sufficiente porre il numero di elettroni $N_{e}$ pari a 1 (un singolo elettrone appunto) nella relazione (\ref{densita_elettroni}) e ricavare $l^{3}$:
+\begin{equation}
+n_{e}=\frac{1}{l^{3}}
+\end{equation}
+cioè:
+\begin{equation}\label{lato}
+l=\sqrt[3]{\frac{1}{n_{e}}}
+\end{equation}
+L'indeterminazione sulla misura di posizione $\Delta x$ non potr\`{a} essere inferiore al valore di $l$ trovato, dal momento che il singolo elettrone potrebbe appunto trovarsi ovunque entro il cubo di lato $l$. Quindi:
+\begin{equation}\label{delta x}
+\Delta x \sim \sqrt[3]{\frac{1}{n_{e}}}
+\end{equation}
+Siamo pronti per il quarto passaggio.
+\item
+Quarto passaggio.
+Supponiamo di conoscere l'indeterminazione $\Delta x$ su una misura di posizione per una certa particella. Per il momento non ci interessa sapere come abbiamo fatto a conoscerla, ci interessa solamente che siamo a conoscenza di quanto vale $\Delta x$. Allora l'indeterminazione con cui può essere  simultaneamente misurata la quantit\`{a} di moto di quella stessa particella non potr\`{a} essere inferiore a:
+\begin{equation}\label{delta p}
+\Delta p = \frac{\hbar / 2}{\Delta x}
+\end{equation}
+Ciò discende direttamente dalla relazione di indeterminazione (\ref{Heisenberg}). Se conosco $\Delta x$, $\Delta p$ dovr\`{a} soddisfare la relazione di indeterminazione e pertanto non potr\`{a} essere inferiore al valore dato dalla (\ref{delta p}).
+\item
+Ora, ulteriore passaggio, nel nostro caso, $\Delta x$ è effettivamente noto, essendo il lato del volumetto (cubico) che contiene un solo elettrone libero, come trovato nella (\ref{delta x}). Allora, tenendo conto della (\ref{delta p}), si ha che $\Delta p$ \emph{non può essere inferiore} a:
+\begin{equation}\label{igloo}
+\Delta p = \frac{\hbar /2}{\Delta x} \sim \frac{\hbar}{2} \cdot \sqrt[3]{n_{e}}
+\end{equation}
+Ne consegue che un elettrone libero non possieder\`{a} mai una quantit\`{a} di moto esattamente nulla; ciò è una conseguenza del principio di indeterminazione di Heisenberg, e quindi è una conseguenza deducibile solo tenendo conto della meccanica quantistica. 
+\par
+Questa quantit\`{a} di moto che l'elettrone possiede genera una pressione; è appunto questa la cosiddetta \emph{pressione degli elettroni degeneri}.
+\item
+Fin qui tutto bene, passaggi chiari. Ma ora serve una formula che ci dica la pressione esercitata da particelle per le quali è nota la quantit\`{a} di moto. Ecco l'idea: si ricorre  alla formula classica:
+\begin{equation}\label{muno}
+P=\frac{1}{3} \frac{m \langle v^{2} \rangle N}{V}
+\end{equation}
+dove $P$ è la pressione esercitata da $N$ particelle di un gas  aventi ciascuna massa $m$ e in moto con velocit\`{a} quadratica media in un volume $V$.
+\footnote{La formula, deducibile applicando allo studio dei gas ideali metodi \emph{classici} di indagine statistica, è ampiamente trattata in vari manuali di fisica e chimica liceale. Per la sua deduzione si rimanda a \Cite{caf}. Il lettore è caldamente invitato a leggere l'elegante discussione delle profonde implicazioni di questa legge in \Cite{mun}, pp. 374-380}
+\par
+Non c'è nulla che ci assicuri \emph{a priori} della validit\`{a} dell'equazione in un contesto in cui gli effetti quantistici sono di rilevante importanza e non possono essere trascurati. Il lettore non tarder\`{a} a notare che sino ad ora si è voluto molto insistere sul fatto che la pressione degli elettroni degeneri è un fatto di natura esclusivamente \emph{quantistica}, non ha senso parlare di pressione degli elettroni degeneri in fisica classica; eppure, adesso, al passaggio finale per il calcolo della pressione, si ricorre ad una formula \emph{classica}. A priori il passaggio è tutt'altro che legittimo, e pertanto in un certo senso può ritenersi giustamente erroneo; vedremo tuttavia che esso conduce a risultati in buon accordo con quelli deducibili in maniera rigorosa con la meccanica quantistica, e per questo motivo è accettabile a posteriori. L'autore si scusa per l'eccessiva pedanteria sulla questione, ma ha ritenuto opportuno insistere sull'argomento al fine di evitare taluni fraintendimenti. Non vi è nulla di difficile nel calcolo della pressione degli elettroni degeneri una volta che sia accettata la validit\`{a} dell'equazione (\ref{muno}) nel contesto in esame. Ma accettarla è tutt'altro che ovvio! \`E solo \emph{per magia} che la meccanica quantistica fornisce un risultato in accordo con quello che verr\`{a} ricavato da questa deduzione!
+\item
+Nel nostro caso il numero di elettroni liberi  $N=N_{e}$ contenuti nel volume $V$ è dato da $n_{e}=N_{e}/V$, per cui la (\ref{muno}) diventa:
+\begin{equation}
+P=\frac{1}{3} n_{e} m_{e} \langle v^{2} \rangle
+\end{equation}
+dove $m_{e}$ è la massa dell'elettrone. Si suppone che $m_{e}$ sia indipendente dallo stato di moto dell'elettrone. Questo perch\'{e}, in generale, si suppone che la velocit\`{a} degli elettroni sia tale da rendere trascurabili eventuali correzioni relativistiche. In altre parole il calcolo qui proposto vale nel caso \emph{non relativistico}: questo sar\`{a} un punto di importanza fondamentale nel seguito.
+\par
+Ricordando la definizione (non relativistica) di quantit\`{a} di moto $p \equiv m \cdot v$, e ipotizzando che il moto degli elettroni liberi sia dovuto all'indeterminazione sulla quantit\`{a} di moto $\Delta p$ si ha infine:
+\begin{equation}\label{finalmente}
+P=\frac{1}{3}n_{e}\frac{\Delta p^{2}}{m_{e}}
+\end{equation}
+\item
+Non rimane, ultimo passaggio, che sostituire $\Delta p$ in base alla relazione (\ref{delta p}):
+\begin{equation}\label{forma ampia}
+P \sim \frac{1}{3} n_{e} \cdot \underbrace{\left( \frac{\hbar^{2}}{4} \cdot \sqrt[3]{n_{e}^{2}} \right)}_{\Delta p^{2}} \cdot \frac{1}{m_{e}}
+\end{equation}
+Questa è l'espressione per il calcolo della pressione degli elettroni degeneri. Possiamo scrivere questo risultato in forma più raccolta, ma solo per comodit\`{a} di visualizzazione.
+La formula definitiva è, dopo qualche passaggio algebrico dalla (\ref{forma ampia}) e sostituendo $\hbar=h/2\pi$:
+\begin{equation}\label{stato degenere}
+P=a \cdot \frac{h^{2} \ n_{e}\,^{\frac{5}{3}}}{m_{e}}
+\end{equation}
+dove $a$ è un coefficiente numerico opportunamente scelto.
+\end{enumerate}
+\subsection{Caratteristiche della pressione di degenerazione}\label{propdeg}
+Tre sono le caratteristiche della pressione di degenerazione di cui occorre fare menzione:
+\begin{enumerate}
+\item[$\bullet$]
+Dipendenza dall'inverso della massa delle particelle;
+\item[$\bullet$]
+Indipendenza dalla temperatura;
+\item[$\bullet$]
+Dipendenza dalla densit\`{a} di particelle libere.
+\end{enumerate}
+Tutte queste propriet\`{a} si possono ricavare direttamente dalla (\ref{stato degenere}).
+\par
+La dipendenza dall'inverso della massa discende dall'essere $m_{e}$ al denominatore nella (\ref{stato degenere}). Questo fatto ci dice che il maggior contributo alla pressione di degenerazione viene proprio dagli elettroni, come preannunciato, piuttosto che dai nuclei.
+Per i nuclei il valore della massa è maggiore, e siccome nella (\ref{stato degenere}) la massa compare al denominatore, il termine di pressione associato ai nuclei sar\`{a} minore che nel caso degli elettroni.
+\par
+
+\smallskip
+
+La non dipendenza dalla temperatura (cioè il fatto che nella (\ref{stato degenere}) non compare la variabile temperatura $T$) ha conseguenze anche più interessanti.
+Una volta che una stella abbia raggiunto la condizione di degenerazione, il solito meccanismo contrazione--riscaldamento imposto dal teorema del viriale viene rotto: per quanto la stella si raffreddi irradiando energia nello spazio, la pressione degli elettroni degeneri si mantiene sempre la stessa. \`E per questo che una nana bianca pur raffreddandosi si mantiene in equilibrio idrostatico. Se, come invece avviene per la pressione termica di un gas perfetto, la pressione di degenerazione dipendesse dalla temperatura, si potrebbe anche dare il caso in cui la nana bianca, dopo una fase di raffreddamento, riprende a contrarsi perch\'{e} la pressione di degenerazione, diminuita con la temperatura, non è più sufficiente a impedirne il collasso. Ciò non è possibile perch\'{e} la pressione di degenerazione è indipendente dalla temperatura.
+Per usare un paragone di Margherita Hack al riguardo: ``Un gas degenerato si comporta come un solido, nel senso che la pressione dipende poco o punto dalla temperatura, ma soltanto dalla densit\`{a}. \`E come se noi ci appoggiassimo con tutta la nostra forza a un tavolo di legno o di ferro o di pietra. Che sia caldo o freddo il tavolo supporta ugualmente il nostro peso.'' \citep{hack}.
+\par
+
+\smallskip
+
+%La dipendenza dalla densit\`{a} volumetrica del numero di elettroni (nella (\ref{stato degenere}) compare al numeratore il termine $n_{e}^{5/3}$ da informazioni sulle rapporto tra massa e raggio di una nana bianca. Si torner\`{a} nel seguito su questo punto.
+\`E bene sottolineare ancora una volta che tutte queste propriet\`{a} valgono nell'approssimazione non relativistica. In seguito si vedr\`{a} le importanti conseguenze di lavorare in regime relativistico, e questo ci condurr\`{a} direttamente al famosissimo limite di Chandrasekhar.
+\subsection{Quando bisogna tener conto della pressione di degenerazione?}
+Perch\'{E}, quando si è parlato delle stelle di sequenza principale, si è parlato di pressione del plasma stellare e di pressione di radiazione, ma non si è mai fatto alcun riferimento alla pressione degli elettroni degeneri?
+\par
+La condizione di degenerazione diventa importante quando i valori di densit\`{a} del gas diventano sufficientemente grandi.
+La densit\`{a} minima alla quale, per un certo gas, bisogna tener conto anche della pressione degli elettroni degeneri è detta \emph{densit\`{a} degli stati quantici}. Se indichiamo questa densit\`{a} con $\rho_{q}$, questa è data dalla relazione:
+\begin{equation}
+\rho_{q}= \left( \frac{2\pi m_{e} k T}{h^{2}} \right)^{\frac{3}{2}}
+\end{equation}
+con $h$ costante di Planck, $k$ costante di Boltzmann (introdotta alla sezione \ref{aumentot}) $m_{e}$ massa dell'elettrone e $T$ temperatura assoluta.
+Questa relazione si ricava imponendo che il momento della (\ref{igloo}) sia eguale al momento termico medio degli elettroni.
+\par
+\`E importante notare come questa densit\`{a} $\rho_{q}$ dipenda dalla temperatura $T$: più freddo è il gas più bassa è la densit\`{a} a cui la pressione di degenerazione diventa non trascurabile. Questo ci dice che i gas degeneri sono gas \emph{freddi}. La condizione di degenerazione si ha a densit\`{a} tanto più basse quanto più bassa è la temperatura.
+\par
+Per il Sole \emph{mediamente} il rapporto tra densit\`{a} volumetrica di elettroni liberi ($n_{e}$, gi\`{a} introdotta precedentemente) e densit\`{a} degli stati quantici $\rho_{q}$ vale, come si potrebbe verificare con un semplice calcolo, circa:
+\begin{displaymath}
+\rho_{q} \sim 55 n_{e}
+\end{displaymath}
+cioè mediamente nel Sole gli effetti dovuti alla degenerazione sono trascurabili.
+\section{Giganti rosse}\label{giganti rosse}
+\subsection{Nucleosintesi del carbonio}
+Stelle di massa superiore a $0.5M_{\odot}$, nel processo di contrazione gravitazionale del nocciolo, raggiungono la temperatura necessaria affinché si abbia l'innesco delle reazioni di fusione nucleare dell'elio $^{4}He$, che si è gi\`{a} visto essere dell'ordine dei 100 milioni di kelvin.
+Per quale ragione il ``bruciamento'' dell'elio richiede temperature un ordine di grandezza maggiori rispetto alle temperature richieste per la fusione dell'idrogeno? La ragione è molto semplice: se nel caso dell'idrogeno la repulsione coulumbiana da vincere per far avvicinare due nuclei era quella dovuta alla repulsione tra 2 protoni, nel caso dell'elio la repulsione coulumbiana da vincere è invece quella, ben maggiore della prima, tra 4 protoni (due di un nuclo di elio e due dell'altro nucleo di elio).
+\par
+Analizziamo più in dettaglio cosa avviene. Esaurito o quasi l'idrogeno del core, venute meno le reazioni di fusione dell'idrogeno, il nocciolo di una stella inizia a contrarsi riscaldandosi. Si è gi\`{a} visto che se la massa $M$ della stella è troppo piccola ($M<0.5 M_{\odot}$), causa l'insorgere di fenomeni quantistici, la contrazione del nocciolo ad un certo punto si arresta e la stella si stabilizza nello stadio di nana bianca, ove rester\`{a} fino al sopraggiungere della morte termica. Ma se invece la massa della stella è un po' più grande ($M>0.5M_{\odot}$, ed è questo il caso che si considera in questa sezione) allora il nocciolo ha modo di raggiungere la temperatura di 100 milioni di kelvin. A questa temperatura, i nuclei di elio presenti in abbondanza nel nocciolo\footnote{Prodotti dalle reazioni di fusione dell'idrogeno quando la stella era ancora in sequenza principale} possiedono un'energia cinetica sufficiente per vincere la repulsione elettrostatica reciproca e portarsi vicini gli uni agli altri. La fusione di due nuclei di elio $^{4}He$ origina un nucleo di berillio $^{8}Be$. Ma c'è un problema: il nucleo di berillio non è stabile, e tende a scindersi in due nuclei di elio nel tempo di $10^{-16}$ secondi! Tuttavia, per quanto breve sia la sua vita, il nucleo di Berillio cos\`{\i}{} originatosi ha tutto il tempo, data la frequenza degli urti, di interagire con un altro nucleo di elio $^{4}He$ formando con esso un nucleo di carbonio $^{12}C$, che è stabile. Si ha la nucleosintesi del carbonio a partire da tre nuclei di elio, attraverso un urto triplo che avviene in due fasi comunque separate nel tempo (il terzo nucleo urta il nucleo di Berillio).
+\footnote{In misura minore, nel regime di temperatura della fusione dell'elio anche altre reazioni di nucleosintesi si rendono possibili.}
+I nuclei di elio sono anche chiamati particelle $\alpha$: per questo la reazione di fusione ora descritta va sotto il nome di processo tripla--$\alpha$. La nucleosintesi del carbonio tramite procedimento tripla--$\alpha$ è una reazione di fusione nucleare che libera energia. Stelle di massa $M>0.5 M_{\odot}$, una volta raggiunte nel nocciolo le temperature sufficienti, entrano in una nuova fase di stabilit\`{a}, questa volta però non più grazie all'energia prodotta dalla combustione dell'idrogeno (ormai praticamente quasi assente nel nocciolo), ma grazie alla fusione dell'elio. Questa fase di stabilit\`{a} è ancora una volta contraddistinta, come la precedente in sequenza principale, da equilibrio termico ($\Delta E=0$, cioè la perdita di energia per irraggiamento viene compensata perfettamente dalla produzione di energia nel nocciolo) ed equilibrio idrostatico.
+\subsection{Espansione dell'inviluppo esterno}
+L'innesco delle reazioni di fusione dell'elio è accompagnato da una espansione degli strati esterni della stella.
+In molti testi questo fatto è riferito senza troppe spiegazioni e, il più delle volte, argomentato sulla base di motivazioni certamente intuitive ma purtroppo scarsamente rigorose e soddisfacenti. La spiegazione più corretta di questo apparentemente strano comportamento degli strati esterni si basa sul teorema del viriale. Il lettore non dovrebbe stupirsi più di questo fatto, visto che buona parte del comportamento di una stella può essere dedotto facendo ricorso al teorema del viriale o a sue generalizzazioni. La deduzione purtroppo in questo caso è ardua: sebbene concettualmente semplice, dal punto di vista matematico essa richiede l'impiego del calcolo differenziale. \`E solo questa ragione che spinge a non presentare in questa sede una simile deduzione. Il lettore tenga comunque presente che il fatto che la stella, innescate le reazioni di fusione dell'elio, vada incontro ad una espansione degli strati esterni è una conseguenza perfettamente deducibile a mezzo del teorema del viriale.
+\par
+A seguito dell'espansione degli strati esterni, si assiste ad una diminuzione della temperatura \emph{superficiale} della stella. Anche questo si può spiegare facilmente con il teorema del viriale. Se la contrazione produce un incremento nei valori di temperatura, l'espansione ne determina invece una diminuzione. Per la legge dello spostamento di Wien, la stella apparir\`{a} rossa. Per questo essa assume la denominazione di \emph{gigante rossa}. Nel diagramma HR si colloca in alto a destra.
+\subsection{Tempo di permanenza nello stadio di gigante rossa}
+Il tempo di permanenza di una stella nella fase di gigante rossa è comunque inferiore a quello di permanenza della stessa in sequenza principale, e questo  per due ragioni:
+\begin{itemize}
+\item
+La quantit\`{a} di elio nel nocciolo è inferiore rispetto alla quantit\`{a} di idrogeno di cui una stella in sequenza principale mediamente può disporre;
+\item
+Il difetto in massa nella fusione dell'elio è molto inferiore rispetto a quello delle reazioni nucleari che avvengono in una stella di sequenza principale e pertanto, a parit\`{a} di energia rilasciata, viene consumata una quantit\`{a} maggiore di elio.
+\end{itemize}
+In termini più immediati, una gigante rossa ha meno combustibile e nel contempo è costretta a consumarne ad un ritmo maggiore.
+\par
+Quando anche l'elio nel nocciolo inizier\`{a} ad esaurirsi, la stella uscir\`{a} nuovamente dalla fase di stabilit\`{a} ed il suo nocciolo proceder\`{a} verso una successiva fase di contrazione gravitazionale, con conseguente aumento di temperatura (il tutto in accordo con il teorema del viriale).
+Il futuro della stella ancora una volta è segnato dalla sua massa.
+\subsection{Fasi terminali di sviluppo di giganti rosse di massa $M<8 M_{\odot}$}
+Giganti rosse di massa \emph{complessiva} inferiore a $8 M_{\odot}$, nella fase di contrazione del nocciolo, che fa seguito all'esaurisi delle riserve di elio, \emph{non} raggiungono temperature sufficienti ad innescare ulteriori reazioni di nucleosintesi.
+\par
+Vediamo più in dettaglio quello che succede.
+Via via che le scorte di elio nel nocciolo si fanno sempre più carenti e il nocciolo stesso prosegue nella sua fase di contrazione, nelle regioni più esterne le temperature diventano tali per cui si verificano reazioni di fusione dell'idrogeno.
+Negli strati esterni l'idrogeno è infatti ancora presente, non è stato consumato durante la permanenza in sequenza principale perch\'{e}, come il lettore certo ricorder\`{a}, in genere non si ha rimescolamento tra il materiale del core e quello dell'involucro esterno. A questo punto però anche la temperatura delle regioni esterne (non superficiali comunque) è sufficientemente elevata da consentire alle reazioni di nucleosintesi dell'elio di avere luogo. In uno strato immediatamente attorno al nocciolo centrale inoltre cominciano ad innescarsi le reazioni di fusione dell'elio (il tripla--$\alpha$). Nel nocciolo, dove ormai quasi tutto l'elio è stato convertito in carbonio, la temperatura non è però (e, come si vedr\`{a} tra breve, non potr\`{a}, per queste stelle, mai essere) abbastanza grande perch\'{e} prendano avvio le reazioni di fusione del carbonio.
+\par
+La stella è una sorta di ``cipolla'' (immagine questa dipinta da numerosi testi divulgativi) con al centro un nocciolo inerte, costituito per buona parte da carbonio, uno strato più esterno dove ancora avvengono le reazioni di fusione dell'elio, uno strato ancora più esterno dove è attiva la fusione nucleare dell'idrogeno ed infine uno strato superficiale più freddo, composto da idrogeno ed elio inerti.
+\par
+Ad un certo punto, nel suo processo di contrazione, il nocciolo diventa degenere. La pressione degli elettroni degeneri, non più trascurabile, finisce infine per impedire ogni ulteriore contrazione delle regioni centrali della stella. Per stelle di massa complessiva inferiore a $8 M_{\odot}$, il collasso del nucleo centrale viene arrestato prima che questo abbia raggiunto temperature sufficienti per la fusione del carbonio.
+Il nocciolo centrale andr\`{a} cos\`{\i}{} a stabilizzarsi nello stadio di \emph{nana bianca}, sostenuto contro un ulteriore collasso dalla pressione di degenerazione degli elettroni, e quindi stabile in una condizione di equilibrio idrostatico, ma non termico.
+In altre parole lo stadio di nana bianca, che abbiamo gi\`{a} incontrato come tappa conclusiva dello sviluppo di stelle di massa inferiore a $0.5 M_{\odot}$ rappresenta anche lo stadio evolutivo finale di giganti rosse poco massicce ($M<8M_{\odot}$). Valgono tutte le considerazioni gi\`{a} espresse sulle nane bianche, e cioè il procedere inesorabile verso la morte termica, il fatto che comunque il tempo necessario perch\'{e} una nana bianca si spenga definitivamente in una nana nera è estremamente lungo ecc.
+\par
+Questo è ciò che succede al nocciolo. Cosa succede invece alle regioni esterne della stella?
+A seguito di ``convulsioni profonde, combinate con la pressione della radiazione e altre forze'' \Cite{balick}, gli strati via via più superficiali della stella vengono scagliati nello spazio. Nella fasi iniziali la velocit\`{a} di espulsione è compresa tra 10 e 20 kilometri al secondo, in seguito diventa anche maggiore \Cite{balick}.
+Si va formando una \emph{nebulosa planetaria}.
+Sono oltre 2000 le nebulose planetarie oggi conosciute. Osservate al telescopio, le nebulose planetarie si rivelano essere oggetti dalle forme particolarmente curiose. Modelli teorici che spieghino in qualche misura come l'espulsione di gas nelle fasi terminali di sviluppo di una gigante rossa possa originare oggetti dalle forme tanto inusuali e diverse tra loro sono ancora oggi oggetto di elaborazione. Secondo i modelli più recenti pare plausibile che le nebulose planetarie si originino per espulsione dei gas in fasi separate nel tempo; pare inoltre che un ruolo importante venga svolto dai campi magnetici. L'argomento, estremamente interessante, non sar\`{a} qui ulteriormente approfondito. Per approfondire si segnala \Cite{balick}.
+\subsection{Fasi terminali di sviluppo di giganti rosse di massa $M>8 M_{\odot}$}
+Diversamente dal caso precedente, stelle di massa maggiore a $8M_{\odot}$ nella fase di collasso del nocciolo centrale, che segue all'esaurimento dell'elio, raggiungono temperature al centro sufficienti all'attivazione delle reazioni di fusione del carbonio.
+Ma c'è di meglio: una volta che anche le quantit\`{a} di carbonio disponibili nel nocciolo diventano presto insufficienti, il nocciolo va soggetto nuovamente a contrazione e corrispondente riscaldamento; e cos\`{\i}{} facendo raggiunge quella temperatura indispensabile all'innesco di altre reazioni nucleari che coinvolgono ossigeno, neon e magnesio. Stelle di massa maggiore a $8M_{\odot}$ non solo raggiungono la temperatura richiesta per la fusione del carbonio (cosa questa che gi\`{a} non avviene per le giganti rosse meno massicce) ma proseguono anche oltre a successive reazioni di fusione. Ogni volta che un combustibile si esaurisce, il nocciolo si contrae e si riscalda, \emph{senza mai raggiungere lo stato degenere}, e nel nocciolo si sviluppano via via che la temperatura aumenta nuove reazione di fusione, fino alla fusione del ferro.
+\par
+Ad un certo punto la nostra gigante rossa massiccia avr\`{a} una struttura a ``cipolla'', un po' come si è descritto per giganti rosse meno massicce. In questo caso però la struttura a cipolla risulta molto più articolata: allo strato superficiale freddo ed inerte, fa seguito, procedendo verso l'interno, un primo strato in cui si verifica la fusione dell'idrogeno; un secondo strato in cui si verifica la fusione dell'elio; un terzo dove si verifica la fusione del carbonio; e cos\`{\i}{} via fino al nocciolo centrale, dove supponiamo sia in corso la fusione del silicio  e dello zolfo a formare ferro.
+\par
+Una volta che le quantit\`{a} di silicio e zolfo cominciano a essere insufficienti al solito il nocciolo inizia a contrarsi, aumentando la temperatura. Il collasso non è ostacolato dalla pressione di degenerazione.
+\footnote{La pressione di degenerazione non raggiunge (ne raggiunger\`{a}) mai un valore sufficiente per sostenere il collasso. Questo perch\'{e} il nucleo è troppo massiccio. Si vedr\`{a} in sezione \ref{chandra} che, per masse maggiori a $1.4M_{\odot}$ il collasso \emph{non} può essere arrestato dalla pressione di degenerazione.}
+%Questo perch\'{e} la densit\`{a} degli stati quantici dipende dalla temperatura, qui estremamente elevata: ne consegue che, in questi regimi di temperatura, gli effetti legati alla degenerazione possono essere trascurati. 
+Si arriva ad un punto in cui la temperatura del nocciolo risulta pari a 10 miliardi di gradi. A questa temperatura si può verificare la fusione del ferro.
+\par
+Ma proprio a questo punto succede qualcosa.
+Un nucleo di ferro $^{56}Fe$ si trasforma in 13 nuclei di elio e quattro neutroni. Diversamente da quanto avviene per tutte le altre reazioni nucleari trattate inprecedenza, la reazione ferro--elio è una reazione endoergonica: richiede energia invece che produrla.
+L'energia richiesta dalla reazione ferro--elio va a scapito dell'energia termica del nucleo, che bruscamente si raffredda.
+La stella entra in una fase di instabilit\`{a} a seguito del repentino raffreddamento del core, e i suoi strati esterni vanno infine incontro a violenta  esplosione. \`E il fenomeno della \emph{supernova}
+\subsection{Supernavae}
+Giganti rosse di massa $M>8 M_{\odot}$ terminano la loro vita in modo esplosivo, dando origine al fenomeno della \emph{supernova}. Un modello preciso dei meccanismi di instabilit\`{a} che sono alla base del fenomeno della supernova non sar\`{a} presentato in questa sede. Si intende nel seguito limitarsi a riportare alcune informazioni di carattere generale sulle supernovae.
+\par
+Si premette sin d'ora che le supernovae di cui si è fatto e si far\`{a} menzione in seguito, cioè quelle supernovae intese come esplosione di giganti rosse massicce, sono più propriamente dette \emph{supernovae di tipo II}. Le supernovae di tipo I si originano in sistemi binari costituiti da una nana bianca di massa prossima a 1,4 masse solari\footnote{Il perch\'{e} di questo valore sar\`{a} meglio chiarito nella sezione \ref{chandra}.} e da una stella prossima allo stadio di gigante rossa. L'esplosione \`e scatenata da un trasferimento di materia dalla compagna alla nana bianca \Cite{freedman}. Le \mbox{supernovae I} presentano molteplici elementi di diversit\`{a} rispetto alle \mbox{supernovae II:} raggiungono nel punto di massimo luminosit\`{a} maggiori, hanno un differente andamento della curva di luminosit\`{a} tipica e sono utilizzate (quelle di tipo I, e solo quelle) come candele standard di riferimento nella misurazione delle distanze extragalattiche\footnote{Le supernovae Ia raggiungono tutte la medesima luminosit\`a assoluta massima \citep{burnham, hack}.} Non ci occuperemo nel seguito di supernovae di tipo I.
+\par
+Nel momento in cui una gigante rossa esplode come supernova II, gli strati esterni della stella vengono proiettati nello spazio con velocit\`{a} di decine di migliaia di kilometri al secondo \Cite{rosino}.
+Nel contempo la stella aumenta la propria luminosit\`{a} al punto da brillare come miliardi di stelle normali \Cite{rosino}; alle volte una supernova può raggiungere luminosit\`{a} a tal punto elevate da risultare comparabili con quelle dell'intera galassia che la ospita \Cite{battistini}.
+\par
+La curva di luminosit\`{a} caratteristica per una supernova di tipo II presenta un aumento non brusco nel periodo precedente al massimo; quest'ultimo è seguito in un primo tempo da una diminuzione lenta della luminosit\`{a} dell'astro e solo un centinaio di giorni dopo l'avvenuto massimo la decrescita della luminosit\`{a} diventa rapida \Cite{burn}.
+\par 
+L'inviluppo espulso dalla stella andr\`{a} a formare una massa di gas in espansione ad altissima velocit\`{a} (\emph{nebulosa residuale}).
+Tra le nebulose residuali più note, degna di menzione è certamente la \emph{Crab Nebulsa}, nella costellazione del Toro. Questa nebulosa residuale è associata all'esplosione di una supernova avvenuta, all'interno della nostra galassia, nel 1054. In data attuale le misurazioni più recenti permettono una stima della velocit\`{a} di espansione dei gas di questa nube pari a circa 1000 km/sec \citep{hack}.
+Cosa succeda al nocciolo centrale della gigante rossa ad esplosione avvenuta sar\`{a} discusso ampiamente alla sezione \ref{chandra}.
+\par
+Le esplosioni di supernovae sono eventi molto rari; si stima che in una galassia si abbia una supernova ogni circa tre secoli \citep{burnham}. Le supernovae esplose nella nostra galassia di cui si abbia notizia negli ultimi secoli sono appena quattro: la grande supernova esplosa nella costellazione del Lupo nel 1006, di cui sono rimaste diverse citazioni e la cronaca dell'astrologo islamico Ali Ibn Ridwan; la supernova esplosa nel Toro il 4 luglio del 1054, di cui ci sono rimaste cronache cinesi e la cui nebulosa residuale è ancora oggi osservabile (la famosa \emph{Crab Nebulsa}); la supernova in Cassiopea del 1572, di cui l'astronomo Tycho Brahe ci ha lasciato una accurata cronaca; ed infine la supernova esplosa nel 1604 nell'Ophiuco di cui Keplero, Galileo ed altri ci hanno lasciato cronache.
+\footnote{L'argomento delle supernovae storiche , di sicuro interesse, non sar\`{a} per brevit\`{a} ulteriormente approfondito. Riferimenti per ulteriori letture saranno dati in bibliografia.}
+\`E interessante notare come, data l'elevata luminosit\`{a} massima che caratterizza le supernovae e il fatto che si tratti di supernovae esplose nella nostra stessa galassia, ciascuno degli eventi storici ora menzionati sia stato osservato a occhio nudo, senza l'ausilio dei mezzi di indagine dell'astronomia telescopica, mezzi peraltro a quei tempi non ancora in uso.
+\par
+Dato comunque il numero elevatissimo di galassie che vengono oggi osservate dagli astronomi, si scopre mediamente più di una supernova extragalattica a settimana \Cite{battistini}.
+\par
+Se si considera che il numero di stelle aventi massa maggiore di $8M_{\odot}$ è piuttosto elevato, viene da chiedersi per quale motivo siano cos\`{\i}{} rari gli eventi di esplosioni di supernovae. La risposta è da ricercarsi nel fatto che, durante le fasi precedenti all'esplosione, la stella, sin dall'epoca della sequenza principale, ha in atto diversi meccanismi con cui disperde nello spazio parte della sua massa. Questi meccanismi sono almeno di tre tipi \Cite{rosino}:
+\begin{itemize}
+\item
+Una stella può perdere massa in seguito ad un'elevata rotazione: per effetto delle intense forze centrifughe che si sviluppano, una stella in rapida rotazione può emettere materia dal suo equatore, materia che si andr\`{a} a depositare sul piano equatoriale formando anelli concentrici in espansione. \`E questo il caso di stelle di classe $Of$ o $Be$ o anche delle stelle Wolf-Rayet;
+\item
+In stelle molto massicce, si può avere emissione di massa per effetto di un'intensa pressione di radiazione;
+\item
+In stelle di altissima temperatura, come stelle di classe $O$, si può verificare inoltre che le particelle che compongono gli strati più esterni, per effetto del moto di agitazione termica, si muovano a velocit\`{a} superiori alla velocit\`{a} di fuga in quella regione.
+\end{itemize}
+Da  segnalare l'esplosione, avvenuta nell'ormai lontano 23 febbraio del 1987, ore 7.35 locali, di una supernova nella Grande Nube di Magellano, una galassia vicina alla nostra via Lattea. Si è trattato della prima supernova extragalattica visibile a occhio nudo. L'esplosione di 1987A, nome con il quale la supernova è stata poi designata, è stata importante per almeno due ragioni: di essa è stato possibile seguire in diretta le diverse fasi dell'esplosione ed individuare anche la stella progenitrice; è stato inoltre osservato, da vari rilevatori, il flusso di neutrini emesso nell'esplosione.
+Una documentazione fotografica delle varie fasi dell'evento è riportata in \Cite{caf}, p. F322.
+\par
+
+\smallskip
+
+Nel seguito dovremo tornare a parlare di supernovae. Rimane infatti ancora da chiarire cosa rimanga, ad esplosione avvenuta, del nocciolo centrale. Ci si potrebbe aspettare che questo collassi gravitazionalmente fino a quando il subentrare della pressione degli elettroni degeneri non gli permette di stabilizzarsi nello stadio di nana bianca. In effetti se nell'esplosione il nocciolo riesce a portare la propria massa al di sotto di un limite critico, pari a $1.4 M_{\odot}$, questo è proprio quello che avviene: ancora una volta la stella termina la propria vita nello stadio di nana bianca, fino al sopraggiungere della morte termica. Generalmente la massa residua è però superiore a questo limite. In tal caso, per ragioni che vedremo in sezione \ref{chandra}, la stella \emph{non può stabilizzarsi nello stadio di nana bianca}. Si vedr\`{a} che la stella terminer\`{a} allora la propria vita nello stadio di pulsar, oppure di stella di quark e gluoni o ancora di buco nero a seconda del valore della massa residua. Ma prima di descrivere questi ultimi casi, riassumiamo in breve quali sono i tratti distintivi e qualificanti delle nane bianche.
+\section{Caratteri principali delle nane bianche}\label{nane bianche}
+Vengono presentati in forma riassuntiva i principali elementi caratterizzanti delle nane bianche. L'esposizione si ispira a \Cite{burn}:
+\begin{enumerate}
+\item
+\emph{Diametro}:
+le nane bianche sono caratterizzate da valori del diametro molto ridotti. Le dimensioni di una nana bianca risultano comparabili con le dimensioni di pianeti di tipo terrestre. Sirio B ha un diametro stimato non superiore a 19000 miglia\footnote{Burnham riporta i valori di lunghezza del diametro espressi in unit\`{a} del sistema anglosassone. Vale il fattore di conversione 1mi = 1,6Km.}. La stella di Van Maanen si stima abbia un diametro di 7800 miglia, cioè è più piccola della Terra. Sono note nane bianche di diametro anche inferiore: LP 357--186, scoperta da W. J. Luyten nel 1962 nella costellazione del Toro, pare avere un diametro calcolato pari a 1200 miglia e LP 768--500, la cui scoperta, nella costellazione della Balena, sempre ad opera di Luyten, è stata annunciata nel novembre del 1963, ha un diametro calcolato pari a 900 miglia.
+\item
+\emph{Massa}:
+stime attendibili della massa delle nane bianche può essere fatta solo per quelle nane bianche appartenenti a sistemi binari.
+Solo in questo caso risulta possibile, impiegando l'analogo della terza legge di keplero al sistema binario di stelle, risalire al valore della massa totale delle due due componenti partendo da misure del periodo di rotazione e della distanza media tra le due stelle. \footnote{Questo è il metodo che si usa in astronomia per misurare la massa delle stelle, non solo delle nane bianche. In alcuni casi particolari è anche possibile risalire dal valore della massa totale delle due componenti alla massa di ogni singola componente.}Ne sono un esempio Sirio B, 40 Eridani e Procione B, i cui valori di massa calcolati risultano rispettivamente pari a 0.98, 0.44 e circa 0.65 masse solari. In generale le nane bianche hanno massa abbastanza prossima al valore della massa attuale del Sole. Per ragioni che saranno descritte in sezione \ref{chandra} non è possibile che esistano nane bianche di massa superiore a circa $1.4 M_{\odot}$.
+\item
+\emph{Densit\`{a}}:
+i valori di densit\`{a} per una nana bianca sono molto elevati (anche se nel seguito incontreremo oggetti astronomici di densit\`{a} anche molto maggiore). In una bianca la massa del Sole viene ad essere infatti concentrata in un volume molto più piccolo.
+La densit\`{a} di una nana bianca può raggiungere il valore di una tonnellata per centimetro cubo ($10^{9}$ kg/m$^{3}$).
+\item
+\emph{Luminosit\`{a}}:
+le nane bianche non sono oggetti molto luminosi. Nel diagramma HR occupano la porzione in basso a sinistra, corrispondente appunto a valori relativamente modesti di luminosit\`{a}. La ragione di questo fatto è essenzilmente da ricercarsi, come gi\`{a} ampiamente discusso, nella ridotta superficie emettente che possiedono (vedi legge di Stefan--Boltzmann).
+Volendo fornire alcuni esempi di riferimento, basti pensare che HZ 29, una nana bianca nella costellazione dei Cani da Caccia, considerata uno tra i più luminosi oggetti stellari appartenenti a questa categoria, non supera 1/40 della luminosit\`{a} del Sole. Per HZ 29 si calcola una magnitudine assoluta pari a +8.9. Le due nane bianche scoperte da Luyten nei primi anni Sessanta, che si è visto prima essere caratterizzate da valori del diametro estremamente ridotti, hanno magnitudine assoluta: LP 357--186 pari a +16.5 ed LP 768--500 probabilmente inferiore a +17.
+\item 
+\emph{Temperature}:
+oltre met\`{a} delle nane bianche oggi conosciute appartengono alla classe spettrale A, sono caratterizzate cioè da una temperatura superficiale tra gli 8000 e i 10000 kelvin. Nane bianche di classe spettrale F sono piuttosto rare. esistono comunque alcuni (pochi) esempi di nane bianche con temperatura superficiale anche inferiore: la stella di Van Maanen è di classe G e W489 è classificata di tipo K.
+\end{enumerate}
+%************************************************
+\chapter{Oltre il limite di Chandrasekhar}\label{chandra}
+\minitoc\mtcskip
+%************************************************
+Nel 1930 il giovane fisico indiano Subramahyan Chandrasekhar decise di imbracarsi per l'Inghilterra con nel cuore il sogno di raggiungere l'Inghilterra dove studiare e diventare un giorno membro della Royal Society.
+Durante il viaggio, Chandra si dedicò allo studio delle fasi terminali dell'evoluzione stellare.
+\par
+Egli in particolare si accorse che una nana bianca di massa superiore ad un certo valore critico stimato pari a circa $1,4 M_{\odot}$ non potr\`{a} mai essere gravitazionalmente stabile. Non possono semplicemente esistere nane bianche di massa maggiore a $1,4 M_{\odot}$; per simili valori di massa la forza di attrazione gravitazionale del corpo stellare su sé stesso risulta talmente intensa da vincere anche la repulsione tra gli elettroni degeneri.
+\par
+All'epoca purtroppo le sue idee furono duramente criticate, comunque a torto, dal fisico inglese Eddington, che non esitò a ironizzare in tono polemico sulle teorie di Chandrasekhar fino al punto di appellarsi all'esistenza di leggi di natura che avrebbero impedito ad una stella di comportarsi in maniere tanto assurde.
+Per i suoi studi sull'evoluzione stellare Chadrasekhar ha ricevuto nel 1983 il premio Nobel. Il riconoscimento per l'importanza delle sue ricerche è arrivato oltre cinquant'anni dopo che i suoi risultati erano stati presentati. La vicenda rappresenta un triste promemoria di cosa possa accadere nella scienza quando certe persone sono a tal punto convinte delle proprie opinioni da non accettare il confronto con pareri diversi o contrastanti. Il fatto che ancora nel XX secolo si siano manifestati casicome questi, dove l'autorit\`{a} di uno scienziato abbia finito per ostacolare sul nascere i progressi della ricerca, è certamente un segnale grave; a parere strettamente personale dell'autore, il quale circa questi fatti non esita a dichiarare il proprio punto di vista, il comportamento di Eddington non può che definirsi sotto questo aspetto estremamente ascientifico. Solo misurando le proprie convinzioni con gli altri e aprendosi al dibattito con idee diverse dalle nostre si può avere la speranza di procedere di qualche passo nel cammino della ricerca scientifica.
+\section{La pressione dello stato degenere in regime relativistico}
+%\footnote{Sezione di approfondimento. Può essere tralasciata in prima lettura. Il contenuto delle sezioni successive non dipende per nulla da quanto qui esposto.}
+\label{climit}
+La pressione degli elettroni degeneri nell'approssimazione non relativistica dipende dalla densit\`{a} volumetrica di elettroni $n_{e}$ (sezione \ref{propdeg}). Più precisamente, se $P_{deg}$ è la pressione degli elettroni degeneri, dall'equazione (\ref{stato degenere}), si ha che:
+\begin{equation}\label{prop53}
+P_{deg} \propto n_{e}^{\frac{5}{3}}
+\end{equation}
+In condizioni di equilibrio idrostatico, la pressione $P_{g}$ che si esercita in un \emph{qualunque} punto all'interno del corpo stellare per effetto del peso della materia degli strati sovrastanti cresce, come ragionevole aspettarsi, con la massa della stella e con la sua densit\`{a}. Questo significa che, a parit\`{a} di densit\`{a}, più una stella è massiccia e più grande sar\`{a} la pressione che si eserciter\`{a} in un suo punto qualunque causa l'attrazione gravitazionale della massa stellare su sé stessa. Viceversa, a parit\`{a} di massa, la pressione sar\`{a} tanto più grande quanto più densa sar\`{a} la stella. Si può tradurre in forma quantitativa questo fatto scrivendo la relazione:
+\begin{equation}\label{pmr}
+P_{g}\propto M^{\frac{2}{3}}\rho^{\frac{4}{3}}
+\end{equation}
+dove $M$ e $\rho$ sono rispettivamente la massa e la densit\`{a} della stella. Si noti che la pressione $P_{g}$, come anche la pressione degli elettroni degeneri (\ref{stato degenere}), non dipende da quale punto del corpo stellare si scelga di considerare: la pressione ha lo stesso valore in ogni punto della stella. Non daremo qui una dimostrazione della (\ref{pmr}); l'equazione può essere dedotta dall'equazione per l'equilibrio idrostatico e facendo uso dell'equazione di stato del gas perfetto.
+\par
+Fatte queste due precisazioni, siamo pronti per affrontare il problema del limite di Chandrasekhar. In questa sezione si cercher\`{a} di sottolineare un fatto in particolar modo, e questo fatto è il seguente: finché si considera come formula per la pressione degli elettroni degeneri la (\ref{stato degenere}), ricavata nell'approssimazione non relativistica, non si arriver\`{a} mai a trovare qualche evidenza che esiste il limite di Chandrasekhar, e cioè che nane bianche di massa superiore a $1.4 M_{\odot}$ non possono stabilizzarsi in condizione di equilibrio idrostatico. Ma se si ricava una nuova espressione per la pressione degli elettroni degeneri nel caso relativistico, allora automaticamente emerge la problematica del limite di Chandrasekhar. La deduzione di questo fatto richiede ovviamente il ricorso a particolarismi tecnici e ad un certo formalismo matematico che esulano certo dagli obiettivi modesti del presente documento. Si vuole in questa sezione presentare qualche sommario argomento a favore di quanto sopra detto, senza pretesa di alcuna completezza. Questa sezione vuole giusto essere un assaggio che indichi al lettore dove nasca l'idea dell'esistenza del limite di Chandrasekhar. In ogni caso la la presente sezione è da considerarsi come materiale integrativo di approfondimento. Il lettore che lo volesse non tardi a proseguire nelle sezioni successive.
+\par
+Un calcolo preciso basato sulla statistica di Fermi--Dirac fornisce la seguente espressione per il calcolo della pressione degli elettroni degeneri nel caso relativistico:
+\begin{equation}
+P_{deg}=\frac{1}{4} \sqrt[3]{\left( \frac{3}{8\pi} \right)} \cdot h \cdot c\cdot n_{e}^{\frac{4}{3}}
+\end{equation}
+cioè:
+\begin{equation}\label{prop43}
+P_{deg} \propto n_{e}^{\frac{4}{3}}
+\end{equation}
+Può apparire una piccola differenza rispetto alla relazione di proporzionalit\`{a}(\ref{prop53}). La (\ref{prop43}) e la (\ref{prop53}) differiscono solo per la potenza con cui vi figura la densit\`{a} di elettroni $n_{e}$. Eppure proprio da questa apparentemente quasi insignificante differenza, che concettualmente non sembra nascondere niente di nuovo, tra le due relazioni prende avvio il problema del limite di Chandrasekhar.
+Finchè si lavora con la relazione (\ref{prop53}), qualsiasi sia la pressione $P_{g}$ dovuta all'attrazione gravitazionale della stella su sé stessa, si può sempre scegliere $n_{e}$ abbastanza grande perch\'{e} risulti che $p_{g}$ e $P_{deg}$ si equilibrano a vicenda. Se una stella è molto massiccia, per la (\ref{pmr}) la pressione sar\`{a} molto grande; via via che la stella si contrae il suo volume diminuisce, e siccome la sua massa non cambia, \emph{sia} $n_{e}$ che $\rho$ crescono; allora la pressione $p_{g}$, in base alla (\ref{pmr}) cresce, perch\'{e} cresce $\rho$, e anche $P_{deg}$ cresce perch\'{e} cresce anche $n_{e}$; ma $P_{deg}$ cresce \underline{più rapidamente} di $P_{g}$, perch\'{e}, per la (\ref{prop53}), $P_{deg}$ cresce con potenza $5/3$ della densit\`{a}, mentre $P_{g}$ cresce con una potenza più piccola, $4/3$ appunto, della densit\`{a}. Ad un certo punto $P_{deg}$ sar\`{a} cresciuta abbastanza da equilibrare $p_{g}$.
+In termini matematici si ha che il rapporto $P_{deg}/P_{g}$ cresce al crescere della densit\`{a}, cioè via via che il collasso della stella procede. Ad un certo punto questo rapporto sar\`{a} cresciuto al punto da valere esattamente $1$.
+\par
+Ma se invece della (\ref{prop53}) usiamo la (\ref{prop43}) questo non è più vero, perch\'{e} in questo caso si avrebbe che sia $P_{deg}$ sia $P_{g}$ crescono con la medesima potenza della densit\`{a}, la potenza $4/3$: via via che la stella si contrae cioè aumentano nella stella maniera sia la pressione di degenerazione sia la pressione dovuta all'attrazione gravitazionale della stella su sé stessa. non è più come nel caso precedente che le due pressioni crescono in maniera diversa via via che la stella prosegue nella fase di collasso. In termini matematici il rapporto $P_{deg}/P_{g}$ non dipende più da una qualche potenza della densit\`{a}, ma dipende solo dalla massa della stella. Vale la relazione:
+\begin{equation}
+\frac{P_{g}}{P_{deg}}\propto M^{\frac{2}{3}}
+\end{equation}
+Per un certo valore critico della massa della stella, la pressione degli elettroni degeneri non sar\`{a} mai in grado di eguagliare la pressione dovuta all'attrazione gravitazionale della stella su sé stessa, e conseguentemente la pressione degli elettroni degeneri non sar\`{a} sufficiente ad arrestare il collasso gravitazionale di queste stelle. Stelle troppo massicce non potranno stabilizzarsi nello stadio di nana bianca. Per stelle degeneri del tutto prive di idrogeno il valore critico per cui questo succede vale:
+\begin{displaymath}
+M_{c} =1.44 M_{\odot}
+\end{displaymath}
+Questo limite è il limite di Chandrasekhar e la massa critica $M_{c}$ prende il nome di massa di Chandrasekhar.
+\section{Pressione dei neutroni degeneri: le stelle di neutroni}\label{stelle neutroni}
+Siamo finalmente pronti per affrontare il grande quesito lasciato aperto alla sessione precedente, e cioè cosa è del nocciolo di una gigante rossa massiccia una volta che quest'ultima è esplosa come supernova? 
+\par
+Riprendiamo brevemente quello che abbiamo visto sulle fasi terminali di sviluppo delle stelle.
+Sappiamo che stelle di massa \emph{complessiva} inferiore ad $8M_{\odot}$ terminano la loro esistenza nello stadio di nana bianca in continuo, anche se lento, procedere verso una sicura morte termica; ci sono stelle (quelle di massa inferiore a $o.5 M_{\odot}$) che si stabilizzano a nane bianche prima ancora di innescare il bruciamento dell'elio, altre più massicce che attraversano invece una ulteriore fase di stabilit\`{a}, garantita dalla reazioni di fusione dell'elio nel nocciolo, prima di evolvere a nane bianche. Comunque sia, passando o no per la combustione dell'elio, tutte queste stelle concludono la loro esistenza come nane bianche. Le nane bianche sono in equilibrio idrostatico perch\'{e} la pressione di degenerazione degli elettroni è sufficiente a sostenere la stella da un ulteriore collasso.
+\par
+Più problematica è la fine di stelle di massa superiore a $8M_{\odot}$. Queste escono dalla fase di giganti rosse in modo esplosivo come supernovae. Nel fenomeno della supernova la stella espelle in maniera violenta gli strati più esterni, che andranno a formare la nebulosa residuale (da non confondere con le nebulose planetarie!). Proprio a questo punto si inserisce la domanda: ``che è del nocciolo?'' Eh, se lavorassimo con l'approssimazione non relativistica della pressione degli elettroni degeneri la conclusione sarebbe sempre la stessa: contraendosi per effetto della gravit\`{a}, ad un certo punto il nocciolo finir\`{a} per stabilizzarsi; la pressione degli elettroni degeneri a questo punto sar\`{a} in ogni caso in grado di sorreggere la stella da un ulteriore collasso e il nocciolo, tutto ciò che rimane della stella esplosa, terminer\`{a} la sua esistenza anch'esso nello stadio di nana bianca. Ma purtroppo per noi le cose non sempre vanno cos\`{\i}{} facili come si vorrebbe e le complicazioni non tardano ad arrivare. Basta riscrivere la formula per la pressione degli elettroni degeneri nel caso relativistico per giungere, con qualche conticino, all'inevitabile conclusione che non potr\`{a} mai esserci una nana bianca gravitazionalmente stabile avente massa superiore a circa $1.4 M_{\odot}$. In genere la massa residua del nocciolo di una supernova ha massa superiore a questo limite. \`E ragionevole aspettarsi che gli sconvolgimenti durante l'esplosione della supernova coinvolgano in qualche misura anche il nocciolo, per cui esso può perdere almeno in parte la sua massa originaria e rientrare al di sotto del limite critico di $1.4 M_{\odot}$. Non si può escludere che processi di questo tipo avvengano, e cioè che il nocciolo di una gigante rossa massiccia, nocciolo la cui massa è senz'altro maggiore di $1.4 M_{\odot}$, possa perdere una frazione della propria massa nell'esplosione della stella come supernova, e rientrare entro il fatidico limite di $1.4 M_{\odot}$. Se questo succede allora il nocciolo finir\`{a} per stabilizzarsi nello stadio di nana bianca.
+Ma questo non può succedere sempre. Ci saranno delle volte in cui questo anche accade, ma più in generale il nocciolo, che durante la permanenza della stella nello stadio di gigante rossa massiccia aveva massa senza dubbio superiore al limite di Chandrasekhar, si ritrova, dopo l'esplosione, ancora con una massa superiore a $1.4 M_{\odot}$. Questo nocciolo semplicemente \emph{non può} stabilizzarsi come nana bianca: la pressione degli elettroni degeneri non riuscir\`{a} \emph{mai} a diventare abbastanza intensa per controbilanciare la tendenza della stella a contrarsi ulteriormente. Non ci sono speranze che il nocciolo di massa maggiore a $1.4 M_{\odot}$ raggiunga infine una condizione di equilibrio idrostatico come nana bianca; la pressione degli elettroni degeneri non crescer\`{a} mai abbastanza da sostenere il ``peso'' della stella.
+\par
+Lo stadio di nana bianca viene superato e la stella prosegue apparentemente in modo inarrestabile la sua corsa verso il collasso gravitazionale. La pressione degli elettroni degeneri non basta a frenare il collasso, e l'attrazione gravitazionale dell'astro su sé stesso ha il sopravvento sulla pressione di degenerazione. Cosa succede a questo punto?
+Per descrivere quanto avviene riportiamo le testuali parole di Leonida Rosino:``I nuclei, tremendamente compressi, si spezzano, si fondono insieme con gli elettroni che non riescono a equilibrare il peso che li schiaccia, si trasformano, per l'annullamento delle cariche opposte, in neutroni'' \Cite{rosino}, p. 806.
+\par
+Frasi di questo tipo si trovano frequentemente riportate nei testi di divulgazione. L'autore rinuncia dal tentativo di fornire una qualche spiegazione di cosa si intenda con ``fusione dei protoni e degli elettroni a formare neutroni'' e si limita a constatare il fatto che, una volta avvenuta, in qualche modo, questa ``fusione'', quello che si origina è una stella di neutroni. Non è detto che la stella di neutroni formi un sistema stabile, e su questo punto torneremo tra breve. ma intanto sicuramente si è formato un oggetto composto di soli neutroni, forse gravitazionalmente stabile o forse ancora in collasso.
+I neutroni che si sono cos\`{\i}{} formati sono neutroni stabili. In condizioni operative ordinarie il neutrone libero è una particella instabile con vita media di circa un quarto d'ora. 
+\par
+%\`E noto che il volume di un atomo sia dato dagli orbitali elettronici (i quali in compenso hanno un ruolo marginale nel determinare la massa complessiva di un atomo). le dimensioni dell'edificio atomico sono individuate dagli elettroni che orbitano attorno al nucleo. Per il resto, ad eccezione del nucleo centrale, l'atomo è, come si potrebbe dire, vuoto\footnote{Termine improprio perch\'{e} non tiene conto delle fluttuazioni quantistiche del vuoto dovute all'indeterminazione nella misura dell'energia. Sebbene il termine sia usato impropriamente, non essendo l'autore al momento in grado di ricorrere ad un termine più rigoroso, confida sul buon senso del lettore che abbia efficacemente colto il significato della proposizione.}. Nel momento in cui gli elettroni e i protoni, in qualche modo, si ``fondono'', lo spazio dell'edificio atomico prima non occupato da alcuna particella reale ora si presenta riempito da neutroni.
+L'ipotesi dell'esistenza di stelle neutroniche fu avanzata da Landau nel 1932, ed in seguito ripresa da Volkoff e Oppenheimer. Simili oggetti, proprio perch\'{e} costituiti da soli neutroni quasi in contatto diretto, risultano estremamente densi. Si stima che la densit\`{a} di una stella di neutroni sia dell'ordine di $10^{18}$ Kg/m$^{3}$, cioè 15 ordini di grandezza più grande della densit\`{a} dell'acqua (che è $10^{3}$ kg/m$^{3}$).
+%Le propriet\`{a} fisiche che ci si aspetta dalla materia neutronica che costituisce le stelle di neutroni sono molto interessanti, e su di esse torneremo tra breve. Vediamo prima di chiarire se una stella di neutroni è o meno un oggetto gravitazionalmente stabile. 
+Se la massa in gioco non è superiore a circa $3$ o $4$  masse solari, le forze di repulsione tra neutroni \emph{degeneri} sono sufficienti a controbilanciare la tendenza della stella a contrarsi ulteriormente. Per valori di massa pari a 3 o 4 volte la massa del Sole il nocciolo in collasso gravitazionale trova la sua condizione di equilibrio idrostatico nella stella di neutroni.
+\par
+Le propriet\`{a} fisiche che ci si aspetta dalla materia neutronica che costituisce le stelle di neutroni sono molto interessanti. I neutroni si dispongono ai vertici di un reticolo cristallino: per questa ragione si ritiene che una stella di neutroni non sia interamente gassosa, nonostante l'elevatissima temperatura che la caratterizza (dell'ordine di qualche centinaio di milioni di gradi) ma possegga uno spesso involucro esterno solido (nel senso di cristallino); solo vari kilometri più in profondit\`{a}, via via che dalla superficie esterna ci si porta verso il nucleo centrale, la temperatura diventa cos\`{\i}{} elevata da impedire ai neutroni di disporsi ordinatamente in uno schema geometrico  di tipo cristallino. Nelle regioni interne, oltre ai neutroni, è ancora possibile trovare in piccole percentuali protoni, elettroni  e alcune altre particelle più esotiche (mesoni ecc.). L'intero edificio è avvolto da un sottilissimo strato di gas formato da nuclei atomici ed elettroni; lo spessore di questo strato più esterno pare non superiore ad un metro \Cite{rosino}.
+\par
+Se la massa in gioco è superiore a 3 o 4 masse solari (la cosiddetta \emph{massa di Oppenheimer}) il nocciolo in contrazione non può stabilizzarsi neppure nello stadio di stella di neutroni: la pressione tra neutroni degeneri non è sufficiente ad impedire un ulteriore collasso del corpo stellare. Cosa sar\`{a} del corpo stellare in questo caso è un problema che sar\`{a} accennato nella sezione conclusiva.
+\section{Pulsar}\label{pulsar}
+\subsection{La scoperta delle pulsar}\label{scoperta pulsar}
+Quello che si è descritto, in termini piuttosto generali e discorsivi alla sezione \ref{stelle neutroni} è un modello \emph{teorico} di come il nocciolo residuo di una supernova possa evolvere, se avente massa compresa indicativamente tra $1.4 M_{\odot}$ e $4M_{\odot}$, a formare una stella di neutroni. Le propriet\`{a} e la struttura di questi oggetti sono frutto di elaborazioni teoriche. Che prove sperimentali si hanno che le cose vadano proprio come si è detto alla sezione \ref{stelle neutroni}, e che invece il modello proposto non sia erroneo? Ci sono cioè dati osservazionali che confermano prima di tutto l'esistenza di stelle di neutroni, ed in secondo luogo che, nell'eventualit\`{a} esistano, questi oggetti abbiano effettivamente le propriet\`{a} teoricamente previste?
+\par
+Ipotizzate teoricamente ancora nel 1932 come si è visto, le stelle di neutroni sembrano aver ricevuto una conferma sperimentale piuttosto forte a favore della loro effettiva esistenza a seguito della scoperta nel 1967, ad opera dell'allora dottoranda a  Cambridge Jocelyn Bell , delle cosiddette \emph{pulsar}, acronimo inglese di \emph{pulsating radio source}.
+\par
+Vediamo di cosa si tratta. Come tutte le storie, anche questa ha un inizio, che si può far risalire alla tarda estate dell'ormai lontano 1967, a Cambridge.\footnote{L'esposizione è ispirata all'eccellente resoconto di Piero Tempesti in \Cite{tempesti}.} Un radiotelescopio, costituito da un insieme di tralicci sostenente duemila piccole antenne, sta scandagliando la volta stellata alla lunghezza d'onda di 3.68 metri. Lo strumento permette di registrare una serie di impulsi brevissimi, di pochi centesimi di secondo, separati da un intervallo regolare di 1,3 secondi. Di cosa si poteva trattare? Jocelyn Bell, nota l'estrema regolarit\`{a} con cui eventi simili si ripetono: in particolare questo tipo di segnale si ritrova in giorni diversi alla stessa ora siderale, e cioè quando transita sul meridiano locale una stessa regione di cielo che Bell identifica appartenere alla costellazione della Piccola Volpe. La studentessa decide di parlarne con il suo professore, Antony Hewish, e insieme decidono di fare una registrazione ad alta velocit\`{a} all'ora siderale in cui ci si aspetta di ricevere questi impulsi. Per settimane Jocelyn si impegna tutte le sere (in autunno la Volpetta transita in meridiano verso sera) a registrare il segnale radio raccolto dal radiotelescopio, ma invano: gli impulsi brevissimi sembrano scomparsi, al punto da far ritenere che quei segnali precedentemente registrati fossero in realt\`{a} rumore spurio di chiss\`{a} quale origine. Ma Jocelyn non si arrende. Riportiamo le parole con cui Piero Tempesti a questo punto narra i fatti accaduti \Cite{tempesti}:
+\begin{quote}
+`` Ma Jocelyn ha quel pensiero fisso che non la abbandona, e una sera, all'ora giusta, torna di nuovo davanti alla consolle dello strumento. Aziona il commutatore di velocit\`{a}\footnote{All'epoca il segnale raccolto dal radiotelescopio veniva registrato da un pennino su un rullo di carta scorrevole. Nelle indagini di Jocelyn si richiedevano registrazioni ad elevata velocit\`{a}, cos\`{\i}{} che fosse possibile esaminare l'andamento del segnale su scale più ampie.} ed attende: un'intelligenza, un cuore ed un grande orecchio metallico tesi verso il cielo per riconoscere, fra i mille tenuissimi «rumori» che vengono percepiti, un evanescente segnale proveniente da un ignoto mondo delle sconfinate profondit\`{a} siderali. l'occhio ansioso segue il pennino che traccia sulla carta che scorre le solite minutissime fluttuazioni del «rumore di fondo»; passa un minuto, due, e non succede nulla; ormai il momento buono sta per finire e la ragazza comincia a pensare che la sua è un'ostinazione inutile e che hanno ragione tutti a dire di non pensarci più\ldots ma improvvisamente ecco che il pennino effettua una rapida oscillazione, si stabilizza un istante e ne compie una seconda, e poi un'altra e poi un'altra ancora\ldots''
+\end{quote}
+A questo punto Jocelyn si rivolge a Hewish, il quale ritiene però che i segnali captati, vista la cadenza estremamente regolare con cui si ripresentano ogni 1,3 secondi, ciascuno con la medesima durata,  siano segnali artificiali di origine terrestre. Poche settimane più tardi Jocelyn scopre un'altra serie di impulsi, questa volta separati tra loro da intervalli regolari di 1,2 secondi, che si verificano quando il Leone transita in meridiano.
+\par
+La notizia viene diramata dalla rivista scientifica \emph{Nature} il 24 febbraio del 1968. Gli impulsi sembrano provenire da regioni di cielo estremamente piccole, praticamente puntiformi. Anche se all'epoca non è ancora ben chiaro il meccanismo con cui simili segnali si generano, le sorgenti vengono battezzate con il nome di pulsar.
+\par
+Ad Antony Hewish fu assegnato il premio Nobel per la fisica nel 1974, mentre Jocelyn non fu neppure nominata. Solo anni dopo ebbe alcuni riconoscimenti di minor prestigio \citep{hack}.
+\subsection{Il modello Pacini--Gold}\label{faro}
+Il modello oggi più accreditato che fornire una spiegazione dell'emissione delle pulsar è il cosiddetto modello Pacini--Gold, dal nome di Franco Pacini che per primo lo propose, nel 1968, assieme con Thomas Gold. il modello è meglio conosciuto come modello ``faro''.
+\par
+Una stella comunemente genera nello spazio un campo magnetico. Sulle sorgenti di un campo magnetico stellare non ci dilungheremo in questa sede.
+Durante la fase di collasso, il campo magnetico eventualmente  generato dal nocciolo residuo dell'esplosione di supernova aumenta notevolmente di intensit\`{a}. Sussiste una relazione di proporzionalit\`{a} inversa tra superficie del corpo stellare e intensit\`{a} del campo magnetico \citep{hack}. Le ragioni di questo fatto non saranno qui chiarite.
+Sempre a causa della contrazione, la velocit\`{a} angolare $\omega$ del corpo stellare aumenta, non diversamente da quanto descritto per il processo di formazione stellare (sezione \ref{contrazione}). Questo effetto è spiegabile ammettendo il principio di conservazione del momento della quantit\`{a} di moto.
+Gli elettroni liberi che ancora si trovano in moto in prossimit\`{a} della superficie della stella (se ancora si può parlare di stella) si trovano in moto a velocit\`{a} lineari praticamente elevatissime, relativistiche, velocit\`{a} rispetto le quali la velocit\`{a} della luce nel vuoto $c$ non è più trascurabile.Come tutte le particelle cariche in moto in un campo magnetico, anche gli elettroni vengono accelerati per effetto della componente magnetica della forza di Lorentz\footnote{Una particella elettricamente carica, di carica elettrica $q$, in moto con velocit\`{a} $\vec{v}$ in un campo magnetico di induzione magnetica $\vec{B}$, subisce una forza $\vec{F}$, detta componente magnetica della forza di Lorentz, data da:
+\begin{displaymath}
+\vec{F}=q \vec{v} \times \vec{B}
+\end{displaymath}
+dove il simbolo $\times$ è usato per indicare il prodotto vettoriale.}.
+A causa del moto accelerato, gli elettroni, in moto a velocit\`{a} relativistiche, emettono radiazione (\emph{radiazione di sincrotrone}) che è funzione della lorocarica e velocit\`{a} (prossima, meglio ripetere, alla velocit\`{a} della luce nel vuoto), nonché dell'intensit\`{a} del campo magnetico.
+Diversamente da un'emissione di tipo termico, generalmente isotropa, l'emissione di sincrotrone risulta emessa lungo direzioni privilegiate, nel nostro caso specifico  lungo uno stretto cono sopra e sotto i poli magnetici (laddove cioè le linee di campo magnetico vanno chiudendosi).
+\par
+Se l'asse del campo magnetico e l'asse di rotazione del corpo stellare sono inclinati l'uno rispetto all'altro, può avvenire che , a ogni rotazione della stella, uno dei due getti di radiazione venga a trovarsi rivolto verso la Terra.
+%\begin{figure}
+%\includegraphics[width=15cm]{evoluzione_stellare0}
+%\caption{Modello Pacini--Gold di pulsar \Cite{dario}.}
+%\end{figure}
+L'energia che gli elettroni irradiano va a spese dell'energia rotazionale del pulsar, che al trascorrere del tempo, diminuir\`{a} la propria velocit\`{a} angolare\footnote{L'energia cinetica rotazionale di un corpo dipende dalla velocit\`{a} angolare $\omega$, in particolare è data dalla relazione $E_{rot}=\frac{1}{2}I\omega^{2}$, con $I$ momento di inerzia del corpo.
+Se $E_{rot}$ diminuisce, se non può variare $I$ ($I$ dipende dalla geometria e dalla massa del corpo), dovr\`{a} diminuire $\omega$.} $\omega$, ovvero allungher\`{a} il proprio periodo \Cite{rosino}.
+\par
+Il lettore non confonda la descrizione sommaria e per certi tratti grossolana che si è data del meccanismo di emissione dei pulsar con una trattazione rigorosa e approfondita del modello Pacini--Gold. Quello che qui si è cercato di fare è dare al lettore un'idea generale di come le stelle di neutroni permettano di spiegare, per via teorica, le propriet\`{a} osservate dei pulsar.
+\par
+Un ulteriore appoggio alla teoria secondo cui i pulsar altro non sono che stelle di neutroni è rappresentato dalla presenza di un pulsar all'interno della Crab Nebula che, come si è detto, è un resto di supernova. Un altro pulsar, la Vela X, fu scoperto nell'omonima costellazione anch'esso associata al resto di una supernova.
+
+%************************************************
+\chapter{Oggetti estremi}\label{buchi neri}
+\minitoc\mtcskip
+%************************************************
+Nel caso di masse in gioco maggiori di 3--4 masse solari, fino a pochi anni fa si riteneva che ormai nulla potesse impedire il collasso gravitazionale del nocciolo residuo dell'esplosione della supernova; la contrazione sarebbe proseguita fino a che tutta la massa sarebbe rimasta concentrata in un punto di dimensione nulla, originando quello che il fisico americano John A. Wheeler ha chiamato \emph{buco nero}.
+Oggi si è propensi a considerare l'ipotesi che, tra la stella di neutroni e il buco nero esista in realt\`{a} un ulteriore caso intermedio, rappresentato dalle \emph{stelle di plasma di quark e gluoni}.
+Questa ipotesi pare confermata dalla recente osservazione, da parte dell'osservatorio orbitante per raggi X Chandra, di due oggetti, RXJ--1856 e 3C--58, di dimensioni pari a poco più di una decina di kilometri \Cite{regge}.
+\par
+In particolare l'oggetto RXJ--1856, un residuo di supernova distante 400 anni luce da noi, è stato studiato da Jeremy Drake, dell'Harvard Smithsonian Center di New York. I risultati dell'indagine forniscono per l'oggetto un diametro stimato pari ad 11 km circa, una temperatura inferiore al milione di kelvin e una luminosit\`{a} particolarmente elevata nella banda X \Cite{cardone}; tali propriet\`{a} sono interpretabili ammettendo che esso, e lo stesso dicasi per 3C--58, sia costituito da quark liberi originatisi dalla scissione dei neutroni durante la fase di collasso gravitazionale.
+Maggiori dettagli sul plasma di quark e gluoni, i tentativi di produrlo in laboratorio e il deconfinamento dei quark (violazione della libert\`{a} asintotica) che questo esotico stato della materia comporta sono reperibili in \Cite{antinori}.
+\par
+In una ipotetica scala degli oggetti stellari più densi, le stelle di plasma di quark e gluoni si pongono immediatamente dopo le stelle di neutroni, delle quali sarebbero circa 2 o 3 volte più dense \Cite{cardone}, e i buchi neri.
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=15cm]{surf1}
+%\end{center}
+%\caption{Due oggetti forse appartenenti alla categoria delle stelle di plasma di quark e gluoni: RXJ--1856 (a sinistra) e 3C--58 (a destra) \Cite{cardone}.}
+%\end{figure}
+\setlength{\unitlength}{1mm}
+\begin{figure}[!b]
+\begin{center}
+\begin{picture}(120,190)%(10,20)
+%\put(0,0){\framebox(120,170)[cc]{}}
+\put(45,160){\framebox(30,08)[cc]{Globuli di Bok}}
+\put(60,160){\line(0,-1){15}}
+\put(60,150){\line(-1,0){45}}
+\put(62,145){\makebox(50,15)[lc]{\shortstack[l]{\footnotesize Contrazione gravitazionale \\ \footnotesize Aumento temperatura}}}
+\put(15,152){\makebox(45,06)[cb]{$\scriptstyle M<0.07 M_{\odot}$}}
+\put(15,150){\line(0,-1){5}}
+\put(03,137){\framebox(24,08)[cc]{Nane brune}}
+%(50,16)[lc]{Contrazione gravitazionale \par Aumento temperatura}}
+\put(33,141){\makebox(54,5)[cb]{\footnotesize{Innesco fusione $H$}}}
+%89=87+2di margine
+\put(80,141){\makebox(20,5)[lb]{$T>10^{7} K$ }}
+%\put(94,140){\circle{10}}
+\put(60,140){\line(0,-1){5}}
+\put(30,123){\framebox(60,12)[cc]{\shortstack[c]{Stelle di sequenza principale\\ \small (stabilit\`a)}}}
+\put(60,123){\line(0,-1){6}}
+\put(46,107){\makebox(28,10)[cc]{\shortstack[c]{\footnotesize L'idrogeno va \\ \footnotesize esaurendosi}}}
+\put(60,107){\line(0,-1){13}}
+\put(20,099){\vector(0,-1){5}}
+\put(60,099){\line(-1,0){40}}
+\put(20,101){\makebox(40,06)[cb]{$\scriptstyle M<0.5 M_{\odot}$}}
+\put(05,086){\framebox(30,08)[cc]{Nane bianche}}
+\put(40,084){\makebox(40,10)[cc]{\shortstack{\footnotesize{Innesco fusione $He$} \\ \footnotesize{(tripla--$\alpha$)}}}}
+\put(80,085){\makebox(20,10)[lc]{$T>10^{8} K$ }}
+\put(60,084){\line(0,-1){3}}
+\put(45,070){\framebox(30,11)[cc]{\shortstack[c]{Giganti rosse\\ \small (stabilit\`a)}}}
+\put(60,070){\line(0,-1){3}}
+\put(42,062){\makebox(36,05)[cc]{\footnotesize L'elio va esaurendosi}}
+\put(60,062){\line(0,-1){4}}
+\put(60,058){\line(-1,0){40}}
+\put(60,058){\line(1,0){40}}
+\put(20,058){\line(0,-1){5}}
+\put(100,058){\line(0,-1){5}}
+\put(20,59){\makebox(22,5)[cb]{$\scriptstyle M<8M_{\odot}$}}
+\put(78,59){\makebox(22,5)[cb]{$\scriptstyle M>8M_{\odot}$}}
+\put(5,48){\makebox(30,5)[cc]{\footnotesize No fusione carbonio}}
+\put(20,48){\vector(0,-1){5}}
+\put(5,35){\framebox(30,8)[cc]{Nane bianche}}
+\put(85,48){\makebox(30,5)[cc]{\footnotesize Fusione carbonio}}
+\put(100,48){\line(0,-1){3}}
+\put(85,40){\makebox(30,5)[cc]{\footnotesize [\ldots]}} 
+\put(100,40){\line(0,-1){3}}
+\put(85,32){\makebox(30,5)[cc]{\footnotesize Fusione $Fe$}} 
+\put(100,32){\line(0,-1){4}}
+\put(85,20){\framebox(30,8)[cc]{Supernovae}}
+\put(100,20){\line(0,-1){3}}
+\put(85,12){\makebox(30,5)[cc]{\footnotesize Strati esterni}} 
+\put(100,12){\vector(0,-1){3}}
+\put(82,02){\framebox(36,7)[cc]{Nebulosa residuale}}
+\put(85,24){\line(-1,0){5}}
+\put(66,20){\makebox(14,8)[cc]{\footnotesize nocciolo}}
+\put(66,24){\line(-1,0){54}}
+\put(12,24){\line(0,-1){3}}
+\put(02,16){\makebox(20,5)[cc]{$\scriptstyle M_{n}<1.4 M_{\odot}$}}
+\put(12,16){\vector(0,-1){4}}
+\put(4,02){\framebox(16,10)[cc]{\shortstack[c]{Nane\\bianche}}}
+\put(36,24){\line(0,-1){3}}
+\put(22,16){\makebox(28,5)[cc]{$\scriptstyle 1.4M_{\odot}<M_{n}<3 M_{\odot}$}}
+\put(36,16){\vector(0,-1){4}}
+\put(28,02){\framebox(15,10)[cc]{\shortstack[c]{Stelle di\\neutroni}}}
+\put(60,24){\line(0,-1){3}}
+\put(50,16){\makebox(20,5)[cc]{$\scriptstyle M_{n}\gg 3 M_{\odot}$}}
+\put(60,16){\vector(0,-1){4}}
+\put(52,02){\framebox(16,10)[cc]{\shortstack[c]{Buchi\\neri}}}
+\put(57,24){\line(0,1){3}}
+\put(47,27){\makebox(24,5)[cc]{$\scriptstyle M_{n}\gtrsim 3 M_{\odot}$}}
+\put(57,32){\vector(0,1){3}}
+\put(43,35){\framebox(28,10)[cc]{\shortstack[c]{Stelle di plasma\\quark e gluoni}}}
+\end{picture}
+\end{center}
+\caption{Schema generale}
+\end{figure}
+Per masse in gioco molto maggiori, il nocciolo in fase di contrazione non potr\`{a} stabilizzarsi neppure nello stadio di stella di quark. In questo caso, come preannunciato all'inizio della sezione, il collasso gravitazionale è inarrestabile, e prosegue fino a che tutta la massa del corpo stellare risulta compressa in un solo punto. Si forma un buco nero. Un buco nero è una regione chiusa di spazio--tempo dalla quale nessun segnale o informazione può evadere verso un ipotetico osservatore esterno causa l'intensit\`{a} elevatissima del campo gravitazionale presente \Cite{hawking}.
+Buchi neri possano formarsi in circostante diverse: buchi neri primordiali possono essersi formati laddove erano casualmente presenti concentrazioni di materiale cosmico particolarmente dense \Cite{hawking}; secondo alcune teorie recenti pare che buchi neri possano formarsi quotidianamente per impatto dei raggi cosmici con le particelle che compongono gli strati alti dell'atmosfera terrestre; inoltre non è da escludere che gi\`{a} con la prossima generazione di acceleratori di particelle sia possibile produrre buchi neri artificiali in laboratorio \Cite{carr}. Anche una stella molto massiccia termina la sua vita come buco nero.
+\appendix
+\chapter{Introduzione alla fisica del corpo nero}\label{app:cnero}
+In questa Appendice vengono richiamati alcuni importatanti risultati inerenti la fisica del corpo nero. 
+\par
+Ogni corpo portato a temperatura assoluta superiore agli $0$ K emette energia sotto forma di radiazione elettromagnetica.
+Conviene, in questa sede, considerare questa affermazione alla stregua di un fatto sperimentale, senza entrare nei dettagli teorici che ne permettono una giustificazione in qualche misura adeguata. 
+A questa modalit\`a di emissione di energia in forma di radiazione ekettromagnetica si da il nome di \emph{irraggiamento}.
+\par
+Un qualunque corpo pu\`o anche assorbire una parte dell'energia trasportata da eventuale radiazione elettromagnetica che incide la sua superficie.
+In generale, diremo che un qualunque corpo \`e in grado di scambiare energia sotto forma di radiazione elettromagnetica.
+
+
+\chapter{Prospettive recenti al problema dei neutrini solari}\label{app:neutrini}
+
+
+\chapter{Teorema del viriale}\label{app:viriale}
+
+
+\chapter{Cenni sulla teoria quantistica dei buchi neri}\label{app:buchi neri}
+L'esistenza di regioni di spazio-tempo \emph{dalle} quali \`e preclusa la trasmissione di ogni genere di segnale o informazione verso un possibile osservatore esterno \`e una conseguenza deducibile nell'ambito di una teoria classica della gravitazione ed in ultima analisi essa pu\`o essere fatta  discendere dall'essere l'interazione gravitazionale sempre attrattiva, perlomeno in situazioni ordinarie.
+Per designare siffatte regioni di universo, inacessibili all'osservazione, il fisico americano John A. Wheeler ha coniato, nell'autunno del 1967, il termine, all'epoca quanto mai appropriato, di \emph{buco nero}.
+\par
+Modelli di buchi neri, messi a punto nell'ultimo trentennio tenendo conto di taluni effetti di natura genuinamente quantistica, paiono tuttavia suggerire l'eventualit\`a che lo scenario classico poc'anzi tratteggiato possa non essere considerato del tutto corretto.
+Già nel 1974 Stephen Hawking, compiendo un'analisi del comportamento della materia in prossimit\`a di un buco nero alla luce di certe considerazioni derivabili nell'ambito delle teorie quantistiche dei campi, dedusse per via teorica come i buchi neri vadano incontro ad emissione termica.
+%Sviluppi sotto il profilo teorico si sono avuti recentemente mediante un approccio basato sulla teoria delle stringhe e paiono confermare i risultati dedotti da Hawking.
+\par
+Per ragioni che saranno meglio analizzate nel seguito, una verifica operativa del fatto che i buchi neri siano soggetti ad irragiamento cade oltre le effettive possibilit\`a di sperimentazione, e pertanto l'ipotesi che i buchi neri emettano non \`e, almeno attualmente, suscettibile di alcuna conferma empirica diretta.
+La discussione in merito, che ad oggi non ha conosciuto una risposta in ogni modo definitiva, si inserisce nel quadro pi\`u ampio dell'elaborazione di una teoria coerente della gravitazione su scala quantistica capace di risolvere l'incompatibilità tra due delle massime formulazioni teoriche del Novecento: la meccanica quantistica e la teoria generale della relativit\`a.
+Una simile impresa, lungi dall'essere stata condotta a termine con successo, rappresenta quasi certamente una delle frontiere pi\`u ambite della fisica di questo secolo.
+\section{Soluzione di Schwarzschild delle equazioni di campo}
+Argomenti a sostegno della tesi circa la presenza nell'Universo di regioni dalle quali neanche i segnali luminosi possono evadere, confinati indefinitamente entro le medesime dagli intensi campi gravitazionali in gioco, possono in qualche modo farsi risalire, nell'ambito della legge newtoniana di gravitazione universale, ai lavori pioneristici che John Mitchell (1724-1793) e Pierre Simon de Laplace (1749-1827) diedero alla luce sul finire del Settecento.
+\par
+\`E tuttavia solo con l'elaborazione, ad opera di Albert Einstein nel 1915, di una teoria generalizzata della gravitazione (la cosiddetta relativit\`a generale), atta a descrivere in maniera precisa, e per quanto se ne sa, fondamentalmente corretta la propagazione della radiazione elettromagnetica in regimi a gravit\`a forte, che si ebbero a disposizione gli strumenti teorici e un apparato matematico necesari ad una accurata analisi dei buchi neri.
+A pochi mesi dall'originario lavoro di Einstein sulla relativit\`a generale, l'astronomo Karl Schwarzchild per primo ricav\`o una soluzione delle equazioni di campo della nuova teoria (le cosiddette equazioni di Einstein), soluzione che è da considerarsi
+
+
+\section{La radiazione di Hawking}
+
+
+
+
+
+%******************************************************************
+% Bibliography
+%*******************************************************
+\printbibliography
+\clearpage
+%*******************************************************
+% Index
+%*******************************************************
+\manualmark
+\markboth{\spacedlowsmallcaps{\indexname}}{\spacedlowsmallcaps{\indexname}}
+\phantomsection
+\begingroup 
+    \let\clearpage\relax
+    \let\cleardoublepage\relax
+    \let\cleardoublepage\relax
+\pagestyle{scrheadings} 
+\addcontentsline{toc}{chapter}{\tocEntry{\indexname}}
+\printindex
+\endgroup 
+\end{document}

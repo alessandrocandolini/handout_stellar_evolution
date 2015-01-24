@@ -1,0 +1,433 @@
+
+% ********************************************************************
+% General commands
+% ******************************************************************** 
+% un ambiente ad hoc per le citazioni
+\newenvironment{citazione}%
+  {\begin{quotation}\small\ignorespaces}%
+  {\end{quotation}}
+
+% [...] ;-)
+\newcommand{\omissis}{[\dots\negthinspace]}
+
+% indica a LaTeX la cartella dove sono riposte le immagini
+\graphicspath{{./},{./Asymptote/}, {./Images/}, {./Metapost/}}
+
+% eccezioni all'algoritmo di sillabazione
+\hyphenation{Fortran ma-cro-istru-zio-ne nitro-idrossil-amminico}
+
+
+% un ambiente ad hoc per gli approfondimenti
+\newenvironment{approfondimento}%
+  {\begin{quotation}\small\ignorespaces}%
+  {\end{quotation}}
+
+% i.e.
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.} 
+
+% th
+\newcommand{\ordth}{\textsuperscript{th}}
+
+
+% ********************************************************************
+% hyperref
+% ******************************************************************** 
+\hypersetup{%
+    colorlinks=true, linktocpage=true, pdfstartpage=1, pdfstartview=FitV,%
+    breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+    plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+    hypertexnames=true, pdfhighlight=/O,%
+    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=RoyalBlue, pagecolor=RoyalBlue,%
+% uncomment the following line if you want to have black links (e.g., for printing)
+% urlcolor=Black, linkcolor=Black, citecolor=Black, pagecolor=Black,%
+    pdftitle={\myTitle},%
+    pdfauthor={\textcopyright\ \myName},%
+    pdfsubject={},%
+    pdfkeywords={},%
+    pdfcreator={pdfLaTeX},%
+    pdfproducer={LaTeX con hyperref e ClassicThesis}%
+}
+
+\hypersetup{citecolor=webgreen}
+\hypersetup{hyperfootnotes=false,pdfpagelabels}
+
+\newcommand{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+
+% *****************************************************************************
+% Matematica 
+% *****************************************************************************
+
+% AMSmath packages 
+\usepackage{amssymb}
+%\usepackage{amsmath}
+
+% comandi per gli insiemi numerici (serve il pacchetto amssymb)
+\newcommand{\numberset}{\mathbb} 
+\newcommand{\N}{\numberset{N}} 
+\newcommand{\Z}{\numberset{Z}} 
+\newcommand{\Q}{\numberset{Q}} 
+\newcommand{\R}{\numberset{R}} 
+%\newcommand{\C}{\numberset{C}} 
+
+% Dirac notation  (serve il pacchetto braket)
+\usepackage{braket} 
+\newcommand{\modul}[1]{\mathinner{\vert#1\vert}} 
+\newcommand{\Modul}[1]{\left\vert#1\right\vert} 
+\newcommand{\norm}[1]{\mathinner{\Vert#1\Vert}}
+\newcommand{\Norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\conj}[1]{#1^{*}} 
+\newcommand{\adj}[1]{#1^{\dagger}}
+
+% un ambiente per i sistemi
+\newenvironment{sistema}%
+  {\left\lbrace\begin{array}{@{}l@{}}}%
+  {\end{array}\right.}
+
+% pacchetto cool 
+\usepackage{cool}
+\makeatletter
+\Style{%
+ArcTrig=arc,
+IntegrateDifferentialDSymb={{\operator@font d}},
+DSymb={{\operator@font d}},
+DDisplayFunc=inset,DShorten=true}
+\makeatother
+
+% vectors (boldface style, primes are printed also in boldface)
+%\usepackage[veceuler]{utvec}
+\makeatletter
+\def\ud{%
+  \@ifnextchar[{\p@ud}{\np@ud}
+}
+\def\p@ud[#1]#2{%
+\mathop{\kern\z@\operator@font d}%
+  \csname nolimits@\endcsname^{#1}\!#2}
+
+\def\np@ud#1{%
+\mathop{\kern\z@\operator@font d}%
+  \csname nolimits@\endcsname\!#1}
+
+\def\udiff{%
+  \@ifnextchar[{\p@udiff}{\np@udiff}
+}
+\def\p@udiff[#1]#2{%
+\mathinner{\ud[#1]{#2}}}
+\def\np@udiff#1{%
+\mathinner{\ud{#1}}}
+
+\def\uexp{
+\mathop{\kern\z@\operator@font e}\nolimits}
+%\newcommand{\udiffo}[2][\empty]{\mathinner{%
+%  \mathop{\operator@font d\vphantom{exp}}\nolimits^{#1}\!#2}}
+\newcommand{\deriv}[3][\empty]{%
+    \frac{\ud[#1]{#2}}{\ud[\vphantom{#1}]{#3^{#1}}}}
+ \makeatother
+
+
+\usepackage[framemethod=tikz]{mdframed}
+
+\MakeRobust\vec
+
+
+
+% *****************************************************************************
+% Teoremi e definizioni 
+% *****************************************************************************
+
+\usepackage{amsthm}                       % Serve il pacchetto amsthm.
+
+\makeatletter
+\newtheoremstyle{classicdef}%             % Stile tipografico dei teoremi
+{11pt}%                                   % Spazio che precede l'enunciato
+{11pt}%                                   % Spazio che segue l'enunciato
+{}%                                       % Stile del font dell'enunciato
+{}%                                       % Rientro (se vuoto, nessun rientro;
+%                                         % \parindent = rientro dei capoversi)
+{\scshape}%                               % Font dell'intestazione
+{:}%                                      % Punteggiatura dopo l'intestazione
+{.5em}%                                   % Spazio che segue l'intestazione:
+%                                         % " " = normale spazio inter-parola;
+%                                         % \newline = a capo
+{}%                                       % Specifica intestazione enunciato
+\makeatother
+
+%\theoremstyle{definition}
+\theoremstyle{classicdef}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{definition}{Definizione}[chapter]
+\newtheorem*{homework}{Homework}
+\theoremstyle{remark}
+\newtheorem*{remark}{Nota}
+\renewcommand{\qedsymbol}{\rule{.5em}{.5em}}
+
+% *****************************************************************************
+% Exercise environment 
+% *****************************************************************************
+
+
+\pgfdeclarehorizontalshading{exercisebackground}{100bp}
+{color(0bp)=(blue!20);
+color(100bp)=(orange!20)}
+
+\pgfdeclarehorizontalshading{exercisetitle}{100bp}
+{color(0bp)=(red!70);
+color(100bp)=(black!5)}
+
+  \mdfdefinestyle{theoremstyle}{%
+     linecolor=red,linewidth=2pt,%
+     frametitlerule=true,%
+ %    apptotikzsetting={\tikzset{mdfframetitlebackground/.append style={%
+  %                       shade,left color=white, right color=blue!20}}},
+   %  frametitlerulecolor=green!60,
+   %  frametitlerulewidth=1pt,
+  %   innertopmargin=\topskip,
+  frametitlefont=\scshape,%
+   }
+%\mdtheorem[style=exercisestyle]{Exercise}{Esercizio}
+%\mdtheorem[style=theoremstyle]{Exercise}{Esercizio}
+
+\providecommand{\problemname}{Problem}
+\newcounter{problem}[chapter]
+\setcounter{problem}{0}
+\makeatletter
+ \renewcommand{\theproblem}{%
+\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@problem
+}
+
+\def\Exercise{%
+  \addtocounter{problem}{1}
+  \begin{mdframed}[backgroundcolor=lightgray!40, roundcorner=5pt, 
+skipabove=12pt,skipbelow=12pt, 
+%tikzsetting={shading=exercisebackground}
+]
+  \@ifnextchar [%
+      {\@myprobt}%
+      {\@myprob}%
+}
+
+\def\@myprobt[#1]{%
+%\trivlist\item[\hskip\labelsep{\bfseries\problemname~\theproblem~(#1).}]}
+\textcolor{orange}{\textsc\problemname~\theproblem (#1).}
+}
+
+\def\@myprob{%
+%\trivlist\item[\hskip\labelsep{\bfseries\problemname\ \theproblem.}]
+\textcolor{orange}{\textsc\problemname~\theproblem.}
+}
+
+\def\endExercise{\end{mdframed}}
+
+\makeatother
+
+
+
+% ********************************************************************
+% Frontespizio
+% ******************************************************************** 
+\usepackage[suftesi,noadvisor]{frontespizio}         % frontespizo
+
+
+
+\newtheorem*{Solution}{Soluzione}%todo
+
+%\newtheorem{Exercise}{Esercizio}
+
+% *****************************************************************************
+% biblatex 
+% *****************************************************************************
+
+\renewcommand{\nameyeardelim}{, }
+
+\defbibheading{bibliography}{%
+\cleardoublepage
+\manualmark
+\phantomsection
+%\addcontentsline{toc}{chapter}{\numberline{}\tocEntry{\bibname}}
+\mtcaddchapter[\numberline{}\tocEntry{\bibname}]
+\myChapter*{\bibname\markboth{\spacedlowsmallcaps{\bibname}}
+{\spacedlowsmallcaps{\bibname}}}}     
+
+% *****************************************************************************
+% caption
+% *****************************************************************************
+\usepackage{caption}                      % Fancy captions and more.
+\captionsetup{format=hang,font=small}
+\captionsetup[table]{skip=\medskipamount} 
+
+
+% *****************************************************************************
+% makeidx, multicol
+% *****************************************************************************
+\let\orgtheindex\theindex
+\let\orgendtheindex\endtheindex
+\def\theindex{%
+	\def\twocolumn{\begin{multicols}{2}}%
+	\def\onecolumn{}%
+	\clearpage
+	\orgtheindex
+}
+\def\endtheindex{%
+	\end{multicols}%
+	\orgendtheindex
+}
+
+\makeindex
+
+% *****************************************************************************
+% breqn
+% *****************************************************************************
+\usepackage{mathtools}                    % Add support for cramped,
+					  % mathlap,etc.
+					  
+\usepackage{siunitx}                      % Add support to print SI units
+\usepackage[euler]{flexisym}              % Add support to Euler font
+\usepackage{breqn}                        % Breqn
+
+\makeatletter
+   \def\eqnumsize{\normalfont \Tf@font}      % Add support to Minion Pro
+\makeatother
+
+\setkeys{breqn}{labelprefix={eq:}}
+
+
+% *****************************************************************************
+% Migliorare il kerning dell'apostrofo coi font MinionPro
+% *****************************************************************************
+\makeatletter 
+\catcode`\'=12 
+\def\qu@te{'} 
+\catcode`'=\active 
+\begingroup 
+\obeylines\obeyspaces% 
+\gdef\@resetactivechars{% 
+\def^^M{\@activechar@info{EOL}\space}% 
+\def {\@activechar@info{space}\space}% 
+}% 
+\endgroup 
+\providecommand{\texorpdfstring}{\@firstoftwo} 
+\protected\def'{\texorpdfstring{\active@quote}{\qu@te}} 
+\def\active@quote{\relax 
+  \ifmmode 
+    \expandafter^\expandafter\bgroup\expandafter\prim@s 
+  \else 
+    \expandafter\futurelet\expandafter\@let@token\expandafter\qu@t@ 
+  \fi} 
+\def\qu@t@{% 
+  \ifx'\@let@token 
+    \qu@te\qu@te\expandafter\@gobble 
+  \else 
+    {}\qu@te{}\penalty\@M\hskip\expandafter\z@skip 
+  \fi} 
+\scantokens\expandafter{% 
+  \expandafter\def\expandafter\pr@m@s\expandafter{\pr@m@s}} 
+\makeatother
+
+
+%%%%%%%%%%%
+% margini %
+% %%%%%%%%%%
+% Suggestions from ClassicThesis
+% Palatino 	10pt: 288--312pt | 609--657pt
+% Palatino 	11pt: 312--336pt | 657--705pt
+% Palatino 	12pt: 360--384pt | 768pt
+
+\areaset[current]{336pt}{750pt}
+\setlength{\marginparwidth}{7em}
+\setlength{\marginparsep}{2em}%
+
+
+%%%%%%%%%
+% altro %
+%%%%%%%%%
+
+\hypersetup{citecolor=webgreen}
+\hypersetup{pdfstartpage=1}
+
+\newcommand{\cinterval}[2]{\mathinner{\left[#1,#2\right]}}
+\newcommand{\ointerval}[2]{\mathinner{]#1,#2[}}
+
+%\usepackage{mdframed}
+\usepackage{nicefrac}
+\usepackage{calligra}
+
+\begin{asydef}
+defaultpen(fontsize(10pt));
+texpreamble("\usepackage[noopticals,onlytext]{MinionPro}");
+texpreamble("\usepackage[small]{eulervm}");
+texpreamble("\usepackage{nicefrac}");
+texpreamble("\usepackage{cool}");
+\end{asydef}
+
+\makeatletter
+\newcommand{\COOL@notation@ExpBaseESymb}{exp}% 'ln', 'log'
+\newcommand{\COOL@notation@ExpShowBase}{at will}% 'at will', 'always'
+\renewcommand{\Exp}[2][\E]
+{%
+\ifthenelse{ \equal{\COOL@notation@ExpShowBase}{at will} }%
+{%
+\ifthenelse{ \equal{#1}{\E} }%
+{%
+\ifthenelse{ \equal{\COOL@notation@ExpBaseESymb}{exp} }%
+{%
+\exp \COOL@decide@paren{Exp}{#2}%
+}%
+{%
+\ifthenelse{ \equal{\COOL@notation@ExpBaseESymb}{exp} }%
+{%
+\exp \COOL@decide@paren{Exp}{#2}%
+}%
+{%
+\PackageError{cool}{Invalid Option Sent}%
+{ExpBaseESymb can only be `ln' or `log'}%
+}%
+}%
+}%
+{%
+\ifthenelse{ \equal{#1}{10} \AND
+\NOT \equal{\COOL@notation@ExpBaseESymb}{exp}  }%
+{%
+\exp \COOL@decide@paren{Exp}{#2}%
+}%
+{%
+\exp_{#1} \COOL@decide@paren{Exp}{#2}%
+}%
+}%
+}%
+{%
+\ifthenelse{ \equal{\COOL@notation@ExpShowBase}{always} }%
+{%
+\exp_{#1}\COOL@decide@paren{Exp}{#2}%
+}%
+{%
+\PackageError{cool}{Invalid Option Sent}%
+{LogShowBase can only be 'at will' or 'always'}%
+}%
+}%
+}
+
+\makeatother
+
+\usepackage{esdiff}
+
+\newcommand{\df}{}
+
+\makeatletter
+\def\df{\@ifnextchar[{\ES@diffform@i}{\ES@diffform@ii}}
+\def\ES@diffform@i[#1]#2{\mathchoice{%
+\ES@dop\ES@difint#2^{#1}}%
+{\ES@taille{\ES@dop\ES@difint#2^{#1}}}%
+{\scriptstyle{\ES@dop\ES@difint#2^{#1}}}%
+{\scriptstyle{\ES@dop\ES@difint#2^{#1}}}}
+
+\def\ES@diffform@ii#1{\mathchoice%
+{\ES@dop\ES@difint#1}%
+{\ES@taille{\ES@dop\ES@difint#1}}%
+{\scriptstyle{\ES@dop\ES@difint#1}}%
+{\scriptstyle{\ES@dop\ES@difint#1}}}
+
+\makeatother

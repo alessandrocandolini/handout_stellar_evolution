@@ -1,0 +1,328 @@
+
+%*******************************************************
+% Chapter 1
+%*******************************************************
+
+\myChapter{Collasso gravitazionale}\label{nascita}
+\minitoc\mtcskip
+
+
+\noindent Viene enunciato il teorema del viriale per nubi autogravitanti (in
+equilibrio). Il teorema \`e utilizzato per predire, sotto opportune ipotesi
+semplificatrici, la dinamica di una nube autogravitante soggetta a perdita di
+energia per irraggiamento. In particolare, si vedr\`a che, come conseguenza del
+teorema del viriale (in approssimazione di collasso quasi-statico), ogni nube
+autogravitante risponde alla perdita di energia radiante contraendosi e
+aumentando via via la propria temperatura, e \emph{pu\`o} cos\`{\i} diventare
+una stella.  Ci\`o avviene a condizione che si rendano disponibili all'interno
+della nube temperature sufficientemente elevate da consentire l'innesco delle
+reazioni di fusione termonucleare (vedremo che queste reazioni richiedono
+temperature di milioni di kelvin). Quando le reazioni si innescano, esse
+forniscono energia che bilancia \emph{esattamente} la perdita di energia per
+irraggiamento, ci\`o sempre in virt\`u del teorema del viriale. Pu\`o accadere
+(e vedremo che ci\`o \`e connesso alla massa della nube) che il collasso venga
+arrestato prematuramente (cio\`e prima che le temperature siano sufficientemente
+alte per l'avvio delle reazioni di fusione termonucleare) a causa dell'insorgere
+di effetti di natura non termica (nello specifico, effetti quantistici di cui
+parlaremo pi\`u estesamente in un campitolo successivo); in tal caso, la nube
+arresta il proprio collasso prima di essere diventata una stella (si parla di
+nane brune). Alcuni limiti al modello presentato vengono discussi in
+\S~\ref{consideraz}.
+
+\section{Nubi autogravitanti}\label{sec:viriale}
+
+Consideriamo una nube di gas ideale.
+Sia $N$ il numero di particelle che compongono la nube.
+Da un punto di vista microscopico,  un gas ideale  \`e costituito da particelle 
+\begin{itemize}
+   \item \emph{puntiformi};
+(Con ``particella puntiforme'' intendiamo che le sue dimensioni siano
+trascurabili rispetto all'estensione dell'intera nube e che si possa ignorare
+la struttura interna (i gradi di libert\`a interni) di queste particelle.)
+\item Non interagenti reciprocamente (cio\`e
+   ignoreremo nella trattazione le interazioni tra queste particelle);
+\end{itemize}
+
+
+\`E  opportuno fare una precisazione sul significato dell'espressione
+``particelle non nteragenti con forze di natura elettrica''.  Le particelle a
+cui vogliamo fare riferimento quando parliamo di un gas sono atomi o molecole.
+Anche se si tratta di strutture aventi in genere carica elettrica complessiva
+nulla, queste entit\`a sono sempre soggette a interazioni elettriche.  Nella
+nostra analisi sull'evoluzione stellare, dovremmo includere alla lista delle
+particelle anche atomi ionizzati ed elettroni liberi, che sono entit\`a dotate
+di carica elettrica (complessiva nel caso degli ioni) non nulla.  \`E chiaro che
+per ciascuna di queste particelle le interazioni elettriche sono presenti
+eccome! Tanto pi\`u quando ci si trova a parlare di ioni.  Quello che intendiamo
+dire con ``forze di natura elettrica trascurabili'' \`e che mediamente possiamo
+trascurare l'interazione a distanza che ogni particella della nube subisce ad
+opera di tutte le altre particelle della nube.  Non si possono trascurare invece
+le interazioni elettriche negli urti tra queste particelle.  D'altro canto nel
+nostro modello a particelle puntiformi, l'energia \`e conservata (e anche nei
+casi reali, l'ipotesi che gli urti siano elastici \`e soddisfatta con buina
+approssimazione) per cui l'unico effetto degli urti \`e quello di deviare le
+particelle coinvolte dalla loro iniziale traiettoria.
+
+Ci si potrebbe aspettare che una nube quale quella ora descritta, se lasciata libera di espandersi nello spazio vuoto, si espanda indefinitamente.
+Perch\'e?
+Supponiamo che tra le particelle sia distribuito un certo quantitativo di energia cinetica.
+(Come vedremo in \sectionname~\ref{aumentot}, questo \`e sicuramente vero a patto che la nube, come peraltro \`e realistico attendersi, si trovi a una temperatura assoluta superiore allo zero kelvin.) 
+Dal momento che nessuna interazione di natura elettrica \`e presente tra le particelle, queste non si influenzeranno a vicenda.
+Non essendo trattenute nel loro moto, al trascorrere del tempo si distribuiranno su regioni di spazio via via di ampiezza maggiore.
+%\footnote{\`E questo, in ultima analisi, lo stesso tipo di  ragionamento alla base della tradizionale considerazione secondo cui un gas (ideale) non ha n\`e forma n\`e volume propri.}
+\par
+In  realt\`a pu\`o succedere che la nube rimanga comunque contenuta indefinitamente entro un volume finito per effetto della mutua attrazione gravitazionale tra le particelle che la compongono.
+Per quanto esotico possa apparire questo fenomeno, si ritiene oggi che nelle stelle avvenga proprio questo. Una stella \`e una struttura mantenuta assieme dalla forza di gravit\`a tra le sue parti.
+Una nube che rimanga confinata indefinitamente entro una regione finita di spazio per mezzo della sola attrazione gravitazionale che si esercita tra le particelle che la compongono la chiameremo ``nube autogravitante''.
+\par
+Introduciamo, in modo per certi versi informale,  due grandezze fisiche che possono essere utile a specificare le propriet\`a di una nube (non neccessariamente autogravitante). 
+Il Lettore interessato potr\`a comunque reperire le definizioni formali in \appendixname~\ref{app:viriale}.
+\par
+La  prima grandezza \`e l'energia cinetica totale della nube.
+Si tratta della somma algebrica dell'energia cinetica di ciascuna particella della nube.
+Siccome le particelle della nube sono per ipotesi puntiformi, non hanno quindi estensione n\'e struttura interna, non possono ruotare attorno a qualche loro asse, e peranto l'energia cinetica di ogni singola particella puntiforme della nube coincide con l'energia cinetica associata al solo moto di traslazione di tale particella. 
+Nel seguito, indicheremo l'energia cinetica totale con $\ec$.
+Sar\`a utile ricordare che, essendo per definizione l'energia cinetica di ogni particella una quantit\`a positiva, anche l'energia cinetica totale della nube sar\`a positiva.
+\par
+La seconda quantit\`a di cui avremmo bisogno nel  seguito \`e la cosiddetta ``energia potenziale gravitazionale propria'' della nube. (Talvolta l'aggettivo ``propria'' viene tralasciato, e anche noi spesso ci adegueremo  per brevit\`a a questa usanza.)
+Nel seguito, indicheremo l'energia potenziale gravitazionale propria con $\ug$. 
+Sar\`a utile ricordare che, essendo la forza di attrazione gravitazionale sempre attrattiva, l'energia potenziale gravitazionale di una nube ha sempre valore numerico negativo.
+\par
+Siamo pronti per enunciare il seguente importantissimo risultato, valido per nubi autogravitanti in quasi equilibrio.
+\begin{theorem}[del viriale]
+Per una nube autogravitante sussiste la relazione
+\begin{equation} \label{viriale}
+\media{\ec} = - \frac{1}{2} \media{\ug} \eqspace ,
+\end{equation}
+dove le parentesi ad angolo $\media{\cdot}$ indicano che le quantit\`a che vi figurano vanno mediate su periodi di tempo ``ragionevolmente'' lunghi.
+\end{theorem}
+\par
+Il Lettore pu\`o trovare una dimostrazione di questo teorema basata su semplici considerazioni di meccanica newtoniana in ~\appendixname~\ref{app:viriale}. 
+Nella stessa appendice, si pu\`o reperire anche maggiori dettagli su come debba intendersi l'espressione ``tempi ragionevolmente lunghi''.
+\par
+Conviene introdurre un'ulteriore grandezza che possiamo associare alla nostra nube, l'energia totale $\etot$, definita come la somma dell'energia cinetica $\ec$ e dell'energia potenziale gravitazionale propria  $\ug$:
+\begin{equation}\label{Ene}
+E=\ec + \ug \eqspace .
+\end{equation}
+Siccome le uniche forze agenti sulle particelle della nube sono le forze gravitazionali di mutua interazione, che sono forze conservative, l'energia totale cos\`{\i} definita si conserva.
+\par
+Vedremo  adesso che il teorema del viriale pu\`o essere utilizzato come strumento per caratterizzare una nube autogravitante uan volta che sia noto il valore dell'energia totale $\etot$ a un qualche istante di tempo. (Siccome l'energia totale si conserva nel nostro caso, non \`e particolarmente rilevante a che istante si riferisca il valore $\etot$.)
+Si hanno due casi:
+\begin{enumerate}
+\item\label{e>0}
+se $\etot>0$, la nube (o almeno parte di essa) si espande indefinitamente;
+\item\label{e<0}
+   se $\etot<0$, la nube \emph{non} pu\`{o} espandersi indefinitamente, \ie, \`e autogravitante.
+\end{enumerate}
+Cerchiamo di spiegarne la ragione.
+Cominciamo dal caso~\ref{e>0}.
+Supponiamo per assurdo che, per $\etot>0$, la nuvola \emph{non} si espanda indefinitamente, ma rimanga confinata in un volume finito.
+Allora sarebbe possibile applicare il teorema del viriale.
+Possiamo riscrivere la \eqname~\eqref{viriale} nella forma $\media{\ug} = -2 \media{\ec}$, da cui
+\begin{equation}\label{Eec}
+\media{\etot} = \media{\ec+\ug} = \media{\ec}+\media{\ug} = \media{\ec}-2\media{\ec}  = - \media{\ec} \eqspace .
+\end{equation}
+Si \`e gi\`a osservato  che, per come definita, l'energia cinetica \`e una grandezza sempre positiva; dalla \eqname~\eqref{Eec} si conclude allora che $\media{\etot}<0$. Ma per la conservazione dell'energia, l'energia totale \`e costante, \ie, $\media{\etot}=\etot$, da cui si conclude che  $\etot <0$ contro l'ipotesi iniziale che $\etot>0$.
+\par
+Veniamo adesso al caso~\ref{e<0}.
+Procediamo per assurdo come nel caso precedente e supponiamo che, per $\etot<0$, la nuvola invece si espanda indefinitamente.
+Ciascuna particella finir\`{a} cio\`e per trovarsi a distanza infinita dalle altre.
+Quando ci\`o avviene, l'energia potenziale gravitazionale propria finale $\ug$ \`e nulla per definizione, tutta l'energia \`e cinetica (quindi positiva) e l'energia totale del sistema \`e dunque positiva contro l'ipotesi iniziale che $\etot<0$.
+\section{Effetti della perdita di energia}\label{perdita}
+Si dimostrer\`{a} di seguito che ogni nube per cui $E<0$ non solo, come gi\`{a} mostrato alla sezione precedente, rimane contenuta entro un volume finito, ma tende a contrarsi su s\`e stessa aumentando la propria temperatura.
+Come approfondiremo meglio nella prossima sezione, questi risultati suggeriscono automaticamente  un meccanismo plausibile per spiegare come si formino le stelle. 
+\subsection{Aumento della temperatura}\label{aumentot}
+Nella nostra indagine supporremo di poter ritenere valido il teorema di equipartizione dell'energia,
+da cui si ricava che la temperatura assoluta $T$ di un sistema di $N$ particelle
+\emph{puntiformi} in equilibrio termico \`e legata al valore dell'energia cinetica media $\langle E_{c} \rangle$ totale delle $N$ particelle dalla relazione
+\begin{equation}\label{equip}
+\langle E_{c} \rangle = \frac{3}{2} NkT
+\end{equation}
+dove $k$ \`e la costante di Boltzmann, pari a \SI{1.38E-23}{\joule\per\kelvin}.
+\par
+Si \`{e} gi\`{a} visto che $E=\langle E \rangle = \langle E_{c} \rangle + \langle U_{g} \rangle = - \langle E_{c} \rangle$ come conseguenza del teorema del viriale ai numeri (\ref{Eec}) e (\ref{Ee}). Tenendo conto della relazione (\ref{equip}) si ha quindi:
+\begin{equation}\label{Eequip}
+E = \langle E \rangle = - \langle E_{c} \rangle  = - \frac{3}{2}  NkT
+\end{equation}
+da cui infine ricavando la temperatura assoluta $T$ si ha:
+\begin{equation}\label{Temp}
+T = \frac{2}{3} \cdot \frac{\langle E_{c} \rangle }{Nk} = -\frac{2}{3} \cdot \frac{ \langle E \rangle }{Nk} = -\frac{2}{3} \cdot \frac{E}{Nk}
+\end{equation}
+La nube assume facilmente temperature superiori, in qualche misura, alla temperatura dello spazio esterno, che, all'epoca attuale, \`{e} pari a circa 2.7 kelvin (radiazione del fondo cosmico). Per il principio zero della termodinamica, la nube tender\`{a} a irradiare energia nello spazio, in forma di onde elettromagnetiche, al fine di ricercare una condizione di equilibrio termico con lo spazio esterno.
+Indichiamo con $\Delta E$ la quantit\`{a} di energia irradiata dalla nube nello spazio circostante. $\Delta E$ rappresenta cio\`{e} la frazione di energia tatale che la nube \emph{perde} nel tentativo di stabilire una relazione di equilibrio termico con l'ambiente esterno pi\`{u} freddo. La variazione $\Delta T$ di temperatura corrispondente alla perdita di energia $\Delta E$  \`{e} pari, secondo la relazione (\ref{Temp}), a:
+\begin{equation}\label{DeltaT}
+\Delta T = -\frac{2}{3} \cdot \frac{\Delta E}{Nk}
+\end{equation}
+Ripercorriamo brevemente a parole quanto si \`{e} fatto in questi ultimi
+passaggi: abbiamo semplicemente ripreso le equazioni (\ref{Eec}) e (\ref{Ee})
+del capitolo precedente, le abbiamo modificate introducendo l'espressione del
+principio di equipartizione e tutto ci\`o al fine di giungere ad una relazione, la numero (\ref{DeltaT}) appunto, che leghi la variazione di energia $\Delta E$ alla variazione di temperatura $\Delta T$. \par
+Questa equazione ci serve per dire che in generale il segno di $\Delta E$ sar\`{a} opposto al segno di $\Delta T$ (nella relazione (\ref{DeltaT}) compare infatti un segno meno per cui, qualora uno dei due termini della relazione sia negativo, l'altro dovr\`{a} necessariamente essere positivo e viceversa.)
+\par
+Pertanto, se $\Delta E$ \`{e} negativo (la nube \emph{perde} energia sotto forma di radiazione elettromagnetica) allora $\Delta T$ \`{e} positiva.
+Questo significa che, \emph{via via che la nuvola di gas irraggia energia, la sua temperatura deve aumentare.}
+\par
+L'effetto pu\`o apparire sconcertante, ma come si \`{e} visto \`{e} una conseguenza deducibile, neanche troppo difficilmente, dal teorema del viriale: pi\`{u} la nube emette energia pi\`{u} la sua temperatura aumenta, la stella continua ad irraggiare energia e intanto aumenta la propria temperatura e cos\`{\i}{} via.
+La stella perde energia e di conseguenza si scalda. \`E questo il significato profondo della relazione (\ref{DeltaT}).
+Il fatto che la nube si riscaldi \`{e} la prima conseguenza della perdita, da parte della nube stessa, di energia radiante.
+\subsection{Contrazione della nube}\label{contrazione}
+Si vuole ora esaminare un secondo effetto della perdita di energia radiante; si vedr\`{a} che, man mano che la nube rilascia energia nello spazio in forma di onde elettromagnetiche, oltre a scaldarsi subisce pure un effetto di \emph{contrazione}.
+\par
+Anche questa seconda conseguenza \`e deducibile da alcune considerazioni quantitative sul teorema del viriale. Vediamo di capire come.
+Per il teorema del viriale, se l'energia cinetica $E_{c}$ \emph{aumenta} \`{e} necessario che l'energia potenziale $U_{g}$ \emph{diminuisca}.
+Nell'espressione matematica del teorema del viriale compare infatti un segno
+meno; qualora il valore, mediato su un lungo periodo di tempo, di una delle due
+grandezze \emph{aumenti}, il valore dell'altra grandezza dovr\`{a}
+\emph{diminuire} affinch\'e la relazione (\ref{viriale}) continui a mantenersi valida. Un aumento di energia cinetica implica dunque una diminuzione dell'energia potenziale.
+\par
+Se la nube irradia energia, abbiamo visto sopra (sezione \ref{aumentot})che aumenta la temperatura. Se aumenta la temperatura, aumenta l'energia cinetica media (basti ricordare il solito teorema di equipartizione). Ma maggiore energia cinetica significa, come abbiamo visto ora, minore energia potenziale.
+\setlength{\unitlength}{1mm}
+\begin{figure}[tbp]
+\begin{center}
+\begin{picture}(100,60)
+\put(30,50){\framebox(40,08)[cc]{Irraggiamento $\Delta E <0$}}
+\put(50,50){\vector(0,-1){7}}
+\put(35,35){\framebox(30,08)[cc]{$\Delta T >0$}}
+\put(50,35){\vector(0,-1){7}}
+\put(35,20){\framebox(30,08)[cc]{$\Delta \langle E_{c} \rangle  >0$}}
+\put(50,20){\vector(0,-1){7}}
+\put(35,05){\framebox(30,08)[cc]{$\Delta \langle U_{g} \rangle <0$}}
+\end{picture}
+\end{center}
+\caption{Schema}
+\end{figure}
+%\begin{center}
+%IRRAGGIAMENTO $\Rightarrow$ AUMENTO $T$ $\Rightarrow$ AUMENTO $\langle E_{c} \rangle$ $\Rightarrow$ DIMINUZIONE $\langle  U_{g} \rangle$
+%\par
+%\end{center}
+L'energia potenziale gravitazionale propria$U_{g}$ di un sistema \`{e}, per definizione, correlata alla massa ed alla geometria del sistema stesso. 
+Un'espressione matematica per $U_{g}$ nel caso di una sfera omogenea di massa
+$m$ e raggio $r$ \`{e}.
+\begin{equation}\label{epropriag}
+U_{g} = - \frac{3}{5} \cdot \frac{GM^{2}}{r}
+\end{equation}
+dove $G$ \`{e} la costante di gravitazione universale.
+\par
+Il fattore numerico $3/5$ \`{e} riferito al caso particolare di una sfera uniforme. Quello che qui ci interessa \`{e} la dipendenza di $U_{g}$ dall'inverso del raggio.
+\par
+Se $U_{g}$ deve diminuire come si \`{e} detto, \`{e} necessario che $r$ (che nell'espressione sopra compare al denominatore) diminuisca.
+In altri termini, mano a mano che la nube irradia energia, la nuvola diventa sempre pi\`{u} \emph{calda} e si \emph{contrae}. 
+Questa \`{e} una conseguenza del teorema del viriale.
+Il processo di contrazione della nube non \`{e} innescato da alcun meccanismo esterno alla nube stessa.
+\emph{Qualunque} insieme di particelle, per cui inizialmente $E<0$, evolver\`{a} autonomamente in maniera tale da ridurre le proprie dimensioni spaziali e da aumentare la propria temperatura interna; l'evoluzione \`{e} perfettamente descrivibile e prevedibile (come si \`{e} voluto mostrare) mediante l'impiego del teorema del viriale (e, volendo essere rigorosi, nell'ipotesi di applicabilit\`{a} del teorema di equipartizione dell'energia).
+Qualsiasi fattore estraneo alla nube stessa risulta superfluo per rendere ragione del processo di contrazione.
+Le leggi della fisica prevedono che \emph{qualsiasi} nube di gas per cui $E<0$ subisca contrazione gravitazionale e aumenti nel contempo la propria temperatura.
+\par
+Se il meccanismo di contrazione pu\`o essere interamente spiegato alla luce del teorema del viriale, ancora ignote rimangono invece le cause \emph{all'origine della formazione} dei globuli di Bok.
+Il perch\'{e} si formino, all'interno delle nebulose, marcate disomogeneit\`{a} nella distribuzione dei gas e delle polveri rimane ancora oggi oggetto di discussione.
+Secondo una delle ipotesi oggi maggiormente accreditate la condensazione dei materiali della nebulosa e la formazione di strutture globulari sarebbe da imputarsi all'effetto di compressione operato da onde d'urto sprigionate nell'esplosione di vicine supernovae.
+\par
+Quello che preme ancora una volta sottolineare, contro taluni errori in merito alla questione alle volte riportati in una manualistica anche di un certo livello,  \`{e} che l'effetto di compressione prodotto dall'esplosione delle supernovae \emph{non} concorre in alcun modo, o comunque con rilevanza scarsamente significativa, a indurre la contrazione dei globuli di Bok, il cui comportamento \`{e} \emph{interamente} regolato dal teorema del viriale, ma semmai costituisce uno dei principali fattori coinvolti nella formazione di disomogeneit\`{a} in seno alla nebulosa, quali appunto gli stessi globuli di Bok devono essere considerati.
+\subsection{Incremento della velocit\`{a} angolare di rotazione}\label{rotazione}
+A titolo di pura curiosit\`{a} ricordiamo a questo punto come, durante la fase
+di contrazione, la nube inizi a manifestare un sensibile moto di rotazione.
+Ci\`{o}  \`{e} conseguenza del principio di conservazione del momento della quantit\`{a} di moto (o momento angolare).
+Malgrado infatti la velocit\`{a} iniziale di rotazione della nube sia il pi\`{u} delle volte talmente piccola da non essere operativamente misurabile, la contrazione determina un aumento della velocit\`{a} angolare (non diversamente da quanto avviene con una ballerina che avvicina le proprie braccia.)
+\subsection{Sintesi dei principali effetti connessi alla perdita di energia radiante}\label{effetti perdita energia}
+In sintesi la perdita di energia sotto forma di radiazione elettromagnetica determina:
+\begin{itemize}
+\item
+aumento della temperatura interna della nube;
+\item
+contrazione della nube;
+\item
+aumento della velocit\`{a} angolare della nube.
+\end{itemize}
+%\newpage
+\section{Alcune considerazioni sul modello di formazione stellare}\label{consideraz}
+Si \`{e} presentato un modello teorico semplificato che fornisca una qualche spiegazione dei meccanismi di formazione stellare. Prima di procedere oltre, appare lecito interrogarsi sull'attendibilit\`{a} di siffatto modello e sulle prove sperimentali che esso eventualmente vanta a conforto. L'elaborazione di ogni modello fisico richiede inoltre che vengano discusse le idealizzazioni e le approssimazioni che esso inevitabilmente contiene.
+Anche tenendo conto del fatto che il modello precedentemente descritto non vuole
+essere che una grossolana semplificazione della decisamente  pi\`{u} rigorosa e
+dettagliata modellistica esistente al riguardo, non si pu\`{o} prescindere dal fornire alcuni estremi di riferimento che permettano al lettore di formarsi un'idea, per quanto generale, della validit\`{a} dei modelli di formazione stellare.
+\par
+
+\smallskip
+
+Fin qui si \`{e} esposto un modello teorico soddisfacente secondo cui \emph{ogni} nube di gas autogravitante tale per cui $E<0$ (\sectionname~\ref{sec:viriale}) e sufficientemente massiccia\footnote{Come si vedr\`{a} pi\`{u} dettagliatamente alla\ref{Jeans}, si possono verificare delle situazioni in cui la massa in gioco \`{e} inferiore al valore critico di circa $0.07$ masse solari. Al di sotto di questo valore critico si ha l'arresto del collasso gravitazionale (causa l'insorgere di fenomeni quantistici) prima che la temperatura interna della nube raggiunga i valori di innesco delle reazioni nucleari.}, andr\`{a} incontro a collasso gravitazionale, a seguito del quale dar\`{a} poi origine ad una stella. Si \`{e} anche detto, nel paragrafo introduttivo alla sezione \ref{nascita}, che possibili candidati al ruolo di nubi dalle quali si origineranno, per successiva contrazione, le stelle, sono i \emph{globuli di Bok}\footnote{Pi\`{u} precisamente si parla di \emph{globuli di Bok maggiori}. Esiste un secondo gruppo di oggetti, appartenenti alla medesima classe dei globuli di Bok, ma di dimensioni estremamente pi\`{u} contenute. Sulla relazione che esista tra i due gruppi non si sa molto, ma secondo talune teorie recenti pare che le differenze non si limitino all'estensione spaziale \Cite{dick}.}
+%
+%
+%		***	trovare l'anno di Dickman	***
+%
+%
+\par
+\emph{Quali prove si hanno che i globuli di Bok siano veramente i primi embrioni di futuri corpi stellari?}
+\par
+Per rispondere, nel seguito si far\`{a} riferimento prevalentemente a \Cite{dick}.%
+\par
+
+\smallskip
+
+Conferme osservazionali dirette che provino in maniera inequivocabile che questi globuli evolvano a formare delle stelle ad oggi non ve ne sono.
+Nessuno ha mai visto nascere una stella.
+Ci\`{o} accade perch\'{e} il processo di formazione stellare richiede scale di tempo troppo grandi perch\'{e} possa venire direttamente osservato.
+Un tale problema non sussiste esclusivamente per le fasi iniziali dell'evoluzione stellare, ma, come si \`{e} cercato di mettere in luce sin dall'introduzione, costituisce una questione ricorrente che ritroveremo per tutti gli stadi evolutivi successivi.
+\par
+Un argomento piuttosto valido a sostegno dell'ipotesi che le stelle si originino dentro globuli di Bok in contrazione potrebbe essere quello di trovare stelle di formazione recente all'interno di queste strutture nebulari. Un'indagine di questo tipo \`{e} stata condotta qualche tempo fa da W.E. Herbst e D.G Turner. Il risultato \`{e} stato che un globulo, noto come Lynds 810, contiene almeno una stella giovane, plausibilmente originatasi per contrazione del globulo stesso.
+\footnote{L'indagine \`{e} citata da \Cite{dick}. %
+L'autore si scusa, ma purtroppo non gli \`{e} stato possibile reperire il lavoro originale dei due ricercatori e neppure venire a conoscenza di sviluppi pi\`{u} recenti sulla questione.}
+\par
+
+\smallskip
+
+Il fatto stesso che i globuli di Bok stiano collassando \`{e} tutt'altro che scontato.
+Potrebbe darsi benissimo il caso che tutti questi globuli siano strutture gravitazionalmente stabili. Se cos\`{\i}{} fosse, ci troveremo di fronte a due alternative: o le nubi che collassano a formare le stelle sono altre, diverse dai globuli di Bok, oppure semplicemente il nostro modello \`{e} tutto da rifare e non \`{e} affatto vero che le stelle si originano come si \`{e} cercato di far intendere nelle pagine precedenti.
+\par
+Un modo per verificare che i globuli si stiano realmente contraendo potrebbe essere questo: dal nostro modello sappiamo (\ref{sec:viriale}) che l'unico requisito perch\'{e} si abbia la contrazione \`{e} che $E<0$, perch\'{e} per $E>0$ la nube semplicemente si disperde e il teorema del viriale non \`{e} pi\`{u} applicabile.
+Se disponessimo di un dispositivo capace di misurare direttamente il valore di
+$E$ per un dato globulo, allora basterebbe vedere se $E>0$ o se $E<0$ per poter
+affermare, in tutta sicurezza, che quel globulo sta collassando o meno. In
+realt\`{a} ci\`{o} non \`{e} proprio rigorosamente esatto perch\'{e} si sono supposti trascurabili certi fattori, come presenza di campi magnetici, di cui diremo qualche parolina in seguito. Per ora continuiamo a trascurare questi fattori.
+Allora, come si stava dicendo, se misuriamo che $E<0$ siamo assolutamente certi che il globulo si sta contraendo.
+\par
+Purtroppo le cose non sono cos\`{\i}{} semplici, perch\'{e} non disponiamo di uno strumento che ci permetta di misurare direttamente $E$. Occorre procedere per via \emph{indiretta}, partendo dalla misurazione diretta di altre grandezze per poi risalire al valore di $E$. Si tratta cio\`{e}, per il nostro globulo, di raccogliere un po' di dati sperimentali e poi da questi, con qualche conticino, ricavare quanto vale $E$.
+\par
+Di quali dati abbiamo bisogno per calcolare $E$?
+\par
+Sappiamo dalla (\ref{Ene}) che $E=\langle E_{c} \rangle+\langle U_{g} \rangle$. Questo non ci aiuta per niente, non disponendo di alcun modo per misurare direttamente neanche $\langle E_{c} \rangle$ e $\langle U_{g} \rangle$.
+Ma noi sappiamo anche dell'altro: sappiamo ad esempio il principio di equipartizione dell'energia (\ref{equip}), e abbiamo anche un'espressione, la (\ref{epropriag}), per $U_{g}$ nel caso in cui il globulo sia una sfera.
+\par
+Per valutare $\langle E_{c} \rangle$ sar\`{a} sufficiente conoscere il numero di
+particelle $N$ che compongono il globulo e la sua temperatura interna assoluta
+$T$; per $\langle U_{g} \rangle$ ci servono la massa del globulo $M$ e il raggio
+$r$. Se si considera che, sapendo la composizione approssimativa del globulo (e
+questa si pu\`o sapere tramite indagine spettroscopica),$N$ pu\`{o} essere ricavato da $M$, i parametri di cui abbiamo bisogno sono, alla fine, la temperatura interna $T$, la massa $M$ ed il raggio $r$.
+\par
+Raggio e massa del globulo sono deducibili dall'analisi di lastre fotografiche, il primo da una misura delle dimensioni \emph{apparenti} delglobulo sulla lastra (nota la distanza del globulo dalla Terra), la seconda, in modo un po' pi\`{u} complicato, stimando l'effetto di assorbimento operato dalle polveri del globulo sulla luce delle stelle che vi passa attraverso \Cite{dick}. Tra i metodi pi\`{u} efficaci per determinare la temperatura interna si ricorda quello basato sull'osservazione della riga spettrale dell'ossido di carbonio alla lunghezza d'onda di 2.6mm \Cite{dick}.
+\par
+A questo punto, noti $T$, $r$ ed $M$, non resta che verificare che i loro valori forniscano la conferma della contrazione gravitazionale dei globuli di Bok.
+Nell'indagine condotta da Dickman su un campione di otto globuli, tutti questi otto globuli si sono rivelati, in base alla misura dei parametri $T$, $M$ ed $r$, in stato avanzato di collasso gravitazionale \Cite{dick}.
+\par
+
+\smallskip
+
+Nel modello di formazione stellare presentato, si \`{e} ignorata l'esistenza di almeno tre importanti fattori frenanti che possono opporsi alla contrazione gravitazionale \Cite{dick}:
+\begin{enumerate}
+\item
+\emph{forze centrifughe} dovute alla rotazione;
+\item
+\emph{campi magnetici}
+\item
+\emph{turbolenza fluidodinamica}
+\end{enumerate}
+La geometria sferica del globulo suggerisce che il primo di questi fattori, la presenza di forze centrifughe, sia trascurabile con buona approssimazione; in caso contrario, ci si aspetterebbe che l'entit\`{a} della forza centrifuga fosse tale da provocare un sensibile schiacciamento nella forma del globulo. Pi\`{u} difficile \`{e} valutare l'entit\`{a} dei restanti due fattori. Vi sono comunque buone ragioni per considerare trascurabili, almeno in prima approssimazione, anche questi fattori.
+Per una trattazione qualitativa pi\`{u} approfondita sull'argomento si rimanda all'articolo di Dickman \Cite{dick}.
+\section{Le protostelle}
+\`E noto come, all'aumentare della temperatura, l'intensit\`{a} massima di irraggiamento per un corpo si abbia a frequenze via via pi\`{u} elevate.
+In forma quantitativa, per un corpo nero\footnote{Qualunque sistema fisico avente \emph{potere assorbente} $A(\nu, T, \ldots)$ pari ad $1$, cio\`{e} in grado di assorbire \emph{tutta} la radiazione incidente.
+%Si definisce \emph{potere assorbente} di un    qualunque corpo, avente temperatura assoluta $T$, il  rapporto tra l'energia assorbita dal corpo stesso e l'energia incidente alla frequenza $\nu$. In genere $A(\nu, T, \ldots)$ \`{e} funzione \emph{anche} delle caratteristiche del corpo in esame, in particolare della sua superficie.(Peruzzi 2000)} 
+}
+questo fatto viene espresso mediante la legge dello spostamento di Wien. \footnote{
+Detta $\lambda_{max}$ la lunghezza d'onda alla quale si ha la massima intensit\`{a} di irraggiamento per un corpo nero alla temperatura assoluta $T$, la legge dello spostamento di Wien stabilisce che $\lambda_{max} \cdot T = b_{0}$,
+con $b_{0}$ costante pari a $b_{0}=\mathnormal{2.897 \times 10^{-3}} m \cdot K$ \Cite{caf}.}
+Il globulo di Bok, durante la fase di contrazione, aumentando la propria temperatura, comincer\`{a} ad emettere radiazione con un massimo di intensit\`{a} attorno a frequenze sempre maggiori, diventando infine osservabile nell'infrarosso e, in molti casi, nello spettro del visibile.
+Qualche decina di anni fa, esaminando con fotometri sensibili all'infrarosso la regione centrale della nebulosa di Orione, Becklin e Neugebauer, due astrofisici del Caltech, hanno identificato una intensa sorgente di radiazione infrarossa, da ritenersi una nube in contrazione gravitazionale.
+La scoperta si \`{e} poi ripetuta, nella medesima zona di cielo, grazie a Kleinmann e Low, che hanno identificato un oggetto, ancora meno compatto, anch'esso visibile nel lontano infrarosso.
+Da allora, il numero di simili oggetti, presumibilmente associati a stelle in via di formazione, \`{e} andato sempre aumentando; ad essi \`{e} stato dato il nome di \emph{protostelle}: pur brillando di luce propria, caratteristica questa delle stelle, non derivano la quantit\`{a} di energia che irradiano nello spazio da reazioni di fusione nucleare.
+\par
+La durata della fase di protostella dipende dalla massa dei materiali in condensazione: il corso evolutivo \`{e} tanto pi\`{u} rapido quanto maggiore \`{e} la massa in gioco.
+

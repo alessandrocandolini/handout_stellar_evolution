@@ -1,0 +1,252 @@
+
+%*******************************************************
+% Chapter 4
+%*******************************************************
+
+\myChapter{Il limite di Chandrasekhar}\label{chandra}
+\minitoc\mtcskip
+
+
+\noindent Era il 1930 quando il giovane fisico indiano Subramahyan Chandrasekhar decise di
+imbracarsi per l'Inghilterra con nel cuore il sogno di raggiungere l'Inghilterra
+dove studiare e diventare un giorno membro della Royal Society.  Durante il
+viaggio, Chandra si dedic\`o allo studio delle fasi terminali dell'evoluzione
+stellare.
+
+Egli in particolare si accorse che una nana bianca di massa superiore ad un
+certo valore critico stimato pari a circa $1,4 M_{\odot}$ non potr\`{a} mai
+essere gravitazionalmente stabile. Non possono semplicemente esistere nane
+bianche di massa maggiore a $1,4 M_{\odot}$; per simili valori di massa la forza
+di attrazione gravitazionale del corpo stellare stesso risulta talmente
+intensa da vincere anche la repulsione tra gli elettroni degeneri.
+
+In questo capitolo vedremo che il collasso gravitazionale pu\`o essere arrestato
+dall'insorgere di effetti di natura genuinamente quantistica: pressione di degenerazione.
+La pressione di degenerazione ha le sue radici nel principio di esclusione di
+Pauli (e \emph{non}, come infelicemente riportato in taluni testi di presunta
+``divulgazione'', nella relazione  di indeterminazione di Heisenberg, che non
+\`e un principio di meccanica statistica, si applica in genere ad operatori non
+commutanti, anche per bosoni.)
+
+
+\section{Cenni di meccanica quantistica}
+
+Il Lettore potrebbe essere gi\`a familiare, con alcuni
+aspetti di natura quantistica dell'atomo di idrogeno non relativistico che
+spesso vengono menzionati, almeno a livello qualitativo, anche nei corsi base
+di chimica.
+Tra questi, ricordiamo
+\begin{itemize}
+   \item Livelli energetici quantizzati: l'elettrone nell'atomo di idrogeno
+      pu\`o assumere solo certi precisi ben determinati valori di energia,
+      lo spettro dei valori di energia possibile \`e discretizzato, ci sono
+      energie permesse e energie non permesse.
+   \item Apsetto intrinsecamente probabilistico della teoria: in genere, la
+      teoria non permette di prevedere l'esito della misurazione di una
+      quantit\`a, ma solamente di conoscere la probabilit\`a che una
+      misurazione. Questa probabilit\`a, secondo l'interpretazione standard
+      corrente \`e da ritenersi \emph{non} epistemica, cio\`e non \`e
+      interpretata come frutto di una nostra conoscenza incompleta e parziale
+      sullo stato del sistema fisico, bens\`{\i} \`e intrinseca.
+\end{itemize}
+Torneremo in termini pi\`u precisi su queste questioni. Per ora, l'intento era
+piuttosto quello di richiamare nozioni che forse il Lettore aveva gi\`a
+incontrato altrove.
+
+Non \`e questa la sede per discutere in maniera sistematico l'edificio teorico
+della meccanica quantistica non relativistica. Un tale studio sistematico ci
+porterebbe lontano, inoltre presenta complicazioni sia dal punto di vista del
+formalismo matematico richiesto (nella formulazione operatoriale, si basa sui
+teoremi di decomposizione spettrale di operatori limitati, possibilmente anche
+non limitati, densamente definiti in uno spazio di Hilbert astratto sul campo
+dei numeri complessi; nella formulazione di Feynman, richiede il ricorso
+all'integrazione in spazi funzionali) inoltre presenta aspetti concettuali
+non banali. Ci limitiamo a presentare peraltro alcuni degli ingredienti base,
+senza alcuna pretesa di completezza o sistematicit\`a, ma \`e quanto basta per
+il calcolo che ci servir\`a.
+
+L'equazione di Schr\"odinger stazionaria unidimensionale per una particella quantistica puntiforme di massa
+$m$, senza spin o altri gradi di libert\`a interni, in moto non relativistico
+in un potenziale $V(x)$  (dipendente solo dalla posizione) \`e
+\begin{dmath}[label={Schrodinger}]
+   -\frac{\hbar^{2}}{2m} \D{\psi_{E}(x)}{x} + V(x) \psi_{E}(x) = E \psi_{E}(x) 
+\end{dmath},
+dove $\hbar = \nicefrac{h}{2\pi}$ \`e la costante di Planck ``razionalizzata''
+(cio\`e \`e la costante di Planck $h$ divisa per $2\pi$).
+$E$ \`e l'energia della particella. 
+
+La Eq.~\eqref{eq:Schrodinger} \`e una equazione differenziale ordinaria; le
+sue soluzioni sono le funzioni d'onda $\psi_{E}(x)$. L'interpretazione fisica
+delle funzioni d'onda $\psi_{E}(x)$ \`e probabilistica:
+$\Abs{\psi_{E}(x)}^{2}$ \`e la densit\`a di probabilit\`a che una misurazione
+di posizione della particella rilevi la particella nel punto individuato dalla
+coordinata $x$.
+
+\subsection{Buca di potenziale infinita}
+
+Consideriamo una particella di massa $m$ confinata nella regione $0<x<L$.
+In questa regione, 
+l'equazione di Schr\"odinger stazionaria diventa in particolare 
+\begin{dmath*}
+   -\frac{\hbar^{2}}{2m} \D[2]{\psi_{E}(x)}{x} = E \psi_{E}(x) 
+   \condition*{0 < x < L}
+\end{dmath*},
+ovvero
+\begin{dmath}[label={buca infinita:eq}]
+   \D[2]{\psi_{E}(x)}{x} = - \frac{2 m E }{\hbar^{2}} \psi_{E}(x)
+   \condition*{0 < x < L}
+\end{dmath}.
+Si tratta di un'equazione differenziale ordinaria, lineare, omogenea, del
+secondo ordine a coefficienti costanti.  La teoria di queste equazioni \`e molto
+ben sviluppata ed esauriente.  \`E noto che \emph{tutte e sole} le soluzioni sono della forma
+\begin{dmath}[label={buca infinita:soluz}]
+   \psi_{E}(x) = A \sin \omega x + B\cos \omega x 
+   \condition*{0 < x < L}
+\end{dmath},
+dove $A$ e $B$ sono numeri reali (o complessi) qualunque e 
+\begin{dmath*}
+   \omega = \sqrt{\frac{2mE}{\hbar^{2}}} 
+\end{dmath*}.
+Non \`e difficile verificare per sostituzione diretta nella eq.~\eqref{eq:buca
+   infinita:eq} che le funzioni~\eqref{eq:buca infinita:soluz} soddisfano
+la eq.~\eqref{eq:buca infinita:eq}. Altra faccenda \`e dimostrare che non ci
+sono altre soluzioni oltre a questa! Ma la teoria delle equazioni lineari non
+solo permette di trovare sistematicamente le soluzioni~\eqref{eq:buca
+   infinita:soluz} ma ci assicura anche che non ci sono altre soluzioni oltre a
+queste.
+
+All'esterno della buca, cio\`e per $x<0$ oppure $x>L$, la probabilit\`a di
+trovare la particella \`e nulla, quindi $\psi_{E}(x) = 0$.
+Per \emph{continuit\`a}, la funzione d'onda deve annullarsi agli estremi della
+buca, cio\`e
+\begin{dmath*}[compact]
+   \psi_{E}(0) = \psi_{E}(L) = 0
+\end{dmath*}.
+Queste condizioni (condizioni al contorno) impongono che 
+\begin{dmath*}[compact]
+   \psi_{E}(0) = B = 0  
+\end{dmath*}
+da cui $B=0$ quindi, e  
+\begin{dmath*}
+   \psi_{E}(L) = A \Sin{\omega L} = 0  
+\end{dmath*}.
+Quest'ultima condizione \`e verificata se e soltanto se: $A=0$  oppure
+$\Sin{\omega L} = 0$. La condizione $A=0$ porterebbe a $\psi_{E}(x) = 0$ per
+ogno $x$, non accettabile. Quindi 
+\begin{dmath}[label={buca infinita:sinwL=0}]
+   \Sin{\omega L } = 0 
+\end{dmath}.
+La eq.~\eqref{eq:buca infinita:sinwL=0} \`e verificata se e soltanto se
+\begin{dmath*}
+   \omega L = k \pi 
+   \condition*{k\in\Z}
+\end{dmath*},
+cio\`e se e soltanto se 
+\begin{dmath*}
+   \omega = k \frac{\pi}{L} 
+   \condition*{k\in\Z}
+\end{dmath*}.
+Escludiamo per\`o il valore $k=0$ che implicherebbe $\omega =0$ e quindi
+$\psi_{E}(x) =0 $ per ogni $x$.
+
+Questa relazione ha importanti conseguenze. Siccome $\omega$ \`e legata al
+valore dell'energia $E$, otteniamo che  
+\begin{dmath*}[compact]
+   \omega^{2} = k^{2} \frac{\pi^{2}}{L^{2}} = \frac{2mE}{\hbar^{2}}
+   \condition*{k\in\Z\backslash\lbrace0\rbrace}
+\end{dmath*},
+da cui
+\begin{dmath*}
+   E = \frac{\hbar^{2} \pi^{2} k^{2} }{2m L^{2}} 
+   \condition*{k\in\Z\backslash\lbrace0\rbrace}
+\end{dmath*},
+cio\`e non tutti i valori di energia $E$ sono permessi! 
+Ci sono dei livelli energetici. Solo le energie che si ottengono inserendo
+valori interi (non nulli) di $k$ nella espressione sopra sono permesse. La
+particella non potr\`a mai trovarsi a un'energia $E$ che non soddisfi questa
+formula.  Le energie permesse  dipendono da $k$, possiamo etichettarle con
+$E_{k}$. Si dice che l'energia \`e quantizzata.
+
+
+
+
+\begin{figure}
+   \centering
+   \asyinclude[inline=true]{Images/buca.asy}
+   \caption{Buca di potenziale infinita}
+\end{figure}
+
+
+Il \emph{ground state} (la minima energia permessa) \emph{non} \`e zero, come
+ci si potrebbe aspettare. Classicamente, la particella pu\`o trovarsi a energia
+zero, quando \`e ferma. Quantisticamente invece, la minima energia possibile
+\`e quella che si ottiene per $k=1$ e vale
+\begin{dmath*}
+   E_{1} = \frac{\pi^{2} \hbar^{2}}{2mL^{2}} 
+\end{dmath*}.
+Questo risultato \`e compatibile con la relazione di indeterminazione posizione-impulso
+di Heisenberg:
+\begin{dmath*}
+   \Delta x \Delta p \geq 
+\end{dmath*},
+dove $\Delta x $ etc. 
+
+
+\subsection{Buca finita di potenziale ed effetto tunnel}
+
+
+
+\section{Gas di Fermi degenere in regime non relativistico}
+
+Cosa succede se nella buca di potenziale ci sono pi\`u particelle?
+\emph{Se} le particelle sono \emph{non} interagenti tra loro, allora il
+problema fattorizza 
+
+
+
+
+
+
+\section{Gas di Fermi degenere in regime relativistico}
+\label{climit}
+La pressione degli elettroni degeneri nell'approssimazione non relativistica dipende dalla densit\`{a} volumetrica di elettroni $n_{e}$ (sezione \ref{propdeg}). Pi\`{u} precisamente, se $P_{deg}$ \`{e} la pressione degli elettroni degeneri, dall'equazione (\ref{stato degenere}), si ha che:
+\begin{equation}\label{prop53}
+P_{deg} \propto n_{e}^{\frac{5}{3}}
+\end{equation}
+In condizioni di equilibrio idrostatico, la pressione $P_{g}$ che si esercita in
+un \emph{qualunque} punto all'interno del corpo stellare per effetto del peso
+della materia degli strati sovrastanti cresce, come ragionevole aspettarsi, con
+la massa della stella e con la sua densit\`{a}. Questo significa che, a
+parit\`{a} di densit\`{a}, pi\`{u} una stella \`{e} massiccia e pi\`{u} grande
+sar\`{a} la pressione che si eserciter\`{a} in un suo punto qualunque causa
+l'attrazione gravitazionale della massa stellare su s\'e stessa. Viceversa, a
+parit\`{a} di massa, la pressione sar\`{a} tanto pi\`{u} grande quanto pi\`{u}
+densa sar\`{a} la stella. Si pu\`o tradurre in forma quantitativa questo fatto scrivendo la relazione:
+\begin{equation}\label{pmr}
+P_{g}\propto M^{\frac{2}{3}}\rho^{\frac{4}{3}}
+\end{equation}
+dove $M$ e $\rho$ sono rispettivamente la massa e la densit\`{a} della stella. Si noti che la pressione $P_{g}$, come anche la pressione degli elettroni degeneri (\ref{stato degenere}), non dipende da quale punto del corpo stellare si scelga di considerare: la pressione ha lo stesso valore in ogni punto della stella. Non daremo qui una dimostrazione della (\ref{pmr}); l'equazione pu\`{o} essere dedotta dall'equazione per l'equilibrio idrostatico e facendo uso dell'equazione di stato del gas perfetto.
+\par
+Fatte queste due precisazioni, siamo pronti per affrontare il problema del limite di Chandrasekhar. In questa sezione si cercher\`{a} di sottolineare un fatto in particolar modo, e questo fatto \`{e} il seguente: finch\'{e} si considera come formula per la pressione degli elettroni degeneri la (\ref{stato degenere}), ricavata nell'approssimazione non relativistica, non si arriver\`{a} mai a trovare qualche evidenza che esiste il limite di Chandrasekhar, e cio\`{e} che nane bianche di massa superiore a $1.4 M_{\odot}$ non possono stabilizzarsi in condizione di equilibrio idrostatico. Ma se si ricava una nuova espressione per la pressione degli elettroni degeneri nel caso relativistico, allora automaticamente emerge la problematica del limite di Chandrasekhar. La deduzione di questo fatto richiede ovviamente il ricorso a particolarismi tecnici e ad un certo formalismo matematico che esulano certo dagli obiettivi modesti del presente documento. Si vuole in questa sezione presentare qualche sommario argomento a favore di quanto sopra detto, senza pretesa di alcuna completezza. Questa sezione vuole giusto essere un assaggio che indichi al lettore dove nasca l'idea dell'esistenza del limite di Chandrasekhar. In ogni caso la la presente sezione \`{e} da considerarsi come materiale integrativo di approfondimento. Il lettore che lo volesse non tardi a proseguire nelle sezioni successive.
+\par
+Un calcolo preciso basato sulla statistica di Fermi--Dirac fornisce la seguente espressione per il calcolo della pressione degli elettroni degeneri nel caso relativistico:
+\begin{equation}
+P_{deg}=\frac{1}{4} \sqrt[3]{\left( \frac{3}{8\pi} \right)} \cdot h \cdot c\cdot n_{e}^{\frac{4}{3}}
+\end{equation}
+cio\`{e}:
+\begin{equation}\label{prop43}
+P_{deg} \propto n_{e}^{\frac{4}{3}}
+\end{equation}
+Pu\`{o} apparire una piccola differenza rispetto alla relazione di proporzionalit\`{a}(\ref{prop53}). La (\ref{prop43}) e la (\ref{prop53}) differiscono solo per la potenza con cui vi figura la densit\`{a} di elettroni $n_{e}$. Eppure proprio da questa apparentemente quasi insignificante differenza, che concettualmente non sembra nascondere niente di nuovo, tra le due relazioni prende avvio il problema del limite di Chandrasekhar.
+Finch\`{e} si lavora con la relazione (\ref{prop53}), qualsiasi sia la pressione $P_{g}$ dovuta all'attrazione gravitazionale della stella su s\'{e} stessa, si pu\`{o} sempre scegliere $n_{e}$ abbastanza grande perch\'{e} risulti che $p_{g}$ e $P_{deg}$ si equilibrano a vicenda. Se una stella \`{e} molto massiccia, per la (\ref{pmr}) la pressione sar\`{a} molto grande; via via che la stella si contrae il suo volume diminuisce, e siccome la sua massa non cambia, \emph{sia} $n_{e}$ che $\rho$ crescono; allora la pressione $p_{g}$, in base alla (\ref{pmr}) cresce, perch\'{e} cresce $\rho$, e anche $P_{deg}$ cresce perch\'{e} cresce anche $n_{e}$; ma $P_{deg}$ cresce \underline{pi\`{u} rapidamente} di $P_{g}$, perch\'{e}, per la (\ref{prop53}), $P_{deg}$ cresce con potenza $5/3$ della densit\`{a}, mentre $P_{g}$ cresce con una potenza pi\`{u} piccola, $4/3$ appunto, della densit\`{a}. Ad un certo punto $P_{deg}$ sar\`{a} cresciuta abbastanza da equilibrare $p_{g}$.
+In termini matematici si ha che il rapporto $P_{deg}/P_{g}$ cresce al crescere della densit\`{a}, cio\`{e} via via che il collasso della stella procede. Ad un certo punto questo rapporto sar\`{a} cresciuto al punto da valere esattamente $1$.
+\par
+Ma se invece della (\ref{prop53}) usiamo la (\ref{prop43}) questo non \`{e} pi\`{u} vero, perch\'{e} in questo caso si avrebbe che sia $P_{deg}$ sia $P_{g}$ crescono con la medesima potenza della densit\`{a}, la potenza $4/3$: via via che la stella si contrae cio\`{e} aumentano nella stella maniera sia la pressione di degenerazione sia la pressione dovuta all'attrazione gravitazionale della stella su s\'{e} stessa. non \`{e} pi\`{u} come nel caso precedente che le due pressioni crescono in maniera diversa via via che la stella prosegue nella fase di collasso. In termini matematici il rapporto $P_{deg}/P_{g}$ non dipende pi\`{u} da una qualche potenza della densit\`{a}, ma dipende solo dalla massa della stella. Vale la relazione:
+\begin{equation}
+\frac{P_{g}}{P_{deg}}\propto M^{\frac{2}{3}}
+\end{equation}
+Per un certo valore critico della massa della stella, la pressione degli elettroni degeneri non sar\`{a} mai in grado di eguagliare la pressione dovuta all'attrazione gravitazionale della stella su s\'{e} stessa, e conseguentemente la pressione degli elettroni degeneri non sar\`{a} sufficiente ad arrestare il collasso gravitazionale di queste stelle. Stelle troppo massicce non potranno stabilizzarsi nello stadio di nana bianca. Per stelle degeneri del tutto prive di idrogeno il valore critico per cui questo succede vale:
+\begin{displaymath}
+M_{c} =1.44 M_{\odot}
+\end{displaymath}
+Questo limite \`{e} il limite di Chandrasekhar e la massa critica $M_{c}$ prende il nome di massa di Chandrasekhar.
